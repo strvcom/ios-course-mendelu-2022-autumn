@@ -26,10 +26,7 @@ extension Background: GameObject {
             .forEach {
                 let background = SKSpriteNode(imageNamed: $0.backgroundName)
                 background.anchorPoint = .zero
-                background.position = CGPoint(
-                    x: 0,
-                    y: gameScene.ground.tileSize.height
-                )
+                background.position = .zero
                 background.zPosition = $0.layer
                 background.size = gameScene.size
                 

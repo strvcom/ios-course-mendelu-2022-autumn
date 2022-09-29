@@ -31,8 +31,9 @@ final class GameViewController: UIViewController {
         skView.ignoresSiblingOrder = true
         skView.preferredFramesPerSecond = 30
         
-        let scene = GameScene(size: UIScreen.main.bounds.size)
-        scene.scaleMode = .aspectFill
+        guard let scene = GameScene(fileNamed: Assets.Scenes.level1) else {
+            return
+        }
             
         skView.presentScene(scene)
     }

@@ -18,11 +18,11 @@ final class Camera: SKCameraNode {
     }
     
     private var leftCameraConstraint: CGFloat {
-        gameScene?.ground.groundWidth ?? 0
+        0
     }
     
     private var rightCameraConstraint: CGFloat {
-        gameScene?.ground.groundWidth ?? 0
+        sceneSize.width
     }
     
     var bottomLeftCorner: CGPoint {
@@ -60,7 +60,7 @@ extension Camera: GameObject {
     func calculateXPosition() -> CGFloat {
         let leftCameraConstraint = (scene?.size.width ?? 0) / 2
         
-        let rightCameraConstraint = (gameScene?.ground.groundWidth ?? 0) - leftCameraConstraint
+        let rightCameraConstraint = sceneSize.width
         
         let xPosition = gameScene?.player.position.x ?? 0
         
