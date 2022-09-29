@@ -40,8 +40,6 @@ final class GameScene: SKScene {
         
         background = Background()
         
-        children.forEach { print("Pain", $0, $0.name) }
-        
         allGameObjects.forEach { $0.setup(gameScene: self) }
 
 //        if controlsHidden {
