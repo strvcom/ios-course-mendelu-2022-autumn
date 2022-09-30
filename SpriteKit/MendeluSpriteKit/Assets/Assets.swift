@@ -22,6 +22,7 @@ extension Assets {
     enum Atlas {
         static let playerIdle = "PlayerIdle"
         static let playerWalk = "PlayerWalk"
+        static let playerAttack = "PlayerAttack"
     }
 }
 

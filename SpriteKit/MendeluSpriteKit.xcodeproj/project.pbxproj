@@ -26,12 +26,14 @@
 		59A9DB3D28E5CF7300492DAA /* Level1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 59A9DB3C28E5CF7300492DAA /* Level1.sks */; };
 		59A9DB3F28E618C500492DAA /* Tiles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 59A9DB3E28E618C500492DAA /* Tiles.sks */; };
 		59A9DB4128E61C6700492DAA /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A9DB4028E61C6700492DAA /* Level.swift */; };
+		59CC663528E711E10010A82E /* ObjectNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC663428E711E10010A82E /* ObjectNames.swift */; };
+		59CC663728E717830010A82E /* PlayerAttack.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 59CC663628E717830010A82E /* PlayerAttack.atlas */; };
+		59CC663D28E72B870010A82E /* ContolButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC663C28E72B870010A82E /* ContolButtons.swift */; };
 		59CFC5EE28D78A5900F4E6AE /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CFC5ED28D78A5900F4E6AE /* Layer.swift */; };
 		59EF42F128E0BA42005CC691 /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EF42F028E0BA42005CC691 /* Joystick.swift */; };
 		59EF42F328E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EF42F228E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift */; };
 		59EF42F528E0D437005CC691 /* Comparable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EF42F428E0D437005CC691 /* Comparable+Extension.swift */; };
 		59EF42F728E0DBBC005CC691 /* PlayerWalk.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 59EF42F628E0DBBB005CC691 /* PlayerWalk.atlas */; };
-		59EF42F928E0E420005CC691 /* JumpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EF42F828E0E420005CC691 /* JumpButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,12 +57,14 @@
 		59A9DB3C28E5CF7300492DAA /* Level1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level1.sks; sourceTree = "<group>"; };
 		59A9DB3E28E618C500492DAA /* Tiles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Tiles.sks; sourceTree = "<group>"; };
 		59A9DB4028E61C6700492DAA /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
+		59CC663428E711E10010A82E /* ObjectNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectNames.swift; sourceTree = "<group>"; };
+		59CC663628E717830010A82E /* PlayerAttack.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PlayerAttack.atlas; sourceTree = "<group>"; };
+		59CC663C28E72B870010A82E /* ContolButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContolButtons.swift; sourceTree = "<group>"; };
 		59CFC5ED28D78A5900F4E6AE /* Layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
 		59EF42F028E0BA42005CC691 /* Joystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 		59EF42F228E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryFloatingPoint+Extension.swift"; sourceTree = "<group>"; };
 		59EF42F428E0D437005CC691 /* Comparable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+Extension.swift"; sourceTree = "<group>"; };
 		59EF42F628E0DBBB005CC691 /* PlayerWalk.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PlayerWalk.atlas; sourceTree = "<group>"; };
-		59EF42F828E0E420005CC691 /* JumpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,7 @@
 				59CFC5ED28D78A5900F4E6AE /* Layer.swift */,
 				5990779E28D77E3C00659E6E /* LevelScene.swift */,
 				5922EAD728D8C2E400BE46DC /* Physics.swift */,
+				59CC663428E711E10010A82E /* ObjectNames.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -103,6 +108,7 @@
 		5922EADD28D8CDBB00BE46DC /* Player */ = {
 			isa = PBXGroup;
 			children = (
+				59CC663628E717830010A82E /* PlayerAttack.atlas */,
 				59EF42F628E0DBBB005CC691 /* PlayerWalk.atlas */,
 				5922EADB28D8CD7300BE46DC /* PlayerIdle.atlas */,
 			);
@@ -189,7 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				59EF42F028E0BA42005CC691 /* Joystick.swift */,
-				59EF42F828E0E420005CC691 /* JumpButton.swift */,
+				59CC663C28E72B870010A82E /* ContolButtons.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -254,6 +260,7 @@
 			files = (
 				599077A428D77E3C00659E6E /* GameViewController.storyboard in Resources */,
 				59EF42F728E0DBBC005CC691 /* PlayerWalk.atlas in Resources */,
+				59CC663728E717830010A82E /* PlayerAttack.atlas in Resources */,
 				599077A928D77E3C00659E6E /* LaunchScreen.storyboard in Resources */,
 				5922EADC28D8CD7300BE46DC /* PlayerIdle.atlas in Resources */,
 				59A9DB3F28E618C500492DAA /* Tiles.sks in Resources */,
@@ -276,12 +283,13 @@
 				59CFC5EE28D78A5900F4E6AE /* Layer.swift in Sources */,
 				5922EAD528D8C0FB00BE46DC /* SceneObject.swift in Sources */,
 				59A9DB4128E61C6700492DAA /* Level.swift in Sources */,
+				59CC663528E711E10010A82E /* ObjectNames.swift in Sources */,
 				5922EAD128D8BF3300BE46DC /* Background.swift in Sources */,
 				592E302728E57B5500603ECC /* Assets.swift in Sources */,
 				59EF42F528E0D437005CC691 /* Comparable+Extension.swift in Sources */,
 				59EF42F328E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift in Sources */,
-				59EF42F928E0E420005CC691 /* JumpButton.swift in Sources */,
 				5990779928D77E3C00659E6E /* AppDelegate.swift in Sources */,
+				59CC663D28E72B870010A82E /* ContolButtons.swift in Sources */,
 				5922EADA28D8C53300BE46DC /* Player.swift in Sources */,
 				59EF42F128E0BA42005CC691 /* Joystick.swift in Sources */,
 				592E302D28E588C100603ECC /* Tile.swift in Sources */,

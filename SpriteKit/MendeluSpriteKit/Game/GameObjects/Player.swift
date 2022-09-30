@@ -11,27 +11,35 @@ final class Player: SKSpriteNode {
     // MARK: Properties
     private var idleFrames = [SKTexture]()
     private var walkingFrames = [SKTexture]()
+    private var attackFrames = [SKTexture]()
+    private var isJumping = false
+    private var isAttacking = false
+    private var direction: Direction = .right
+    private var animationState: AnimationState = .idle {
+        didSet {
+            guard oldValue != animationState else {
+                return
+            }
+            
+            updateStateAnimation()
+        }
+    }
     
     private var velocity: CGFloat {
         levelScene?.joystick.velocity ?? 0
     }
     
-    private var playerSize: CGSize {
-        CGSize(
-            width: 20,
-            height: 35
-        )
+    private var isWalking: Bool {
+        velocity != 0
     }
-    
-    private(set) var state: PlayerState = .idle
-    private(set) var direction: Direction = .right
 }
 
 // MARK: PlayerState
-extension Player {
-    enum PlayerState {
+private extension Player {
+    enum AnimationState {
         case walking
         case idle
+        case attacking
     }
 }
 
@@ -46,10 +54,9 @@ extension Player {
 // MARK: GameObject
 extension Player: SceneObject {
     func setup(scene: LevelScene) {
-        scene.addChild(self)
-        
         idleFrames = SKTextureAtlas(named: Assets.Atlas.playerIdle).textures
         walkingFrames = SKTextureAtlas(named: Assets.Atlas.playerWalk).textures
+        attackFrames = SKTextureAtlas(named: Assets.Atlas.playerAttack).textures
         
         updateStateAnimation()
         
@@ -63,11 +70,39 @@ extension Player: SceneObject {
         
         updatePosition()
     }
+    
+    func handleContact(_ contact: SKPhysicsContact) {
+        if contact.bodyA.node == self {
+            handleContactWith(
+                body: contact.bodyB,
+                contact: contact
+            )
+        } else if contact.bodyB.node == self {
+            handleContactWith(
+                body: contact.bodyA,
+                contact: contact
+            )
+        }
+    }
 }
 
 // MARK: Public API
 extension Player {
+    func attack() {
+        guard !isAttacking else {
+            return
+        }
+        
+        isAttacking = true
+    }
+    
     func jump() {
+        guard !isJumping else {
+            return
+        }
+        
+        isJumping = true
+        
         physicsBody?.applyImpulse(
             CGVector(
                 dx: 0,
@@ -81,35 +116,27 @@ extension Player {
 private extension Player {
     func setupPlayer() {
         zPosition = Layer.player
-        position = CGPoint(
-            x: levelScene?.frame.midX ?? 0,
-            y: levelScene?.frame.midY ?? 0
-        )
-        size = playerSize
         physicsBody = SKPhysicsBody(rectangleOf: size)
         physicsBody?.categoryBitMask = Physics.CategoryBitMask.player
         physicsBody?.restitution = 0
         physicsBody?.allowsRotation = false
+        physicsBody?.contactTestBitMask = Physics.CategoryBitMask.groundTile
     }
     
     func updateState() {
-        let newState: PlayerState = velocity == 0
-            ? .idle
-            : .walking
-        
-        guard newState != state else {
-            return
+        if isAttacking {
+            animationState = .attacking
+        } else {
+            animationState = isWalking
+                ? .walking
+                : .idle
         }
-        
-        state = newState
-        
-        updateStateAnimation()
     }
     
     func updateStateAnimation() {
         removeAllActions()
         
-        switch state {
+        switch animationState {
         case .idle:
             run(
                 SKAction.repeatForever(
@@ -132,6 +159,19 @@ private extension Player {
                     )
                 )
             )
+        case .attacking:
+            run(
+                SKAction.animate(
+                    with: attackFrames,
+                    timePerFrame: 0.08,
+                    resize: false,
+                    restore: true
+                )
+            ) { [weak self] in
+                self?.isAttacking = false
+                
+                self?.updateState()
+            }
         }
     }
     
@@ -172,5 +212,21 @@ private extension Player {
             x: position.x + moveBy,
             y: position.y
         )
+    }
+    
+    func handleContactWith(
+        body: SKPhysicsBody,
+        contact: SKPhysicsContact
+    ) {
+        switch body.node?.name {
+        case ObjectNames.tile:
+            guard contact.contactNormal.dy > 0 else {
+                return
+            }
+            
+            isJumping = false
+        default:
+            break
+        }
     }
 }

@@ -13,15 +13,15 @@ final class Camera: SKCameraNode {
         scene?.view?.safeAreaInsets ?? .zero
     }
     
-    private var cameraSize: CGSize {
+    private var sceneSize: CGSize {
+        scene?.size ?? .zero
+    }
+    
+    var cameraSize: CGSize {
         CGSize(
             width: sceneSize.width * xScale,
             height: sceneSize.height * yScale
         )
-    }
-    
-    private var sceneSize: CGSize {
-        scene?.size ?? .zero
     }
     
     var bottomLeftCorner: CGPoint {

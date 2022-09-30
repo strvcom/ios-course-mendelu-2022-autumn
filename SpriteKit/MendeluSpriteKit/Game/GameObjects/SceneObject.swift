@@ -16,15 +16,21 @@ protocol SceneObject {
     func keyboardDown(presses: Set<UIPress>)
     
     func keyboardUp(presses: Set<UIPress>)
+    
+    func handleContact(_ contact: SKPhysicsContact)
 }
 
 // MARK: Default Implementation
 extension SceneObject {
+    func setup(scene: LevelScene) {}
+    
     func update(_ currentTime: TimeInterval) {}
     
     func keyboardDown(presses: Set<UIPress>) {}
     
     func keyboardUp(presses: Set<UIPress>) {}
+    
+    func handleContact(_ contact: SKPhysicsContact) {}
 }
 
 // MARK: SceneObject + SKNode
