@@ -30,6 +30,7 @@ final class GameViewController: UIViewController {
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
         skView.preferredFramesPerSecond = 30
+        skView.showsPhysics = true
         
         guard let scene = GameScene(fileNamed: Assets.Scenes.level1) else {
             return

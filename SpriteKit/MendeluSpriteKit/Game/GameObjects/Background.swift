@@ -40,18 +40,15 @@ extension Background: GameObject {
 // MARK: Private API
 private extension Background {
     func calculateNodeSize(gameScene: GameScene) -> CGSize {
-        guard
-            let ground = gameScene.childNode(withName: "Ground") as? SKTileMapNode,
-            let backgroundImageSize = UIImage(named: backgrounds.first?.backgroundName ?? "")?.size
-        else {
+        guard let backgroundImageSize = UIImage(named: backgrounds.first?.backgroundName ?? "")?.size else {
             return .zero
         }
         
         let aspectRatio = backgroundImageSize.height / backgroundImageSize.width
         
         return CGSize(
-            width: ground.mapSize.width,
-            height: ground.mapSize.width * aspectRatio
+            width: gameScene.ground.ground.mapSize.width,
+            height: gameScene.ground.ground.mapSize.width * aspectRatio
         )
     }
 }

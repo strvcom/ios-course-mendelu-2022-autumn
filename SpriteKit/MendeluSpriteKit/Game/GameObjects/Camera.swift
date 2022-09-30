@@ -13,6 +13,13 @@ final class Camera: SKCameraNode {
         scene?.view?.safeAreaInsets ?? .zero
     }
     
+    private var cameraSize: CGSize {
+        CGSize(
+            width: sceneSize.width * xScale,
+            height: sceneSize.height * yScale
+        )
+    }
+    
     private var sceneSize: CGSize {
         scene?.size ?? .zero
     }
@@ -46,48 +53,38 @@ extension Camera: GameObject {
         gameScene.camera = self
         gameScene.addChild(self)
         
-//        xScale = 0.7
-//        yScale = 0.7
+        xScale = 0.7
+        yScale = 0.7
     }
     
     func update(_ currentTime: TimeInterval) {
+        guard
+            let playerPosition = gameScene?.player.position,
+            let boundingRectangle = calculateBoundingRectangle()
+        else {
+            return
+        }
+        
+        let widthRange = (boundingRectangle.minX ... boundingRectangle.minX + boundingRectangle.width)
+        
+        let heightRange = (boundingRectangle.minY ... boundingRectangle.minY + boundingRectangle.height)
+
         position = CGPoint(
-            x: calculateXPosition(),
-            y: calculateYPosition()
+            x: playerPosition.x.clamped(to: widthRange),
+            y: playerPosition.y.clamped(to: heightRange)
         )
     }
     
-    func calculateXPosition() -> CGFloat {
-        let leftCameraConstraint = (scene?.size.width ?? 0) / 2
-        
-        let rightCameraConstraint = sceneSize.width
-        
-        let xPosition = gameScene?.player.position.x ?? 0
-        
-        if xPosition < leftCameraConstraint {
-            return leftCameraConstraint
-        } else if xPosition > rightCameraConstraint {
-            return rightCameraConstraint
-        } else {
-            return xPosition
+    func calculateBoundingRectangle() -> CGRect? {
+        guard let mapSize = gameScene?.ground.ground.mapSize else {
+            return nil
         }
-    }
-    
-    func calculateYPosition() -> CGFloat {
-        let halfOfCameraHeight = ((scene?.size.height ?? 0) * yScale) / 2
         
-        let topCameraConstraint = (scene?.size.height ?? 0)
-        
-        let bottomCameraConstraint: CGFloat = 0
-        
-        let yPosition = gameScene?.player.position.y ?? 0
-        
-        if yPosition + halfOfCameraHeight > topCameraConstraint {
-            return topCameraConstraint - halfOfCameraHeight
-        } else if yPosition - halfOfCameraHeight < bottomCameraConstraint {
-            return halfOfCameraHeight
-        } else {
-            return yPosition
-        }
+        return CGRect(
+            x: cameraSize.width / 2,
+            y: cameraSize.height / 2,
+            width: mapSize.width - cameraSize.width,
+            height: mapSize.height - cameraSize.height
+        )
     }
 }
