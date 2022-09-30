@@ -39,7 +39,7 @@ final class LevelScene: SKScene {
         
         cameraObject = Camera()
         background = Background()
-        level = Level(ground: childNode(withName: "Ground") as! SKTileMapNode)
+        level = Level(ground: childNode(withName: Self.ObjectNames.ground) as! SKTileMapNode)
         player = Player()
         joystick = Joystick()
         jumpButton = JumpButton()
@@ -51,5 +51,13 @@ final class LevelScene: SKScene {
         super.update(currentTime)
         
         allSceneObjects.forEach { $0.update(currentTime) }
+    }
+}
+
+// MARK: ObjectNames
+extension LevelScene {
+    enum ObjectNames {
+        static let ground = "Ground"
+        static let scenery = "Scenery"
     }
 }

@@ -22,6 +22,14 @@ extension Level: SceneObject {
     func setup(scene: LevelScene) {
         ground.zPosition = Layer.tiles
         
+        for child in scene.children {
+            guard child.name == LevelScene.ObjectNames.scenery else {
+                continue
+            }
+            
+            child.zPosition = Layer.scenery
+        }
+        
         addPhysicsToTileMapNodes(scene: scene)
         
         createTopBoundary(scene: scene)
