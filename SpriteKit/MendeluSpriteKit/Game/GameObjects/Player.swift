@@ -16,14 +16,8 @@ final class Player: SKSpriteNode {
         levelScene?.joystick.velocity ?? 0
     }
     
-    private var playerSize: CGSize {
-        CGSize(
-            width: 20,
-            height: 35
-        )
-    }
-    
     private(set) var state: PlayerState = .idle
+    private(set) var jumped = false
     private(set) var direction: Direction = .right
 }
 
@@ -46,8 +40,6 @@ extension Player {
 // MARK: GameObject
 extension Player: SceneObject {
     func setup(scene: LevelScene) {
-        scene.addChild(self)
-        
         idleFrames = SKTextureAtlas(named: Assets.Atlas.playerIdle).textures
         walkingFrames = SKTextureAtlas(named: Assets.Atlas.playerWalk).textures
         
@@ -63,11 +55,31 @@ extension Player: SceneObject {
         
         updatePosition()
     }
+    
+    func handleContact(_ contact: SKPhysicsContact) {
+        if contact.bodyA.node == self {
+            handleContactWith(
+                body: contact.bodyB,
+                contact: contact
+            )
+        } else if contact.bodyB.node == self {
+            handleContactWith(
+                body: contact.bodyA,
+                contact: contact
+            )
+        }
+    }
 }
 
 // MARK: Public API
 extension Player {
     func jump() {
+        guard !jumped else {
+            return
+        }
+        
+        jumped = true
+        
         physicsBody?.applyImpulse(
             CGVector(
                 dx: 0,
@@ -81,15 +93,11 @@ extension Player {
 private extension Player {
     func setupPlayer() {
         zPosition = Layer.player
-        position = CGPoint(
-            x: levelScene?.frame.midX ?? 0,
-            y: levelScene?.frame.midY ?? 0
-        )
-        size = playerSize
         physicsBody = SKPhysicsBody(rectangleOf: size)
         physicsBody?.categoryBitMask = Physics.CategoryBitMask.player
         physicsBody?.restitution = 0
         physicsBody?.allowsRotation = false
+        physicsBody?.contactTestBitMask = Physics.CategoryBitMask.groundTile
     }
     
     func updateState() {
@@ -172,5 +180,21 @@ private extension Player {
             x: position.x + moveBy,
             y: position.y
         )
+    }
+    
+    func handleContactWith(
+        body: SKPhysicsBody,
+        contact: SKPhysicsContact
+    ) {
+        switch body.node?.name {
+        case ObjectNames.tile:
+            guard contact.contactNormal.dy > 0 else {
+                return
+            }
+            
+            jumped = false
+        default:
+            break
+        }
     }
 }

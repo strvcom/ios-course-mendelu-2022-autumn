@@ -37,10 +37,12 @@ final class LevelScene: SKScene {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         
+        physicsWorld.contactDelegate = self
+        
         cameraObject = Camera()
         background = Background()
-        level = Level(ground: childNode(withName: Self.ObjectNames.ground) as! SKTileMapNode)
-        player = Player()
+        level = Level(ground: childNode(withName: ObjectNames.ground) as! SKTileMapNode)
+        player = childNode(withName: ObjectNames.player) as? Player
         joystick = Joystick()
         jumpButton = JumpButton()
         
@@ -54,10 +56,9 @@ final class LevelScene: SKScene {
     }
 }
 
-// MARK: ObjectNames
-extension LevelScene {
-    enum ObjectNames {
-        static let ground = "Ground"
-        static let scenery = "Scenery"
+// MARK: SKPhysicsContactDelegate
+extension LevelScene: SKPhysicsContactDelegate {
+    func didBegin(_ contact: SKPhysicsContact) {
+        allSceneObjects.forEach { $0.handleContact(contact) }
     }
 }

@@ -23,7 +23,7 @@ extension Level: SceneObject {
         ground.zPosition = Layer.tiles
         
         for child in scene.children {
-            guard child.name == LevelScene.ObjectNames.scenery else {
+            guard child.name == ObjectNames.scenery else {
                 continue
             }
             
@@ -64,6 +64,7 @@ private extension Level {
                     color: .clear,
                     size: ground.tileSize
                 )
+                node.name = ObjectNames.tile
                 node.zPosition = Layer.tiles
                 node.position = CGPoint(
                     x: xPosition,
