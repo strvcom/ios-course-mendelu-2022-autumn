@@ -21,7 +21,7 @@ final class Background {
 
 // MARK: GameObject
 extension Background: GameObject {
-    func setup(gameScene: GameScene) {
+    func setup(gameScene: LevelScene) {
         let size = calculateNodeSize(gameScene: gameScene)
         
         backgrounds
@@ -39,7 +39,7 @@ extension Background: GameObject {
 
 // MARK: Private API
 private extension Background {
-    func calculateNodeSize(gameScene: GameScene) -> CGSize {
+    func calculateNodeSize(gameScene: LevelScene) -> CGSize {
         guard let backgroundImageSize = UIImage(named: backgrounds.first?.backgroundName ?? "")?.size else {
             return .zero
         }

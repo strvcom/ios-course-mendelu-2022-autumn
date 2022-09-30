@@ -32,7 +32,7 @@ final class GameViewController: UIViewController {
         skView.preferredFramesPerSecond = 30
         skView.showsPhysics = true
         
-        guard let scene = GameScene(fileNamed: Assets.Scenes.level1) else {
+        guard let scene = LevelScene(fileNamed: Assets.Scenes.level1) else {
             return
         }
             
@@ -48,7 +48,7 @@ final class GameViewController: UIViewController {
             with: event
         )
         
-        guard let scene = skView.scene as? GameScene else {
+        guard let scene = skView.scene as? LevelScene else {
             return
         }
         
@@ -66,7 +66,7 @@ final class GameViewController: UIViewController {
             with: event
         )
         
-        guard let scene = skView.scene as? GameScene else {
+        guard let scene = skView.scene as? LevelScene else {
             return
         }
         

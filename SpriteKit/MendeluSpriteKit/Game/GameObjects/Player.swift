@@ -45,7 +45,7 @@ extension Player {
 
 // MARK: GameObject
 extension Player: GameObject {
-    func setup(gameScene: GameScene) {
+    func setup(gameScene: LevelScene) {
         gameScene.addChild(self)
         
         idleFrames = SKTextureAtlas(named: Assets.Atlas.playerIdle).textures

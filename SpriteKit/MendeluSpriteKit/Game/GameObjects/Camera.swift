@@ -24,14 +24,6 @@ final class Camera: SKCameraNode {
         scene?.size ?? .zero
     }
     
-    private var leftCameraConstraint: CGFloat {
-        0
-    }
-    
-    private var rightCameraConstraint: CGFloat {
-        sceneSize.width
-    }
-    
     var bottomLeftCorner: CGPoint {
         CGPoint(
             x: -(sceneSize.width / 2) + safeArea.left,
@@ -49,7 +41,7 @@ final class Camera: SKCameraNode {
 
 // MARK: GameObject
 extension Camera: GameObject {
-    func setup(gameScene: GameScene) {
+    func setup(gameScene: LevelScene) {
         gameScene.camera = self
         gameScene.addChild(self)
         
@@ -64,9 +56,9 @@ extension Camera: GameObject {
         else {
             return
         }
-        
+
         let widthRange = (boundingRectangle.minX ... boundingRectangle.minX + boundingRectangle.width)
-        
+
         let heightRange = (boundingRectangle.minY ... boundingRectangle.minY + boundingRectangle.height)
 
         position = CGPoint(

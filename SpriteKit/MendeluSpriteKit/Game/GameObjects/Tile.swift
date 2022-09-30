@@ -16,7 +16,7 @@ extension Tile {
 
 // MARK: GameObject
 extension Tile: GameObject {
-    func setup(gameScene: GameScene) {
+    func setup(gameScene: LevelScene) {
         name = Self.name
         zPosition = Layer.tiles
         physicsBody = SKPhysicsBody(

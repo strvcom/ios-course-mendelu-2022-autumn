@@ -19,7 +19,9 @@ final class Ground {
 
 // MARK: GameObject
 extension Ground: GameObject {
-    func setup(gameScene: GameScene) {        
+    func setup(gameScene: LevelScene) {
+        ground.zPosition = Layer.tiles
+        
         for columnNumber in 0 ..< ground.numberOfColumns {
             for rowNumber in 0 ..< ground.numberOfColumns {
                 let definition = ground.tileDefinition(
@@ -39,7 +41,7 @@ extension Ground: GameObject {
                     color: .clear,
                     size: ground.tileSize
                 )
-                node.zPosition = 40
+                node.zPosition = Layer.tiles
                 node.position = CGPoint(
                     x: xPosition,
                     y: yPosition

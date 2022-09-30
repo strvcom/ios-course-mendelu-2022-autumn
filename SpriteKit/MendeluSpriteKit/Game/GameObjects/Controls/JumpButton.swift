@@ -32,7 +32,7 @@ final class JumpButton: SKNode {
 
 // MARK: GameObject
 extension JumpButton: GameObject {
-    func setup(gameScene: GameScene) {
+    func setup(gameScene: LevelScene) {
         gameScene.cameraObject.addChild(self)
 
         isUserInteractionEnabled = true

@@ -1,5 +1,5 @@
 //
-//  GameScene.swift
+//  LevelScene.swift
 //  MendeluSpriteKit
 //
 //  Created by Róbert Oravec on 18.09.2022.
@@ -7,13 +7,14 @@
 
 import SpriteKit
 
-final class GameScene: SKScene {
+final class LevelScene: SKScene {
     // MARK: Properties
     var allGameObjects: [GameObject] {
         [
             cameraObject,
             background,
             ground,
+            levelBoundary,
             player,
             joystick,
             jumpButton
@@ -23,6 +24,7 @@ final class GameScene: SKScene {
     private(set) var cameraObject: Camera!
     private(set) var background: Background!
     private(set) var ground: Ground!
+    private(set) var levelBoundary: LevelBoundary!
     private(set) var player: Player!
     private(set) var joystick: Joystick!
     private(set) var jumpButton: JumpButton!
@@ -40,6 +42,7 @@ final class GameScene: SKScene {
         cameraObject = Camera()
         background = Background()
         ground = Ground(ground: childNode(withName: Self.groundTileNodeName) as! SKTileMapNode)
+        levelBoundary = LevelBoundary()
         player = Player()
         joystick = Joystick()
         jumpButton = JumpButton()
@@ -55,6 +58,13 @@ final class GameScene: SKScene {
 }
 
 // MARK: Constants
-extension GameScene {
+extension LevelScene {
     static let groundTileNodeName = "Ground"
+}
+
+// MARK: Private API
+private extension LevelScene {
+    func createLevelBoundary() {
+        
+    }
 }

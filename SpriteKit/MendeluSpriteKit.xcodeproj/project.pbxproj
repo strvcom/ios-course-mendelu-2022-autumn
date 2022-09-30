@@ -19,13 +19,14 @@
 		59699EB128E1AEA700999BE7 /* SKNode+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59699EB028E1AEA700999BE7 /* SKNode+Extension.swift */; };
 		59699EB528E1B40700999BE7 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59699EB428E1B40700999BE7 /* Camera.swift */; };
 		5990779928D77E3C00659E6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5990779828D77E3C00659E6E /* AppDelegate.swift */; };
-		5990779F28D77E3C00659E6E /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5990779E28D77E3C00659E6E /* GameScene.swift */; };
+		5990779F28D77E3C00659E6E /* LevelScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5990779E28D77E3C00659E6E /* LevelScene.swift */; };
 		599077A128D77E3C00659E6E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 599077A028D77E3C00659E6E /* GameViewController.swift */; };
 		599077A428D77E3C00659E6E /* GameViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 599077A228D77E3C00659E6E /* GameViewController.storyboard */; };
 		599077A928D77E3C00659E6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 599077A728D77E3C00659E6E /* LaunchScreen.storyboard */; };
 		59A9DB3D28E5CF7300492DAA /* Level1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 59A9DB3C28E5CF7300492DAA /* Level1.sks */; };
 		59A9DB3F28E618C500492DAA /* Tiles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 59A9DB3E28E618C500492DAA /* Tiles.sks */; };
 		59A9DB4128E61C6700492DAA /* Ground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A9DB4028E61C6700492DAA /* Ground.swift */; };
+		59CC663328E6E0C60010A82E /* LevelBoundary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC663228E6E0C60010A82E /* LevelBoundary.swift */; };
 		59CFC5EE28D78A5900F4E6AE /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CFC5ED28D78A5900F4E6AE /* Layer.swift */; };
 		59EF42F128E0BA42005CC691 /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EF42F028E0BA42005CC691 /* Joystick.swift */; };
 		59EF42F328E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EF42F228E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift */; };
@@ -48,13 +49,14 @@
 		59699EB428E1B40700999BE7 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		5990779528D77E3C00659E6E /* MendeluSpriteKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MendeluSpriteKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5990779828D77E3C00659E6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5990779E28D77E3C00659E6E /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		5990779E28D77E3C00659E6E /* LevelScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelScene.swift; sourceTree = "<group>"; };
 		599077A028D77E3C00659E6E /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		599077A328D77E3C00659E6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/GameViewController.storyboard; sourceTree = "<group>"; };
 		599077A828D77E3C00659E6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		59A9DB3C28E5CF7300492DAA /* Level1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level1.sks; sourceTree = "<group>"; };
 		59A9DB3E28E618C500492DAA /* Tiles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Tiles.sks; sourceTree = "<group>"; };
 		59A9DB4028E61C6700492DAA /* Ground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
+		59CC663228E6E0C60010A82E /* LevelBoundary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelBoundary.swift; sourceTree = "<group>"; };
 		59CFC5ED28D78A5900F4E6AE /* Layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
 		59EF42F028E0BA42005CC691 /* Joystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 		59EF42F228E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryFloatingPoint+Extension.swift"; sourceTree = "<group>"; };
@@ -80,7 +82,7 @@
 				592E302B28E588A000603ECC /* Levels */,
 				5922EAD628D8C1A400BE46DC /* GameObjects */,
 				59CFC5ED28D78A5900F4E6AE /* Layer.swift */,
-				5990779E28D77E3C00659E6E /* GameScene.swift */,
+				5990779E28D77E3C00659E6E /* LevelScene.swift */,
 				5922EAD728D8C2E400BE46DC /* Physics.swift */,
 			);
 			path = Game;
@@ -89,13 +91,14 @@
 		5922EAD628D8C1A400BE46DC /* GameObjects */ = {
 			isa = PBXGroup;
 			children = (
-				59EF42EF28E0BA38005CC691 /* Controls */,
 				5922EAD028D8BF3300BE46DC /* Background.swift */,
-				5922EAD428D8C0FB00BE46DC /* GameObject.swift */,
-				5922EAD928D8C53300BE46DC /* Player.swift */,
 				59699EB428E1B40700999BE7 /* Camera.swift */,
-				592E302C28E588C100603ECC /* Tile.swift */,
+				5922EAD428D8C0FB00BE46DC /* GameObject.swift */,
 				59A9DB4028E61C6700492DAA /* Ground.swift */,
+				5922EAD928D8C53300BE46DC /* Player.swift */,
+				592E302C28E588C100603ECC /* Tile.swift */,
+				59EF42EF28E0BA38005CC691 /* Controls */,
+				59CC663228E6E0C60010A82E /* LevelBoundary.swift */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -269,7 +272,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5990779F28D77E3C00659E6E /* GameScene.swift in Sources */,
+				59CC663328E6E0C60010A82E /* LevelBoundary.swift in Sources */,
+				5990779F28D77E3C00659E6E /* LevelScene.swift in Sources */,
 				599077A128D77E3C00659E6E /* GameViewController.swift in Sources */,
 				59699EB528E1B40700999BE7 /* Camera.swift in Sources */,
 				5922EAD828D8C2E400BE46DC /* Physics.swift in Sources */,

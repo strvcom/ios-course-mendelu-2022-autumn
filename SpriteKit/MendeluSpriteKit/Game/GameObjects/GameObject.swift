@@ -9,7 +9,7 @@ import UIKit
 import SpriteKit
 
 protocol GameObject {
-    func setup(gameScene: GameScene)
+    func setup(gameScene: LevelScene)
     
     func update(_ currentTime: TimeInterval)
     
@@ -29,7 +29,7 @@ extension GameObject {
 
 // MARK: GameObject + SKNode
 extension GameObject where Self: SKNode {
-    var gameScene: GameScene? {
-        scene as? GameScene
+    var gameScene: LevelScene? {
+        scene as? LevelScene
     }
 }
