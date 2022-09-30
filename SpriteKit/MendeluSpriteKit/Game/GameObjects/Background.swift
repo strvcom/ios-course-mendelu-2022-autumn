@@ -20,20 +20,35 @@ final class Background {
 }
 
 // MARK: GameObject
-extension Background: GameObject {
-    func setup(gameScene: GameScene) {
+extension Background: SceneObject {
+    func setup(scene: LevelScene) {
+        let size = calculateNodeSize(scene: scene)
+        
         backgrounds
             .forEach {
                 let background = SKSpriteNode(imageNamed: $0.backgroundName)
                 background.anchorPoint = .zero
-                background.position = CGPoint(
-                    x: 0,
-                    y: gameScene.ground.tileSize.height
-                )
+                background.position = .zero
                 background.zPosition = $0.layer
-                background.size = gameScene.size
+                background.size = size
                 
-                gameScene.addChild(background)
+                scene.addChild(background)
             }
+    }
+}
+
+// MARK: Private API
+private extension Background {
+    func calculateNodeSize(scene: LevelScene) -> CGSize {
+        guard let backgroundImageSize = UIImage(named: backgrounds.first?.backgroundName ?? "")?.size else {
+            return .zero
+        }
+        
+        let aspectRatio = backgroundImageSize.height / backgroundImageSize.width
+        
+        return CGSize(
+            width: scene.level.ground.mapSize.width,
+            height: scene.level.ground.mapSize.width * aspectRatio
+        )
     }
 }

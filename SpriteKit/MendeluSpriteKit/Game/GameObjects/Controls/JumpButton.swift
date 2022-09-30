@@ -10,7 +10,7 @@ import SpriteKit
 final class JumpButton: SKNode {
     // MARK: Properties
     private var size: CGFloat {
-        (gameScene?.size.height ?? 0) * 0.13
+        (levelScene?.size.height ?? 0) * 0.13
     }
     
     // MARK: Overrides
@@ -18,22 +18,22 @@ final class JumpButton: SKNode {
         _ touches: Set<UITouch>,
         with event: UIEvent?
     ) {
-        gameScene?.player.jump()
+        levelScene?.player.jump()
     }
     
     func keyboardUp(presses: Set<UIPress>) {
         for press in presses {
             if press.key?.charactersIgnoringModifiers == " " {
-                gameScene?.player.jump()
+                levelScene?.player.jump()
             }
         }
     }
 }
 
 // MARK: GameObject
-extension JumpButton: GameObject {
-    func setup(gameScene: GameScene) {
-        gameScene.cameraObject.addChild(self)
+extension JumpButton: SceneObject {
+    func setup(scene: LevelScene) {
+        scene.cameraObject.addChild(self)
 
         isUserInteractionEnabled = true
         
@@ -45,7 +45,7 @@ extension JumpButton: GameObject {
         
         zPosition = Layer.controls
         
-        let bottomRight = gameScene.cameraObject.bottomRightCorner
+        let bottomRight = scene.cameraObject.bottomRightCorner
         
         position = CGPoint(
             x: bottomRight.x - size * 1.3,

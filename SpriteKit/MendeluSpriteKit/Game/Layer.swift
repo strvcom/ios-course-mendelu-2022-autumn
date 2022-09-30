@@ -15,8 +15,9 @@ enum Layer {
     static let background4: CGFloat = 3
     
     // MARK: Level 1
-    static let tiles: CGFloat = 10
-    static let player: CGFloat = 11
+    static let scenery: CGFloat = 10
+    static let tiles: CGFloat = 11
+    static let player: CGFloat = 12
     
     // MARK: Controls
     static let controls: CGFloat = 20

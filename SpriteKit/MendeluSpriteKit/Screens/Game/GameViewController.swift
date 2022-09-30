@@ -30,9 +30,11 @@ final class GameViewController: UIViewController {
         skView.showsNodeCount = true
         skView.ignoresSiblingOrder = true
         skView.preferredFramesPerSecond = 30
+        skView.showsPhysics = true
         
-        let scene = GameScene(size: UIScreen.main.bounds.size)
-        scene.scaleMode = .aspectFill
+        guard let scene = LevelScene(fileNamed: Assets.Scenes.level1) else {
+            return
+        }
             
         skView.presentScene(scene)
     }
@@ -46,11 +48,11 @@ final class GameViewController: UIViewController {
             with: event
         )
         
-        guard let scene = skView.scene as? GameScene else {
+        guard let scene = skView.scene as? LevelScene else {
             return
         }
         
-        for gameObject in scene.allGameObjects {
+        for gameObject in scene.allSceneObjects {
             gameObject.keyboardUp(presses: presses)
         }
     }
@@ -64,11 +66,11 @@ final class GameViewController: UIViewController {
             with: event
         )
         
-        guard let scene = skView.scene as? GameScene else {
+        guard let scene = skView.scene as? LevelScene else {
             return
         }
         
-        for gameObject in scene.allGameObjects {
+        for gameObject in scene.allSceneObjects {
             gameObject.keyboardDown(presses: presses)
         }
     }
