@@ -11,21 +11,35 @@ final class Player: SKSpriteNode {
     // MARK: Properties
     private var idleFrames = [SKTexture]()
     private var walkingFrames = [SKTexture]()
+    private var attackFrames = [SKTexture]()
+    private var isJumping = false
+    private var isAttacking = false
+    private var direction: Direction = .right
+    private var animationState: AnimationState = .idle {
+        didSet {
+            guard oldValue != animationState else {
+                return
+            }
+            
+            updateStateAnimation()
+        }
+    }
     
     private var velocity: CGFloat {
         levelScene?.joystick.velocity ?? 0
     }
     
-    private(set) var state: PlayerState = .idle
-    private(set) var jumped = false
-    private(set) var direction: Direction = .right
+    private var isWalking: Bool {
+        velocity != 0
+    }
 }
 
 // MARK: PlayerState
-extension Player {
-    enum PlayerState {
+private extension Player {
+    enum AnimationState {
         case walking
         case idle
+        case attacking
     }
 }
 
@@ -42,6 +56,7 @@ extension Player: SceneObject {
     func setup(scene: LevelScene) {
         idleFrames = SKTextureAtlas(named: Assets.Atlas.playerIdle).textures
         walkingFrames = SKTextureAtlas(named: Assets.Atlas.playerWalk).textures
+        attackFrames = SKTextureAtlas(named: Assets.Atlas.playerAttack).textures
         
         updateStateAnimation()
         
@@ -73,12 +88,20 @@ extension Player: SceneObject {
 
 // MARK: Public API
 extension Player {
-    func jump() {
-        guard !jumped else {
+    func attack() {
+        guard !isAttacking else {
             return
         }
         
-        jumped = true
+        isAttacking = true
+    }
+    
+    func jump() {
+        guard !isJumping else {
+            return
+        }
+        
+        isJumping = true
         
         physicsBody?.applyImpulse(
             CGVector(
@@ -101,23 +124,19 @@ private extension Player {
     }
     
     func updateState() {
-        let newState: PlayerState = velocity == 0
-            ? .idle
-            : .walking
-        
-        guard newState != state else {
-            return
+        if isAttacking {
+            animationState = .attacking
+        } else {
+            animationState = isWalking
+                ? .walking
+                : .idle
         }
-        
-        state = newState
-        
-        updateStateAnimation()
     }
     
     func updateStateAnimation() {
         removeAllActions()
         
-        switch state {
+        switch animationState {
         case .idle:
             run(
                 SKAction.repeatForever(
@@ -140,6 +159,19 @@ private extension Player {
                     )
                 )
             )
+        case .attacking:
+            run(
+                SKAction.animate(
+                    with: attackFrames,
+                    timePerFrame: 0.08,
+                    resize: false,
+                    restore: true
+                )
+            ) { [weak self] in
+                self?.isAttacking = false
+                
+                self?.updateState()
+            }
         }
     }
     
@@ -192,7 +224,7 @@ private extension Player {
                 return
             }
             
-            jumped = false
+            isJumping = false
         default:
             break
         }

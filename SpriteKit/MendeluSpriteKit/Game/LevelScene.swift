@@ -16,7 +16,7 @@ final class LevelScene: SKScene {
             level,
             player,
             joystick,
-            jumpButton
+            controlButtons
         ]
     }
     
@@ -25,7 +25,7 @@ final class LevelScene: SKScene {
     private(set) var level: Level!
     private(set) var player: Player!
     private(set) var joystick: Joystick!
-    private(set) var jumpButton: JumpButton!
+    private(set) var controlButtons: ControlButtons!
     
     // MARK: Overrides
     override func willMove(from view: SKView) {
@@ -44,7 +44,7 @@ final class LevelScene: SKScene {
         level = Level(ground: childNode(withName: ObjectNames.ground) as! SKTileMapNode)
         player = childNode(withName: ObjectNames.player) as? Player
         joystick = Joystick()
-        jumpButton = JumpButton()
+        controlButtons = ControlButtons()
         
         allSceneObjects.forEach { $0.setup(scene: self) }
     }

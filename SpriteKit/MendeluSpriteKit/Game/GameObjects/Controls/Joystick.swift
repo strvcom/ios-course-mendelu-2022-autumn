@@ -79,8 +79,8 @@ extension Joystick: SceneObject {
         let bottomLeft = scene.cameraObject.bottomLeftCorner
         
         position = CGPoint(
-            x: bottomLeft.x + size * 1.3,
-            y: bottomLeft.y + size * 1.3
+            x: bottomLeft.x + 75,
+            y: bottomLeft.y + 75
         )
     }
     
