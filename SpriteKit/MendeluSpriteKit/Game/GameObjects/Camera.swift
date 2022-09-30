@@ -40,10 +40,10 @@ final class Camera: SKCameraNode {
 }
 
 // MARK: GameObject
-extension Camera: GameObject {
-    func setup(gameScene: LevelScene) {
-        gameScene.camera = self
-        gameScene.addChild(self)
+extension Camera: SceneObject {
+    func setup(scene: LevelScene) {
+        scene.camera = self
+        scene.addChild(self)
         
         xScale = 0.7
         yScale = 0.7
@@ -51,7 +51,7 @@ extension Camera: GameObject {
     
     func update(_ currentTime: TimeInterval) {
         guard
-            let playerPosition = gameScene?.player.position,
+            let playerPosition = levelScene?.player.position,
             let boundingRectangle = calculateBoundingRectangle()
         else {
             return
@@ -68,7 +68,7 @@ extension Camera: GameObject {
     }
     
     func calculateBoundingRectangle() -> CGRect? {
-        guard let mapSize = gameScene?.ground.ground.mapSize else {
+        guard let mapSize = levelScene?.level.ground.mapSize else {
             return nil
         }
         

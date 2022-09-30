@@ -13,7 +13,7 @@ final class Player: SKSpriteNode {
     private var walkingFrames = [SKTexture]()
     
     private var velocity: CGFloat {
-        gameScene?.joystick.velocity ?? 0
+        levelScene?.joystick.velocity ?? 0
     }
     
     private var playerSize: CGSize {
@@ -44,9 +44,9 @@ extension Player {
 }
 
 // MARK: GameObject
-extension Player: GameObject {
-    func setup(gameScene: LevelScene) {
-        gameScene.addChild(self)
+extension Player: SceneObject {
+    func setup(scene: LevelScene) {
+        scene.addChild(self)
         
         idleFrames = SKTextureAtlas(named: Assets.Atlas.playerIdle).textures
         walkingFrames = SKTextureAtlas(named: Assets.Atlas.playerWalk).textures
@@ -82,8 +82,8 @@ private extension Player {
     func setupPlayer() {
         zPosition = Layer.player
         position = CGPoint(
-            x: gameScene?.frame.midX ?? 0,
-            y: gameScene?.frame.midY ?? 0
+            x: levelScene?.frame.midX ?? 0,
+            y: levelScene?.frame.midY ?? 0
         )
         size = playerSize
         physicsBody = SKPhysicsBody(rectangleOf: size)

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5922EAD128D8BF3300BE46DC /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5922EAD028D8BF3300BE46DC /* Background.swift */; };
-		5922EAD528D8C0FB00BE46DC /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5922EAD428D8C0FB00BE46DC /* GameObject.swift */; };
+		5922EAD528D8C0FB00BE46DC /* SceneObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5922EAD428D8C0FB00BE46DC /* SceneObject.swift */; };
 		5922EAD828D8C2E400BE46DC /* Physics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5922EAD728D8C2E400BE46DC /* Physics.swift */; };
 		5922EADA28D8C53300BE46DC /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5922EAD928D8C53300BE46DC /* Player.swift */; };
 		5922EADC28D8CD7300BE46DC /* PlayerIdle.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5922EADB28D8CD7300BE46DC /* PlayerIdle.atlas */; };
@@ -25,8 +25,7 @@
 		599077A928D77E3C00659E6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 599077A728D77E3C00659E6E /* LaunchScreen.storyboard */; };
 		59A9DB3D28E5CF7300492DAA /* Level1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 59A9DB3C28E5CF7300492DAA /* Level1.sks */; };
 		59A9DB3F28E618C500492DAA /* Tiles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 59A9DB3E28E618C500492DAA /* Tiles.sks */; };
-		59A9DB4128E61C6700492DAA /* Ground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A9DB4028E61C6700492DAA /* Ground.swift */; };
-		59CC663328E6E0C60010A82E /* LevelBoundary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC663228E6E0C60010A82E /* LevelBoundary.swift */; };
+		59A9DB4128E61C6700492DAA /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A9DB4028E61C6700492DAA /* Level.swift */; };
 		59CFC5EE28D78A5900F4E6AE /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CFC5ED28D78A5900F4E6AE /* Layer.swift */; };
 		59EF42F128E0BA42005CC691 /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EF42F028E0BA42005CC691 /* Joystick.swift */; };
 		59EF42F328E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EF42F228E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift */; };
@@ -37,7 +36,7 @@
 
 /* Begin PBXFileReference section */
 		5922EAD028D8BF3300BE46DC /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
-		5922EAD428D8C0FB00BE46DC /* GameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
+		5922EAD428D8C0FB00BE46DC /* SceneObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneObject.swift; sourceTree = "<group>"; };
 		5922EAD728D8C2E400BE46DC /* Physics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Physics.swift; sourceTree = "<group>"; };
 		5922EAD928D8C53300BE46DC /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		5922EADB28D8CD7300BE46DC /* PlayerIdle.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PlayerIdle.atlas; sourceTree = "<group>"; };
@@ -55,8 +54,7 @@
 		599077A828D77E3C00659E6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		59A9DB3C28E5CF7300492DAA /* Level1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Level1.sks; sourceTree = "<group>"; };
 		59A9DB3E28E618C500492DAA /* Tiles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Tiles.sks; sourceTree = "<group>"; };
-		59A9DB4028E61C6700492DAA /* Ground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
-		59CC663228E6E0C60010A82E /* LevelBoundary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelBoundary.swift; sourceTree = "<group>"; };
+		59A9DB4028E61C6700492DAA /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		59CFC5ED28D78A5900F4E6AE /* Layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
 		59EF42F028E0BA42005CC691 /* Joystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 		59EF42F228E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryFloatingPoint+Extension.swift"; sourceTree = "<group>"; };
@@ -93,12 +91,11 @@
 			children = (
 				5922EAD028D8BF3300BE46DC /* Background.swift */,
 				59699EB428E1B40700999BE7 /* Camera.swift */,
-				5922EAD428D8C0FB00BE46DC /* GameObject.swift */,
-				59A9DB4028E61C6700492DAA /* Ground.swift */,
+				5922EAD428D8C0FB00BE46DC /* SceneObject.swift */,
+				59A9DB4028E61C6700492DAA /* Level.swift */,
 				5922EAD928D8C53300BE46DC /* Player.swift */,
 				592E302C28E588C100603ECC /* Tile.swift */,
 				59EF42EF28E0BA38005CC691 /* Controls */,
-				59CC663228E6E0C60010A82E /* LevelBoundary.swift */,
 			);
 			path = GameObjects;
 			sourceTree = "<group>";
@@ -272,14 +269,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59CC663328E6E0C60010A82E /* LevelBoundary.swift in Sources */,
 				5990779F28D77E3C00659E6E /* LevelScene.swift in Sources */,
 				599077A128D77E3C00659E6E /* GameViewController.swift in Sources */,
 				59699EB528E1B40700999BE7 /* Camera.swift in Sources */,
 				5922EAD828D8C2E400BE46DC /* Physics.swift in Sources */,
 				59CFC5EE28D78A5900F4E6AE /* Layer.swift in Sources */,
-				5922EAD528D8C0FB00BE46DC /* GameObject.swift in Sources */,
-				59A9DB4128E61C6700492DAA /* Ground.swift in Sources */,
+				5922EAD528D8C0FB00BE46DC /* SceneObject.swift in Sources */,
+				59A9DB4128E61C6700492DAA /* Level.swift in Sources */,
 				5922EAD128D8BF3300BE46DC /* Background.swift in Sources */,
 				592E302728E57B5500603ECC /* Assets.swift in Sources */,
 				59EF42F528E0D437005CC691 /* Comparable+Extension.swift in Sources */,

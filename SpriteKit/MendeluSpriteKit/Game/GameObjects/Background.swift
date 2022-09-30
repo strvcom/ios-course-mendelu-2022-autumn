@@ -20,9 +20,9 @@ final class Background {
 }
 
 // MARK: GameObject
-extension Background: GameObject {
-    func setup(gameScene: LevelScene) {
-        let size = calculateNodeSize(gameScene: gameScene)
+extension Background: SceneObject {
+    func setup(scene: LevelScene) {
+        let size = calculateNodeSize(scene: scene)
         
         backgrounds
             .forEach {
@@ -32,14 +32,14 @@ extension Background: GameObject {
                 background.zPosition = $0.layer
                 background.size = size
                 
-                gameScene.addChild(background)
+                scene.addChild(background)
             }
     }
 }
 
 // MARK: Private API
 private extension Background {
-    func calculateNodeSize(gameScene: LevelScene) -> CGSize {
+    func calculateNodeSize(scene: LevelScene) -> CGSize {
         guard let backgroundImageSize = UIImage(named: backgrounds.first?.backgroundName ?? "")?.size else {
             return .zero
         }
@@ -47,8 +47,8 @@ private extension Background {
         let aspectRatio = backgroundImageSize.height / backgroundImageSize.width
         
         return CGSize(
-            width: gameScene.ground.ground.mapSize.width,
-            height: gameScene.ground.ground.mapSize.width * aspectRatio
+            width: scene.level.ground.mapSize.width,
+            height: scene.level.ground.mapSize.width * aspectRatio
         )
     }
 }

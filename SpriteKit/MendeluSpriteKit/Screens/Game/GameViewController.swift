@@ -52,7 +52,7 @@ final class GameViewController: UIViewController {
             return
         }
         
-        for gameObject in scene.allGameObjects {
+        for gameObject in scene.allSceneObjects {
             gameObject.keyboardUp(presses: presses)
         }
     }
@@ -70,7 +70,7 @@ final class GameViewController: UIViewController {
             return
         }
         
-        for gameObject in scene.allGameObjects {
+        for gameObject in scene.allSceneObjects {
             gameObject.keyboardDown(presses: presses)
         }
     }

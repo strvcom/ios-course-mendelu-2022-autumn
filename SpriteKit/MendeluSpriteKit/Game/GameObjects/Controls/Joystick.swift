@@ -18,7 +18,7 @@ final class Joystick: SKNode {
     }
     
     private var size: CGFloat {
-        (gameScene?.size.height ?? 0) * 0.13
+        (levelScene?.size.height ?? 0) * 0.13
     }
     
     /// Normalized value between -1 ... 1.
@@ -56,9 +56,9 @@ final class Joystick: SKNode {
 }
 
 // MARK: GameObject
-extension Joystick: GameObject {
-    func setup(gameScene: LevelScene) {
-        gameScene.cameraObject.addChild(self)
+extension Joystick: SceneObject {
+    func setup(scene: LevelScene) {
+        scene.cameraObject.addChild(self)
 
         isUserInteractionEnabled = true
         
@@ -76,7 +76,7 @@ extension Joystick: GameObject {
         
         zPosition = Layer.controls
         
-        let bottomLeft = gameScene.cameraObject.bottomLeftCorner
+        let bottomLeft = scene.cameraObject.bottomLeftCorner
         
         position = CGPoint(
             x: bottomLeft.x + size * 1.3,

@@ -9,12 +9,11 @@ import SpriteKit
 
 final class LevelScene: SKScene {
     // MARK: Properties
-    var allGameObjects: [GameObject] {
+    var allSceneObjects: [SceneObject] {
         [
             cameraObject,
             background,
-            ground,
-            levelBoundary,
+            level,
             player,
             joystick,
             jumpButton
@@ -23,8 +22,7 @@ final class LevelScene: SKScene {
     
     private(set) var cameraObject: Camera!
     private(set) var background: Background!
-    private(set) var ground: Ground!
-    private(set) var levelBoundary: LevelBoundary!
+    private(set) var level: Level!
     private(set) var player: Player!
     private(set) var joystick: Joystick!
     private(set) var jumpButton: JumpButton!
@@ -41,30 +39,17 @@ final class LevelScene: SKScene {
         
         cameraObject = Camera()
         background = Background()
-        ground = Ground(ground: childNode(withName: Self.groundTileNodeName) as! SKTileMapNode)
-        levelBoundary = LevelBoundary()
+        level = Level(ground: childNode(withName: "Ground") as! SKTileMapNode)
         player = Player()
         joystick = Joystick()
         jumpButton = JumpButton()
         
-        allGameObjects.forEach { $0.setup(gameScene: self) }
+        allSceneObjects.forEach { $0.setup(scene: self) }
     }
     
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
         
-        allGameObjects.forEach { $0.update(currentTime) }
-    }
-}
-
-// MARK: Constants
-extension LevelScene {
-    static let groundTileNodeName = "Ground"
-}
-
-// MARK: Private API
-private extension LevelScene {
-    func createLevelBoundary() {
-        
+        allSceneObjects.forEach { $0.update(currentTime) }
     }
 }

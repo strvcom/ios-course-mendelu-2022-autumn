@@ -8,8 +8,8 @@
 import UIKit
 import SpriteKit
 
-protocol GameObject {
-    func setup(gameScene: LevelScene)
+protocol SceneObject {
+    func setup(scene: LevelScene)
     
     func update(_ currentTime: TimeInterval)
     
@@ -19,7 +19,7 @@ protocol GameObject {
 }
 
 // MARK: Default Implementation
-extension GameObject {
+extension SceneObject {
     func update(_ currentTime: TimeInterval) {}
     
     func keyboardDown(presses: Set<UIPress>) {}
@@ -27,9 +27,9 @@ extension GameObject {
     func keyboardUp(presses: Set<UIPress>) {}
 }
 
-// MARK: GameObject + SKNode
-extension GameObject where Self: SKNode {
-    var gameScene: LevelScene? {
+// MARK: SceneObject + SKNode
+extension SceneObject where Self: SKNode {
+    var levelScene: LevelScene? {
         scene as? LevelScene
     }
 }
