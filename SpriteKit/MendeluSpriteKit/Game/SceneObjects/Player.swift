@@ -25,16 +25,6 @@ final class Player: SKSpriteNode {
         }
     }
     
-    private var animationState: AnimationState = .idle {
-        didSet {
-            guard oldValue != animationState else {
-                return
-            }
-            
-            updateStateAnimation()
-        }
-    }
-    
     private var velocity: CGFloat {
         levelScene?.joystick.velocity ?? 0
     }
@@ -42,25 +32,58 @@ final class Player: SKSpriteNode {
     private var isWalking: Bool {
         velocity != 0
     }
+    
+    private(set) var animations = [String : SKAction]()
 }
 
-// MARK: PlayerState
-private extension Player {
-    enum AnimationState {
-        case walking
-        case idle
-        case attacking
-    }
-}
+// MARK: AnimatedObject
+extension Player: AnimatedObject {}
 
 // MARK: GameObject
 extension Player: SceneObject {
     func setup(scene: LevelScene) {
         idleFrames = SKTextureAtlas(named: Assets.Atlas.playerIdle).textures
+        
         walkingFrames = SKTextureAtlas(named: Assets.Atlas.playerWalk).textures
+        
         attackFrames = SKTextureAtlas(named: Assets.Atlas.playerAttack).textures
         
-        updateStateAnimation()
+        animations[Animations.idle.rawValue] = SKAction.repeatForever(
+            SKAction.animate(
+                with: idleFrames,
+                timePerFrame: 0.2,
+                resize: false,
+                restore: true
+            )
+        )
+        
+        animations[Animations.walking.rawValue] = SKAction.repeatForever(
+            SKAction.animate(
+                with: walkingFrames,
+                timePerFrame: 0.2,
+                resize: false,
+                restore: true
+            )
+        )
+        
+        let attackTimePerFrame: TimeInterval = 0.08
+        
+        animations[Animations.attacking.rawValue] = SKAction.group([
+            SKAction.animate(
+                with: attackFrames,
+                timePerFrame: attackTimePerFrame,
+                resize: false,
+                restore: true
+            ),
+            SKAction.sequence([
+                SKAction.wait(forDuration: attackTimePerFrame * Double(attackFrames.count)),
+                SKAction.run { [weak self] in
+                    self?.isAttacking = false
+                }
+            ])
+        ])
+        
+        updateState()
         
         setupPlayer()
     }
@@ -73,7 +96,7 @@ extension Player: SceneObject {
         updatePosition()
     }
     
-    func handleContact(_ contact: SKPhysicsContact) {
+    func handleContactStart(_ contact: SKPhysicsContact) {
         if contact.bodyA.node == self {
             handleContactWith(
                 body: contact.bodyB,
@@ -114,6 +137,15 @@ extension Player {
     }
 }
 
+// MARK: PlayerState
+private extension Player {
+    enum Animations: String {
+        case walking
+        case idle
+        case attacking
+    }
+}
+
 // MARK: Private API
 private extension Player {
     func setupPlayer() {
@@ -128,53 +160,11 @@ private extension Player {
     
     func updateState() {
         if isAttacking {
-            animationState = .attacking
+            playAnimation(key: Animations.attacking.rawValue)
         } else {
-            animationState = isWalking
-                ? .walking
-                : .idle
-        }
-    }
-    
-    func updateStateAnimation() {
-        removeAllActions()
-        
-        switch animationState {
-        case .idle:
-            run(
-                SKAction.repeatForever(
-                    SKAction.animate(
-                        with: idleFrames,
-                        timePerFrame: 0.2,
-                        resize: false,
-                        restore: true
-                    )
-                )
-            )
-        case .walking:
-            run(
-                SKAction.repeatForever(
-                    SKAction.animate(
-                        with: walkingFrames,
-                        timePerFrame: 0.2,
-                        resize: false,
-                        restore: true
-                    )
-                )
-            )
-        case .attacking:
-            run(
-                SKAction.animate(
-                    with: attackFrames,
-                    timePerFrame: 0.08,
-                    resize: false,
-                    restore: true
-                )
-            ) { [weak self] in
-                self?.isAttacking = false
-                
-                self?.updateState()
-            }
+            isWalking
+                ? playAnimation(key: Animations.walking.rawValue)
+                : playAnimation(key: Animations.idle.rawValue)
         }
     }
     

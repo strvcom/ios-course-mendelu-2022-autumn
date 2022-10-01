@@ -11,6 +11,7 @@ final class Zombie: SKSpriteNode {
     // MARK: Properties
     private var idleFrames = [SKTexture]()
     private var walkingFrames = [SKTexture]()
+    private var attackFrames = [SKTexture]()
     
     private var direction: Direction = .right {
         didSet {
@@ -94,6 +95,20 @@ extension Zombie: SceneObject {
         
         updateState()
     }
+    
+    func handleContactStart(_ contact: SKPhysicsContact) {
+        if contact.bodyA == self {
+            handleContactWith(
+                body: contact.bodyB,
+                contact: contact
+            )
+        } else if contact.bodyB == self {
+            handleContactWith(
+                body: contact.bodyA,
+                contact: contact
+            )
+        }
+    }
 }
 
 // MARK: Private API
@@ -145,6 +160,18 @@ private extension Zombie {
                     )
                 )
             )
+        }
+    }
+    
+    func handleContactWith(
+        body: SKPhysicsBody,
+        contact: SKPhysicsContact
+    ) {
+        switch body {
+        case _ as Player:
+            print("Pain player hit")
+        default:
+            break
         }
     }
 }

@@ -9,6 +9,8 @@ import SpriteKit
 
 final class LevelScene: SKScene {
     // MARK: Properties
+    private let controlsHidden = true
+    
     var allSceneObjects: [SceneObject] {
         [
             cameraObject,
@@ -63,6 +65,11 @@ final class LevelScene: SKScene {
         }
         
         allSceneObjects.forEach { $0.setup(scene: self) }
+        
+        if controlsHidden {
+            joystick.alpha = 0
+            controlButtons.alpha = 0
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -75,6 +82,10 @@ final class LevelScene: SKScene {
 // MARK: SKPhysicsContactDelegate
 extension LevelScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
-        allSceneObjects.forEach { $0.handleContact(contact) }
+        allSceneObjects.forEach { $0.handleContactStart(contact) }
+    }
+    
+    func didEnd(_ contact: SKPhysicsContact) {
+        
     }
 }
