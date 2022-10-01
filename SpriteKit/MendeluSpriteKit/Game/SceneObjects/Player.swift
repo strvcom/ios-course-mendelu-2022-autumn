@@ -14,7 +14,17 @@ final class Player: SKSpriteNode {
     private var attackFrames = [SKTexture]()
     private var isJumping = false
     private var isAttacking = false
-    private var direction: Direction = .right
+    
+    private var direction: Direction = .right {
+        didSet {
+            guard oldValue != direction else {
+                return
+            }
+            
+            updateSpriteDirection()
+        }
+    }
+    
     private var animationState: AnimationState = .idle {
         didSet {
             guard oldValue != animationState else {
@@ -120,7 +130,8 @@ private extension Player {
         physicsBody?.categoryBitMask = Physics.CategoryBitMask.player
         physicsBody?.restitution = 0
         physicsBody?.allowsRotation = false
-        physicsBody?.contactTestBitMask = Physics.CategoryBitMask.groundTile
+        physicsBody?.contactTestBitMask = Physics.CategoryBitMask.groundTile |
+            Physics.CategoryBitMask.zombie
     }
     
     func updateState() {
@@ -176,21 +187,11 @@ private extension Player {
     }
     
     func updateDirection() {
-        var newDirection = direction
-        
         if velocity > 0 {
-            newDirection = .right
+            direction = .right
         } else if velocity < 0 {
-            newDirection = .left
+            direction = .left
         }
-        
-        guard newDirection != direction else {
-            return
-        }
-        
-        direction = newDirection
-        
-        updateSpriteDirection()
     }
     
     func updateSpriteDirection() {
