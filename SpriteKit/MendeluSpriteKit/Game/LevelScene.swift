@@ -18,6 +18,7 @@ final class LevelScene: SKScene {
             joystick,
             controlButtons
         ]
+        + zombies
     }
     
     private(set) var cameraObject: Camera!
@@ -26,6 +27,7 @@ final class LevelScene: SKScene {
     private(set) var player: Player!
     private(set) var joystick: Joystick!
     private(set) var controlButtons: ControlButtons!
+    private(set) var zombies = [Zombie]()
     
     // MARK: Overrides
     override func willMove(from view: SKView) {
@@ -40,11 +42,25 @@ final class LevelScene: SKScene {
         physicsWorld.contactDelegate = self
         
         cameraObject = Camera()
+        
         background = Background()
-        level = Level(ground: childNode(withName: ObjectNames.ground) as! SKTileMapNode)
-        player = childNode(withName: ObjectNames.player) as? Player
+        
         joystick = Joystick()
+        
         controlButtons = ControlButtons()
+    
+        for child in children {
+            switch child {
+            case let zombie as Zombie:
+                zombies.append(zombie)
+            case let map as SKTileMapNode:
+                level = Level(ground: map)
+            case let player as Player:
+                self.player = player
+            default:
+                break
+            }
+        }
         
         allSceneObjects.forEach { $0.setup(scene: self) }
     }

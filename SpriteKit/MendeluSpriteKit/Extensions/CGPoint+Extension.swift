@@ -5,4 +5,10 @@
 //  Created by Róbert Oravec on 01.10.2022.
 //
 
-import Foundation
+import CoreGraphics
+
+extension CGPoint {
+    func distance(to point: CGPoint) -> CGFloat {
+        sqrt(pow((point.y - y), 2) + pow((point.x - x), 2))
+    }
+}

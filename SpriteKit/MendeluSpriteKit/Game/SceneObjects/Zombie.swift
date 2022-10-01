@@ -11,8 +11,18 @@ final class Zombie: SKSpriteNode {
     // MARK: Properties
     private var idleFrames = [SKTexture]()
     private var walkingFrames = [SKTexture]()
-    private var direction: Direction = .right
-    private var animationState: AnimationState = .walking {
+    
+    private var direction: Direction = .right {
+        didSet {
+            guard oldValue != direction else {
+                return
+            }
+            
+            updateNodeDirection(direction: direction)
+        }
+    }
+    
+    private var animationState: AnimationState = .idle {
         didSet {
             guard oldValue != animationState else {
                 return
@@ -21,6 +31,26 @@ final class Zombie: SKSpriteNode {
             updateStateAnimation()
         }
     }
+    
+    private var velocity: CGFloat {
+        let distance = playerPosition.distance(to: position)
+        
+        guard distance < 200 else {
+            return 0
+        }
+        
+        return playerPosition.x > position.x
+            ? 1
+            : -1
+    }
+    
+    private var playerPosition: CGPoint {
+        levelScene?.player.position ?? .zero
+    }
+    
+    private var isWalking: Bool {
+        velocity != 0
+    }
 }
 
 // MARK: PlayerState
@@ -28,14 +58,6 @@ private extension Zombie {
     enum AnimationState {
         case walking
         case idle
-    }
-}
-
-// MARK: Direction
-extension Zombie {
-    enum Direction {
-        case left
-        case right
     }
 }
 
@@ -56,8 +78,6 @@ extension Zombie: SceneObject {
     }
     
     func update(_ currentTime: TimeInterval) {
-        let playerPosition = levelScene?.player.position ?? .zero
-        
         guard
             let body = levelScene?.physicsWorld.body(
                 alongRayStart: position,
@@ -68,16 +88,9 @@ extension Zombie: SceneObject {
             return
         }
         
-        updateSpriteDirection(
-            newDirection: playerPosition.x > position.x
-                ? .right
-                : .left
-        )
+        updateDirection()
         
-        let distance = playerPosition.distance(to: position)
-        
-        print("Pain", distance)
-        
+        updatePosition()
         
         updateState()
     }
@@ -86,7 +99,24 @@ extension Zombie: SceneObject {
 // MARK: Private API
 private extension Zombie {
     func updateState() {
+        animationState = isWalking
+            ? .walking
+            : .idle
+    }
+    
+    func updateDirection() {
+        direction = playerPosition.x > position.x
+            ? .right
+            : .left
+    }
+    
+    func updatePosition() {
+        let moveBy = size.width * 0.07 * velocity
         
+        position = CGPoint(
+            x: position.x + moveBy,
+            y: position.y
+        )
     }
     
     func updateStateAnimation() {
@@ -116,21 +146,5 @@ private extension Zombie {
                 )
             )
         }
-    }
-    
-    func updatePosition() {
-        
-    }
-    
-    func updateSpriteDirection() {
-        var multiplierForDirection: CGFloat
-        switch direction {
-        case .left:
-            multiplierForDirection = -1
-        case .right:
-            multiplierForDirection = 1
-        }
-          
-        xScale = abs(xScale) * multiplierForDirection
     }
 }

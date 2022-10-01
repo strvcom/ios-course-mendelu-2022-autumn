@@ -21,7 +21,7 @@ final class Player: SKSpriteNode {
                 return
             }
             
-            updateSpriteDirection()
+            updateNodeDirection(direction: direction)
         }
     }
     
@@ -50,14 +50,6 @@ private extension Player {
         case walking
         case idle
         case attacking
-    }
-}
-
-// MARK: Direction
-extension Player {
-    enum Direction {
-        case left
-        case right
     }
 }
 
@@ -192,18 +184,6 @@ private extension Player {
         } else if velocity < 0 {
             direction = .left
         }
-    }
-    
-    func updateSpriteDirection() {
-        var multiplierForDirection: CGFloat
-        switch direction {
-        case .left:
-            multiplierForDirection = -1
-        case .right:
-            multiplierForDirection = 1
-        }
-          
-        xScale = abs(xScale) * multiplierForDirection
     }
     
     func updatePosition() {
