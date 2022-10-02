@@ -9,25 +9,23 @@ import SpriteKit
 
 final class Player: SKSpriteNode {
     // MARK: Properties
-    private var idleFrames = [SKTexture]()
-    private var walkingFrames = [SKTexture]()
-    private var attackFrames = [SKTexture]()
+    private let idleFrames = SKTextureAtlas(named: Assets.Atlas.playerIdle).textures
+    private let walkingFrames = SKTextureAtlas(named: Assets.Atlas.playerWalk).textures
+    private let attackFrames = SKTextureAtlas(named: Assets.Atlas.playerAttack).textures
     private var isJumping = false
     private var isAttacking = false
     
-    private lazy var hurtBox: SKSpriteNode = {
-        let node = SKSpriteNode(
-            color: .clear,
+    private lazy var hurtBox: HurtBox = {
+        HurtBox(
             size: CGSize(
                 width: 5,
                 height: 5
+            ),
+            position: CGPoint(
+                x: 10,
+                y: 4
             )
         )
-        node.position = CGPoint(
-            x: 10,
-            y: 7
-        )
-        return node
     }()
     
     private var direction: Direction = .right {
@@ -49,6 +47,19 @@ final class Player: SKSpriteNode {
     }
     
     private(set) var animations = [String: SKAction]()
+    
+    private(set) lazy var hitbox: HitBox = {
+        HitBox(
+            size: CGSize(
+                width: 20,
+                height: 35
+            ),
+            position: CGPoint(
+                x: 0,
+                y: -2
+            )
+        )
+    }()
 }
 
 // MARK: AnimatedObject
@@ -57,57 +68,7 @@ extension Player: AnimatedObject {}
 // MARK: GameObject
 extension Player: SceneObject {
     func setup(scene: LevelScene) {
-        
-        
-        idleFrames = SKTextureAtlas(named: Assets.Atlas.playerIdle).textures
-        
-        walkingFrames = SKTextureAtlas(named: Assets.Atlas.playerWalk).textures
-        
-        attackFrames = SKTextureAtlas(named: Assets.Atlas.playerAttack).textures
-        
-        animations[Animations.idle.rawValue] = SKAction.repeatForever(
-            SKAction.animate(
-                with: idleFrames,
-                timePerFrame: 0.2,
-                resize: false,
-                restore: true
-            )
-        )
-        
-        animations[Animations.walking.rawValue] = SKAction.repeatForever(
-            SKAction.animate(
-                with: walkingFrames,
-                timePerFrame: 0.2,
-                resize: false,
-                restore: true
-            )
-        )
-        
-        let attackTimePerFrame: TimeInterval = 0.08
-        
-        animations[Animations.attacking.rawValue] = SKAction.group([
-            SKAction.run { [weak self] in
-                guard let self = self else {
-                    return
-                }
-                
-                self.addChild(self.hurtBox)
-            },
-            SKAction.animate(
-                with: attackFrames,
-                timePerFrame: attackTimePerFrame,
-                resize: false,
-                restore: true
-            ),
-            SKAction.sequence([
-                SKAction.wait(forDuration: attackTimePerFrame * Double(attackFrames.count)),
-                SKAction.run { [weak self] in
-                    self?.hurtBox.removeFromParent()
-                    
-                    self?.isAttacking = false
-                }
-            ])
-        ])
+        setupActions()
         
         updateState()
         
@@ -177,12 +138,13 @@ private extension Player {
 // MARK: Private API
 private extension Player {
     func setupPlayer() {
+        addChild(hitbox)
+        
         zPosition = Layer.player
+        
         physicsBody = SKPhysicsBody(
-            rectangleOf: CGSize(
-                width: 20,
-                height: 35
-            )
+            rectangleOf: hitbox.size,
+            center: hitbox.position
         )
         physicsBody?.categoryBitMask = Physics.CategoryBitMask.player
         physicsBody?.collisionBitMask = Physics.CategoryBitMask.boundary |
@@ -191,6 +153,53 @@ private extension Player {
         physicsBody?.restitution = 0
         physicsBody?.allowsRotation = false
         physicsBody?.contactTestBitMask = Physics.CategoryBitMask.groundTile
+    }
+    
+    func setupActions() {
+        animations[Animations.idle.rawValue] = SKAction.repeatForever(
+            SKAction.animate(
+                with: idleFrames,
+                timePerFrame: 0.2,
+                resize: false,
+                restore: true
+            )
+        )
+        
+        animations[Animations.walking.rawValue] = SKAction.repeatForever(
+            SKAction.animate(
+                with: walkingFrames,
+                timePerFrame: 0.2,
+                resize: false,
+                restore: true
+            )
+        )
+        
+        let attackTimePerFrame: TimeInterval = 0.08
+        
+        animations[Animations.attacking.rawValue] = SKAction.group([
+            SKAction.animate(
+                with: attackFrames,
+                timePerFrame: attackTimePerFrame,
+                resize: false,
+                restore: true
+            ),
+            SKAction.sequence([
+                SKAction.wait(forDuration: attackTimePerFrame * Double(4)),
+                SKAction.run { [weak self] in
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    self.addChild(self.hurtBox)
+                },
+                SKAction.wait(forDuration: attackTimePerFrame * Double(2)),
+                SKAction.run { [weak self] in
+                    self?.hurtBox.removeFromParent()
+                    
+                    self?.isAttacking = false
+                }
+            ])
+        ])
     }
     
     func updateState() {
@@ -229,7 +238,7 @@ private extension Player {
         }
         
         for zombie in levelScene.zombies {
-            guard hurtBox.intersects(zombie) else {
+            guard hurtBox.intersects(zombie.hitBox) else {
                 continue
             }
             

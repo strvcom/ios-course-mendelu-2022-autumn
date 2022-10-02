@@ -58,6 +58,10 @@ final class Joystick: SKNode {
 // MARK: GameObject
 extension Joystick: SceneObject {
     func setup(scene: LevelScene) {
+        alpha = Environment.showControls
+            ? 1
+            : 0
+        
         scene.cameraObject.addChild(self)
 
         isUserInteractionEnabled = true

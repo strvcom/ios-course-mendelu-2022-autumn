@@ -46,6 +46,19 @@ final class Zombie: SKSpriteNode {
     }
     
     private(set) var animations = [String: SKAction]()
+    
+    private(set) lazy var hitBox: HitBox = {
+        HitBox(
+            size: CGSize(
+                width: 18,
+                height: 35
+            ),
+            position: CGPoint(
+                x: -3,
+                y: 0
+            )
+        )
+    }()
 }
 
 // MARK: GameObject
@@ -98,10 +111,8 @@ extension Zombie: SceneObject {
         zPosition = Layer.zombie
         
         physicsBody = SKPhysicsBody(
-            rectangleOf: CGSize(
-                width: 20,
-                height: 35
-            )
+            rectangleOf: hitBox.size,
+            center: hitBox.position
         )
         physicsBody?.categoryBitMask = Physics.CategoryBitMask.zombie
         physicsBody?.collisionBitMask = Physics.CategoryBitMask.player
@@ -109,6 +120,8 @@ extension Zombie: SceneObject {
             | Physics.CategoryBitMask.boundary
         physicsBody?.restitution = 0
         physicsBody?.allowsRotation = false
+        
+        addChild(hitBox)
     }
     
     func update(_ currentTime: TimeInterval) {
@@ -126,7 +139,7 @@ extension Zombie: SceneObject {
         
         updateDirection()
         
-        updatePosition()
+//        updatePosition()
     }
 }
 

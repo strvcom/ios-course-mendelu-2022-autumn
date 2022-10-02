@@ -21,6 +21,10 @@ final class ControlButtons: SKSpriteNode {
 // MARK: GameObject
 extension ControlButtons: SceneObject {
     func setup(scene: LevelScene) {
+        alpha = Environment.showControls
+            ? 1
+            : 0
+        
         scene.cameraObject.addChild(self)
         
         color = .clear

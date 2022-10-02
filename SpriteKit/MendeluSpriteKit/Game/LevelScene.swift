@@ -65,11 +65,6 @@ final class LevelScene: SKScene {
         }
         
         allSceneObjects.forEach { $0.setup(scene: self) }
-        
-        if controlsHidden {
-            joystick.alpha = 0
-            controlButtons.alpha = 0
-        }
     }
     
     override func update(_ currentTime: TimeInterval) {

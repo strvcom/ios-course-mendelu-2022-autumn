@@ -37,6 +37,9 @@
 		59CC665028E87C0D0010A82E /* ZombieAttack.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 59CC664F28E87C0D0010A82E /* ZombieAttack.atlas */; };
 		59CC665228E8897E0010A82E /* AnimatedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC665128E8897E0010A82E /* AnimatedObject.swift */; };
 		59CC665528E8C7310010A82E /* ZombieDeath.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 59CC665428E8C7310010A82E /* ZombieDeath.atlas */; };
+		59CC665728E98B8B0010A82E /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC665628E98B8B0010A82E /* Environment.swift */; };
+		59CC665B28E98C3E0010A82E /* HitBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC665A28E98C3E0010A82E /* HitBox.swift */; };
+		59CC665D28E98C8C0010A82E /* HurtBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CC665C28E98C8C0010A82E /* HurtBox.swift */; };
 		59CFC5EE28D78A5900F4E6AE /* Layer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CFC5ED28D78A5900F4E6AE /* Layer.swift */; };
 		59EF42F128E0BA42005CC691 /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EF42F028E0BA42005CC691 /* Joystick.swift */; };
 		59EF42F328E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EF42F228E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift */; };
@@ -76,6 +79,9 @@
 		59CC664F28E87C0D0010A82E /* ZombieAttack.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ZombieAttack.atlas; sourceTree = "<group>"; };
 		59CC665128E8897E0010A82E /* AnimatedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedObject.swift; sourceTree = "<group>"; };
 		59CC665428E8C7310010A82E /* ZombieDeath.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = ZombieDeath.atlas; sourceTree = "<group>"; };
+		59CC665628E98B8B0010A82E /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		59CC665A28E98C3E0010A82E /* HitBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HitBox.swift; sourceTree = "<group>"; };
+		59CC665C28E98C8C0010A82E /* HurtBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HurtBox.swift; sourceTree = "<group>"; };
 		59CFC5ED28D78A5900F4E6AE /* Layer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layer.swift; sourceTree = "<group>"; };
 		59EF42F028E0BA42005CC691 /* Joystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 		59EF42F228E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryFloatingPoint+Extension.swift"; sourceTree = "<group>"; };
@@ -104,6 +110,7 @@
 				5922EAD728D8C2E400BE46DC /* Physics.swift */,
 				59CC663428E711E10010A82E /* ObjectNames.swift */,
 				59CC664D28E8711B0010A82E /* Direction.swift */,
+				59CC665628E98B8B0010A82E /* Environment.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -113,6 +120,8 @@
 			children = (
 				5922EAD028D8BF3300BE46DC /* Background.swift */,
 				59699EB428E1B40700999BE7 /* Camera.swift */,
+				59CC665A28E98C3E0010A82E /* HitBox.swift */,
+				59CC665C28E98C8C0010A82E /* HurtBox.swift */,
 				59A9DB4028E61C6700492DAA /* Level.swift */,
 				5922EAD928D8C53300BE46DC /* Player.swift */,
 				592E302C28E588C100603ECC /* Tile.swift */,
@@ -321,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5990779F28D77E3C00659E6E /* LevelScene.swift in Sources */,
+				59CC665728E98B8B0010A82E /* Environment.swift in Sources */,
 				599077A128D77E3C00659E6E /* GameViewController.swift in Sources */,
 				59699EB528E1B40700999BE7 /* Camera.swift in Sources */,
 				5922EAD828D8C2E400BE46DC /* Physics.swift in Sources */,
@@ -343,6 +353,8 @@
 				592E302D28E588C100603ECC /* Tile.swift in Sources */,
 				59699EB128E1AEA700999BE7 /* SKNode+Extension.swift in Sources */,
 				5922EAE028D8CF8200BE46DC /* SKTextureAtlas+Extension.swift in Sources */,
+				59CC665D28E98C8C0010A82E /* HurtBox.swift in Sources */,
+				59CC665B28E98C3E0010A82E /* HitBox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
