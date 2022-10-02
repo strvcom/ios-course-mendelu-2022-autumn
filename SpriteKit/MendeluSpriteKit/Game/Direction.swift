@@ -10,6 +10,13 @@ import SpriteKit
 enum Direction {
     case left
     case right
+    
+    // MARK: Init
+    init(xScale: CGFloat) {
+        self = xScale > 0
+            ? .right
+            : .left
+    }
 }
 
 // MARK: SKNode + Direction

@@ -81,8 +81,7 @@ private extension Level {
                 node.physicsBody?.isDynamic = false
                 node.physicsBody?.restitution = 0
                 node.physicsBody?.categoryBitMask = Physics.CategoryBitMask.groundTile
-                node.physicsBody?.collisionBitMask = Physics.CategoryBitMask.player |
-                    Physics.CategoryBitMask.zombie
+                node.physicsBody?.collisionBitMask = Physics.CollisionBitMask.groundTile
                 
                 scene.addChild(node)
             }
@@ -182,8 +181,7 @@ private extension Level {
         node.physicsBody?.isDynamic = false
         node.physicsBody?.restitution = 0
         node.physicsBody?.categoryBitMask = Physics.CategoryBitMask.boundary
-        node.physicsBody?.collisionBitMask = Physics.CategoryBitMask.player |
-            Physics.CategoryBitMask.zombie
+        node.physicsBody?.collisionBitMask = Physics.CollisionBitMask.boundary
         
         scene.addChild(node)
     }

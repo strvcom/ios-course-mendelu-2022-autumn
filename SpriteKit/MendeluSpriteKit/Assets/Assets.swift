@@ -14,6 +14,7 @@ extension Assets {
         static let background2 = "Background/b2"
         static let background3 = "Background/b3"
         static let background4 = "Background/b4"
+        static let projectile = "PumpkinProjectile"
     }
 }
 
@@ -27,6 +28,7 @@ extension Assets {
         static let zombieWalk = "ZombieWalk"
         static let zombieDeath = "ZombieDeath"
         static let zombieAttack = "ZombieAttack"
+        static let pumpkinEating = "PumpkinEating"
     }
 }
 

@@ -21,6 +21,7 @@ final class LevelScene: SKScene {
             controlButtons
         ]
         + zombies
+        + others
     }
     
     private(set) var cameraObject: Camera!
@@ -30,6 +31,7 @@ final class LevelScene: SKScene {
     private(set) var joystick: Joystick!
     private(set) var controlButtons: ControlButtons!
     private(set) var zombies = [Zombie]()
+    private(set) var others = [SceneObject]()
     
     // MARK: Overrides
     override func willMove(from view: SKView) {
@@ -59,6 +61,8 @@ final class LevelScene: SKScene {
                 level = Level(ground: map)
             case let player as Player:
                 self.player = player
+            case let other as SceneObject:
+                others.append(other)
             default:
                 break
             }
