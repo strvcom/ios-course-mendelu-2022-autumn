@@ -82,23 +82,34 @@ private extension ShootingPumpkin {
     }
     
     func shoot() {
+        let pumpkinDirection = Direction(xScale: xScale)
+
         let projectile = SKSpriteNode(texture: SKTexture(imageNamed: Assets.Image.projectile))
         projectile.name = ObjectNames.projectile
-        projectile.zPosition = 30
-        projectile.physicsBody = SKPhysicsBody(rectangleOf: projectile.size)
-        projectile.physicsBody?.affectedByGravity = false
-        projectile.physicsBody?.usesPreciseCollisionDetection = true
-        projectile.physicsBody?.contactTestBitMask = Physics.ContactTestBitMask.projectile
+        projectile.zPosition = Layer.projectile
         projectile.position = CGPoint(
             x: position.x,
             y: position.y - 20
         )
+        projectile.updateNodeDirection(direction: pumpkinDirection)
+        projectile.physicsBody = SKPhysicsBody(rectangleOf: projectile.size)
+        projectile.physicsBody?.affectedByGravity = false
+        projectile.physicsBody?.usesPreciseCollisionDetection = true
+        projectile.physicsBody?.contactTestBitMask = Physics.ContactTestBitMask.projectile
         
         levelScene?.addChild(projectile)
         
+        let dx: Int
+        switch pumpkinDirection {
+        case .left:
+            dx = 2
+        case .right:
+            dx = -2
+        }
+        
         projectile.physicsBody?.applyImpulse(
             CGVector(
-                dx: -2,
+                dx: dx,
                 dy: 0
             )
         )
