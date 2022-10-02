@@ -21,5 +21,6 @@ final class HitBox: SKSpriteNode {
         )
         
         self.position = position
+        self.zPosition = Layer.hitbox
     }
 }

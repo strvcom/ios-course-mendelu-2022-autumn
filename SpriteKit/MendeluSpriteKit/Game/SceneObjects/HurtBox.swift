@@ -21,5 +21,6 @@ final class HurtBox: SKSpriteNode {
         )
         
         self.position = position
+        self.zPosition = Layer.hurtBox
     }
 }
