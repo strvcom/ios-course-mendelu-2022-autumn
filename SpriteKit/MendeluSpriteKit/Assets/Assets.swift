@@ -23,6 +23,10 @@ extension Assets {
         static let playerIdle = "PlayerIdle"
         static let playerWalk = "PlayerWalk"
         static let playerAttack = "PlayerAttack"
+        static let zombieIdle = "ZombieIdle"
+        static let zombieWalk = "ZombieWalk"
+        static let zombieDeath = "ZombieDeath"
+        static let zombieAttack = "ZombieAttack"
     }
 }
 

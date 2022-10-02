@@ -26,10 +26,11 @@ final class GameViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        skView.showsFPS = true
-        skView.showsNodeCount = true
+        skView.showsFPS = Environment.sceneInDebugMode
+        skView.showsNodeCount = Environment.sceneInDebugMode
         skView.ignoresSiblingOrder = true
         skView.preferredFramesPerSecond = 30
+        skView.showsPhysics = Environment.sceneInDebugMode
         
         guard let scene = LevelScene(fileNamed: Assets.Scenes.level1) else {
             return

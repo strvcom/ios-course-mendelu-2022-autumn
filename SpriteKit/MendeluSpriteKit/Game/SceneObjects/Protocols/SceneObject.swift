@@ -17,7 +17,9 @@ protocol SceneObject {
     
     func keyboardUp(presses: Set<UIPress>)
     
-    func handleContact(_ contact: SKPhysicsContact)
+    func handleContactStart(_ contact: SKPhysicsContact)
+    
+    func handleContactEnd(_ contact: SKPhysicsContact)
 }
 
 // MARK: Default Implementation
@@ -30,7 +32,9 @@ extension SceneObject {
     
     func keyboardUp(presses: Set<UIPress>) {}
     
-    func handleContact(_ contact: SKPhysicsContact) {}
+    func handleContactStart(_ contact: SKPhysicsContact) {}
+    
+    func handleContactEnd(_ contact: SKPhysicsContact) {}
 }
 
 // MARK: SceneObject + SKNode

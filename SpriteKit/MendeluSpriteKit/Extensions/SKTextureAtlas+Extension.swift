@@ -10,6 +10,7 @@ import SpriteKit
 extension SKTextureAtlas {
     var textures: [SKTexture] {
         textureNames
+            .sorted()
             .map { textureNamed($0) }
     }
 }
