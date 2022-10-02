@@ -9,11 +9,26 @@ import SpriteKit
 
 final class Zombie: SKSpriteNode {
     // MARK: Properties
-    private var idleFrames = [SKTexture]()
-    private var walkingFrames = [SKTexture]()
-    private var attackFrames = [SKTexture]()
-    private var deathFrames = [SKTexture]()
+    private let idleFrames = SKTextureAtlas(named: Assets.Atlas.zombieIdle).textures
+    private var walkingFrames = SKTextureAtlas(named: Assets.Atlas.zombieWalk).textures
+    private var attackFrames = SKTextureAtlas(named: Assets.Atlas.zombieAttack).textures
+    private var deathFrames = SKTextureAtlas(named: Assets.Atlas.zombieDeath).textures
+    private var velocity: CGFloat = 0
     private var isDead = false
+    private var isAttacking = false
+    
+    private lazy var hurtBox: HurtBox = {
+        HurtBox(
+            size: CGSize(
+                width: 6,
+                height: 6
+            ),
+            position: CGPoint(
+                x: 8,
+                y: 4
+            )
+        )
+    }()
     
     private var direction: Direction = .right {
         didSet {
@@ -25,20 +40,12 @@ final class Zombie: SKSpriteNode {
         }
     }
     
-    private var velocity: CGFloat {
-        let distance = playerPosition.distance(to: position)
-        
-        guard distance < 200 else {
-            return 0
-        }
-        
-        return playerPosition.x > position.x
-            ? 1
-            : -1
-    }
-    
     private var playerPosition: CGPoint {
         levelScene?.player.position ?? .zero
+    }
+    
+    private var distanceToPlayer: CGFloat {
+        playerPosition.distance(to: position)
     }
     
     private var isWalking: Bool {
@@ -64,12 +71,63 @@ final class Zombie: SKSpriteNode {
 // MARK: GameObject
 extension Zombie: SceneObject {
     func setup(scene: LevelScene) {
-        idleFrames = SKTextureAtlas(named: Assets.Atlas.zombieIdle).textures
+        setupActions()
         
-        walkingFrames = SKTextureAtlas(named: Assets.Atlas.zombieWalk).textures
+        setupZombie()
         
-        deathFrames = SKTextureAtlas(named: Assets.Atlas.zombieDeath).textures
+        updateState()
+    }
+    
+    func update(_ currentTime: TimeInterval) {
+        updateState()
         
+        guard
+            let body = levelScene?.physicsWorld.body(
+                alongRayStart: position,
+                end: playerPosition
+            ),
+            body.categoryBitMask == Physics.CategoryBitMask.player
+        else {
+            velocity = 0
+            
+            return
+        }
+        
+        updateDirection()
+        
+        updatePosition()
+        
+        updateIsAttacking()
+    }
+}
+
+// MARK: AnimatedObject
+extension Zombie: AnimatedObject {}
+
+// MARK: Zombie
+extension Zombie {
+    func hitted() {
+        guard !isDead else {
+            return
+        }
+        
+        isDead = true
+    }
+}
+
+// MARK: PlayerState
+private extension Zombie {
+    enum Animations: String {
+        case walking
+        case idle
+        case death
+        case attacking
+    }
+}
+
+// MARK: Private API
+private extension Zombie {
+    func setupActions() {
         animations[Animations.idle.rawValue] = SKAction.repeatForever(
             SKAction.animate(
                 with: idleFrames,
@@ -102,12 +160,47 @@ extension Zombie: SceneObject {
             ),
             SKAction.sequence([
                 SKAction.wait(forDuration: deathTimePerFrame * Double(deathFrames.count)),
-                SKAction.removeFromParent()
+                SKAction.run { [weak self] in
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    self.levelScene?.zombieDied(zombie: self)
+                    
+                    self.removeFromParent()
+                }
             ])
         ])
         
-        updateState()
+        let attackTimePerFrame: TimeInterval = 0.08
         
+        animations[Animations.attacking.rawValue] = SKAction.group([
+            SKAction.animate(
+                with: attackFrames,
+                timePerFrame: attackTimePerFrame,
+                resize: false,
+                restore: true
+            ),
+            SKAction.sequence([
+                SKAction.wait(forDuration: attackTimePerFrame * Double(4)),
+                SKAction.run { [weak self] in
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    self.addChild(self.hurtBox)
+                },
+                SKAction.wait(forDuration: attackTimePerFrame * Double(2)),
+                SKAction.run { [weak self] in
+                    self?.hurtBox.removeFromParent()
+                    
+                    self?.isAttacking = false
+                }
+            ])
+        ])
+    }
+    
+    func setupZombie() {
         zPosition = Layer.zombie
         
         physicsBody = SKPhysicsBody(
@@ -124,53 +217,11 @@ extension Zombie: SceneObject {
         addChild(hitBox)
     }
     
-    func update(_ currentTime: TimeInterval) {
-        updateState()
-        
-        guard
-            let body = levelScene?.physicsWorld.body(
-                alongRayStart: position,
-                end: playerPosition
-            ),
-            body.categoryBitMask == Physics.CategoryBitMask.player
-        else {
-            return
-        }
-        
-        updateDirection()
-        
-//        updatePosition()
-    }
-}
-
-// MARK: AnimatedObject
-extension Zombie: AnimatedObject {}
-
-// MARK: Zombie
-extension Zombie {
-    func hitted() {
-        guard !isDead else {
-            return
-        }
-        
-        isDead = true
-    }
-}
-
-// MARK: PlayerState
-private extension Zombie {
-    enum Animations: String {
-        case walking
-        case idle
-        case death
-    }
-}
-
-// MARK: Private API
-private extension Zombie {
     func updateState() {
         if isDead {
             playAnimation(key: Animations.death.rawValue)
+        } else if isAttacking {
+            playAnimation(key: Animations.attacking.rawValue)
         } else {
             isWalking
                 ? playAnimation(key: Animations.walking.rawValue)
@@ -179,7 +230,10 @@ private extension Zombie {
     }
     
     func updateDirection() {
-        guard !isDead else {
+        guard
+            !isDead,
+            !isAttacking
+        else {
             return
         }
         
@@ -189,8 +243,19 @@ private extension Zombie {
     }
     
     func updatePosition() {
-        guard !isDead else {
+        guard
+            !isDead,
+            !isAttacking
+        else {
             return
+        }
+        
+        if distanceToPlayer > 200 {
+            velocity = 0
+        } else {
+            velocity = playerPosition.x > position.x
+                ? 1
+                : -1
         }
         
         let moveBy = size.width * 0.07 * velocity
@@ -199,5 +264,16 @@ private extension Zombie {
             x: position.x + moveBy,
             y: position.y
         )
+    }
+    
+    func updateIsAttacking() {
+        guard
+            distanceToPlayer < size.width / 2,
+            !isAttacking
+        else {
+            return
+        }
+        
+        isAttacking = true
     }
 }

@@ -81,6 +81,17 @@ extension LevelScene: SKPhysicsContactDelegate {
     }
     
     func didEnd(_ contact: SKPhysicsContact) {
+        allSceneObjects.forEach { $0.handleContactEnd(contact) }
+    }
+}
+
+// MARK: Public API
+extension LevelScene {
+    func zombieDied(zombie: Zombie) {
+        guard let index = zombies.firstIndex(where: { $0 === zombie }) else {
+            return
+        }
         
+        zombies.remove(at: index)
     }
 }
