@@ -147,12 +147,10 @@ private extension Player {
             center: hitbox.position
         )
         physicsBody?.categoryBitMask = Physics.CategoryBitMask.player
-        physicsBody?.collisionBitMask = Physics.CategoryBitMask.boundary |
-            Physics.CategoryBitMask.zombie |
-            Physics.CategoryBitMask.groundTile
+        physicsBody?.collisionBitMask = Physics.CollisionBitMask.player
         physicsBody?.restitution = 0
         physicsBody?.allowsRotation = false
-        physicsBody?.contactTestBitMask = Physics.CategoryBitMask.groundTile
+        physicsBody?.contactTestBitMask = Physics.ContactTestBitMask.player
     }
     
     func setupActions() {

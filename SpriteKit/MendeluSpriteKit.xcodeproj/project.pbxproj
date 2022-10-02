@@ -128,11 +128,11 @@
 				59CC665C28E98C8C0010A82E /* HurtBox.swift */,
 				59A9DB4028E61C6700492DAA /* Level.swift */,
 				5922EAD928D8C53300BE46DC /* Player.swift */,
+				59CC666428E99FDC0010A82E /* ShootingPumpkin.swift */,
 				592E302C28E588C100603ECC /* Tile.swift */,
 				59CC663E28E84BC80010A82E /* Zombie.swift */,
 				59EF42EF28E0BA38005CC691 /* Controls */,
 				59CC665328E88A0B0010A82E /* Protocols */,
-				59CC666428E99FDC0010A82E /* ShootingPumpkin.swift */,
 			);
 			path = SceneObjects;
 			sourceTree = "<group>";

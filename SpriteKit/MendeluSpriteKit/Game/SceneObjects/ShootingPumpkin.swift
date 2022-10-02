@@ -25,6 +25,20 @@ extension ShootingPumpkin: SceneObject {
     func update(_ currentTime: TimeInterval) {
         playAnimation(key: Animations.eating.rawValue)
     }
+    
+    func handleContactStart(_ contact: SKPhysicsContact) {
+        if contact.bodyA.node?.name == ObjectNames.projectile {
+            handleProjectileHit(
+                with: contact.bodyB,
+                projectile: contact.bodyA
+            )
+        } else if contact.bodyB.node?.name == ObjectNames.projectile {
+            handleProjectileHit(
+                with: contact.bodyA,
+                projectile: contact.bodyB
+            )
+        }
+    }
 }
 
 // MARK: AnimatedObject
@@ -44,13 +58,58 @@ private extension ShootingPumpkin {
     }
     
     func setupActions() {
+        let eatingTimePerFrame: TimeInterval = 0.25
+        
+        let waitDuration = (Double(eatingFrames.count) / 2) * eatingTimePerFrame
+        
         animations[Animations.eating.rawValue] = SKAction.repeatForever(
-            SKAction.animate(
-                with: eatingFrames,
-                timePerFrame: 0.25,
-                resize: false,
-                restore: true
+            SKAction.group([
+                SKAction.sequence([
+                    SKAction.wait(forDuration: waitDuration),
+                    SKAction.run { [weak self] in
+                        self?.shoot()
+                    },
+                    SKAction.wait(forDuration: waitDuration)
+                ]),
+                SKAction.animate(
+                    with: eatingFrames,
+                    timePerFrame: 0.25,
+                    resize: false,
+                    restore: true
+                )
+            ])
+        )
+    }
+    
+    func shoot() {
+        let projectile = SKSpriteNode(texture: SKTexture(imageNamed: Assets.Image.projectile))
+        projectile.name = ObjectNames.projectile
+        projectile.zPosition = 30
+        projectile.physicsBody = SKPhysicsBody(rectangleOf: projectile.size)
+        projectile.physicsBody?.affectedByGravity = false
+        projectile.physicsBody?.usesPreciseCollisionDetection = true
+        projectile.physicsBody?.contactTestBitMask = Physics.ContactTestBitMask.projectile
+        projectile.position = CGPoint(
+            x: position.x,
+            y: position.y - 20
+        )
+        
+        levelScene?.addChild(projectile)
+        
+        projectile.physicsBody?.applyImpulse(
+            CGVector(
+                dx: -2,
+                dy: 0
             )
         )
+    }
+    
+    func handleProjectileHit(
+        with body: SKPhysicsBody,
+        projectile: SKPhysicsBody
+    ) {
+        projectile.node?.removeFromParent()
+        
+        print("Projectile collision with \(body)")
     }
 }

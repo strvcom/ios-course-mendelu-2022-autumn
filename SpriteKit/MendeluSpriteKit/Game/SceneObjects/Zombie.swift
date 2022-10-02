@@ -208,9 +208,7 @@ private extension Zombie {
             center: hitBox.position
         )
         physicsBody?.categoryBitMask = Physics.CategoryBitMask.zombie
-        physicsBody?.collisionBitMask = Physics.CategoryBitMask.player
-            | Physics.CategoryBitMask.groundTile
-            | Physics.CategoryBitMask.boundary
+        physicsBody?.collisionBitMask = Physics.CollisionBitMask.zombie
         physicsBody?.restitution = 0
         physicsBody?.allowsRotation = false
         
