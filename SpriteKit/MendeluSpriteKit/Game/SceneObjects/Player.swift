@@ -15,6 +15,21 @@ final class Player: SKSpriteNode {
     private var isJumping = false
     private var isAttacking = false
     
+    private lazy var hurtBox: SKSpriteNode = {
+        let node = SKSpriteNode(
+            color: .clear,
+            size: CGSize(
+                width: 5,
+                height: 5
+            )
+        )
+        node.position = CGPoint(
+            x: 10,
+            y: 7
+        )
+        return node
+    }()
+    
     private var direction: Direction = .right {
         didSet {
             guard oldValue != direction else {
@@ -33,7 +48,7 @@ final class Player: SKSpriteNode {
         velocity != 0
     }
     
-    private(set) var animations = [String : SKAction]()
+    private(set) var animations = [String: SKAction]()
 }
 
 // MARK: AnimatedObject
@@ -42,6 +57,8 @@ extension Player: AnimatedObject {}
 // MARK: GameObject
 extension Player: SceneObject {
     func setup(scene: LevelScene) {
+        
+        
         idleFrames = SKTextureAtlas(named: Assets.Atlas.playerIdle).textures
         
         walkingFrames = SKTextureAtlas(named: Assets.Atlas.playerWalk).textures
@@ -69,6 +86,13 @@ extension Player: SceneObject {
         let attackTimePerFrame: TimeInterval = 0.08
         
         animations[Animations.attacking.rawValue] = SKAction.group([
+            SKAction.run { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                
+                self.addChild(self.hurtBox)
+            },
             SKAction.animate(
                 with: attackFrames,
                 timePerFrame: attackTimePerFrame,
@@ -78,6 +102,8 @@ extension Player: SceneObject {
             SKAction.sequence([
                 SKAction.wait(forDuration: attackTimePerFrame * Double(attackFrames.count)),
                 SKAction.run { [weak self] in
+                    self?.hurtBox.removeFromParent()
+                    
                     self?.isAttacking = false
                 }
             ])
@@ -94,6 +120,8 @@ extension Player: SceneObject {
         updateState()
         
         updatePosition()
+        
+        updateHurtBox()
     }
     
     func handleContactStart(_ contact: SKPhysicsContact) {
@@ -150,12 +178,19 @@ private extension Player {
 private extension Player {
     func setupPlayer() {
         zPosition = Layer.player
-        physicsBody = SKPhysicsBody(rectangleOf: size)
+        physicsBody = SKPhysicsBody(
+            rectangleOf: CGSize(
+                width: 20,
+                height: 35
+            )
+        )
         physicsBody?.categoryBitMask = Physics.CategoryBitMask.player
+        physicsBody?.collisionBitMask = Physics.CategoryBitMask.boundary |
+            Physics.CategoryBitMask.zombie |
+            Physics.CategoryBitMask.groundTile
         physicsBody?.restitution = 0
         physicsBody?.allowsRotation = false
-        physicsBody?.contactTestBitMask = Physics.CategoryBitMask.groundTile |
-            Physics.CategoryBitMask.zombie
+        physicsBody?.contactTestBitMask = Physics.CategoryBitMask.groundTile
     }
     
     func updateState() {
@@ -177,12 +212,29 @@ private extension Player {
     }
     
     func updatePosition() {
-        let moveBy = size.width * 0.3 * velocity
+        let moveBy = size.width * 0.2 * velocity
         
         position = CGPoint(
             x: position.x + moveBy,
             y: position.y
         )
+    }
+    
+    func updateHurtBox() {
+        guard
+            hurtBox.parent != nil,
+            let levelScene = levelScene
+        else {
+            return
+        }
+        
+        for zombie in levelScene.zombies {
+            guard hurtBox.intersects(zombie) else {
+                continue
+            }
+            
+            zombie.hitted()
+        }
     }
     
     func handleContactWith(

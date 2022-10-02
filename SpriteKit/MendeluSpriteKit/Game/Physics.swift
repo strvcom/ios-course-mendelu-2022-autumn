@@ -18,5 +18,7 @@ extension Physics {
         static let player: UInt32 = 0b0000_0000_0000_0000_0000_0000_0000_0100
         /// Bitmask with value of `0000 0000 0000 0000 0000 0000 0000 1000`.
         static let zombie: UInt32 = 0b0000_0000_0000_0000_0000_0000_0000_1000
+        /// Bitmask with value of `0000 0000 0000 0000 0000 0000 0001 0000`.
+        static let hurtBox: UInt32 = 0b0000_0000_0000_0000_0000_0000_0001_0000
     }
 }

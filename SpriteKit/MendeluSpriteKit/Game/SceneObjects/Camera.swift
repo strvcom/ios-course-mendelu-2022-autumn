@@ -45,8 +45,8 @@ extension Camera: SceneObject {
         scene.camera = self
         scene.addChild(self)
         
-        xScale = 0.7
-        yScale = 0.7
+        xScale = 0.5
+        yScale = 0.5
     }
     
     func update(_ currentTime: TimeInterval) {
