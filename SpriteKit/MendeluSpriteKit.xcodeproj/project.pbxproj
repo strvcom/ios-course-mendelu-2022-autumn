@@ -47,6 +47,10 @@
 		59EF42F328E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EF42F228E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift */; };
 		59EF42F528E0D437005CC691 /* Comparable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EF42F428E0D437005CC691 /* Comparable+Extension.swift */; };
 		59EF42F728E0DBBC005CC691 /* PlayerWalk.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 59EF42F628E0DBBB005CC691 /* PlayerWalk.atlas */; };
+		9DDF5D2328EC3E190039409F /* FountainFlow3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DDF5D1F28EC3E190039409F /* FountainFlow3.png */; };
+		9DDF5D2428EC3E190039409F /* FountainFlow2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DDF5D2028EC3E190039409F /* FountainFlow2.png */; };
+		9DDF5D2528EC3E190039409F /* FountainFlow4.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DDF5D2128EC3E190039409F /* FountainFlow4.png */; };
+		9DDF5D2628EC3E190039409F /* FountainFlow1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9DDF5D2228EC3E190039409F /* FountainFlow1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +95,10 @@
 		59EF42F228E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryFloatingPoint+Extension.swift"; sourceTree = "<group>"; };
 		59EF42F428E0D437005CC691 /* Comparable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+Extension.swift"; sourceTree = "<group>"; };
 		59EF42F628E0DBBB005CC691 /* PlayerWalk.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PlayerWalk.atlas; sourceTree = "<group>"; };
+		9DDF5D1F28EC3E190039409F /* FountainFlow3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FountainFlow3.png; sourceTree = "<group>"; };
+		9DDF5D2028EC3E190039409F /* FountainFlow2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FountainFlow2.png; sourceTree = "<group>"; };
+		9DDF5D2128EC3E190039409F /* FountainFlow4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FountainFlow4.png; sourceTree = "<group>"; };
+		9DDF5D2228EC3E190039409F /* FountainFlow1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FountainFlow1.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +209,7 @@
 				59A9DB3E28E618C500492DAA /* Tiles.sks */,
 				592E302628E57B5500603ECC /* Assets.swift */,
 				592E302328E494F400603ECC /* Assets.xcassets */,
+				9DDF5D2728EC3E3E0039409F /* Fountain */,
 				5922EADD28D8CDBB00BE46DC /* Player */,
 				59CC666128E99E6A0010A82E /* Pumpkin */,
 				59CC664028E84D1B0010A82E /* Zombie */,
@@ -261,6 +270,25 @@
 				59CC663C28E72B870010A82E /* ContolButtons.swift */,
 			);
 			path = Controls;
+			sourceTree = "<group>";
+		};
+		9DDF5D1E28EC3D7A0039409F /* FountainFlow.atlas */ = {
+			isa = PBXGroup;
+			children = (
+				9DDF5D2228EC3E190039409F /* FountainFlow1.png */,
+				9DDF5D2028EC3E190039409F /* FountainFlow2.png */,
+				9DDF5D1F28EC3E190039409F /* FountainFlow3.png */,
+				9DDF5D2128EC3E190039409F /* FountainFlow4.png */,
+			);
+			path = FountainFlow.atlas;
+			sourceTree = "<group>";
+		};
+		9DDF5D2728EC3E3E0039409F /* Fountain */ = {
+			isa = PBXGroup;
+			children = (
+				9DDF5D1E28EC3D7A0039409F /* FountainFlow.atlas */,
+			);
+			path = Fountain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,8 +353,11 @@
 				599077A428D77E3C00659E6E /* GameViewController.storyboard in Resources */,
 				59EF42F728E0DBBC005CC691 /* PlayerWalk.atlas in Resources */,
 				59CC663728E717830010A82E /* PlayerAttack.atlas in Resources */,
+				9DDF5D2528EC3E190039409F /* FountainFlow4.png in Resources */,
+				9DDF5D2428EC3E190039409F /* FountainFlow2.png in Resources */,
 				59CC665528E8C7310010A82E /* ZombieDeath.atlas in Resources */,
 				599077A928D77E3C00659E6E /* LaunchScreen.storyboard in Resources */,
+				9DDF5D2628EC3E190039409F /* FountainFlow1.png in Resources */,
 				5922EADC28D8CD7300BE46DC /* PlayerIdle.atlas in Resources */,
 				59CC665028E87C0D0010A82E /* ZombieAttack.atlas in Resources */,
 				59A9DB3F28E618C500492DAA /* Tiles.sks in Resources */,
@@ -334,6 +365,7 @@
 				59CC666328E99E870010A82E /* PumpkinEating.atlas in Resources */,
 				59A9DB3D28E5CF7300492DAA /* Level1.sks in Resources */,
 				59CC664228E84D470010A82E /* ZombieIdle.atlas in Resources */,
+				9DDF5D2328EC3E190039409F /* FountainFlow3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
