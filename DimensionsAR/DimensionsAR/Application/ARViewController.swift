@@ -9,24 +9,16 @@ import UIKit
 import SceneKit
 import ARKit
 
-final class ViewController: UIViewController, ARSCNViewDelegate {
+final class ARViewController: UIViewController, ARSCNViewDelegate {
+    // MARK: - UI Components
 
     @IBOutlet var sceneView: ARSCNView!
-    
+
+    // MARK: - View Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Set the view's delegate
-        sceneView.delegate = self
-        
-        // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
-        
-        // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        
-        // Set the scene to the view
-        sceneView.scene = scene
+        setup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,5 +36,20 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Pause the view's session
         sceneView.session.pause()
+    }
+}
+
+// MARK: - UI Setup
+extension ARViewController {
+    func setup() {
+        setupSceneView()
+    }
+
+    func setupSceneView() {
+        // Set the view's delegate
+        sceneView.delegate = self
+
+        // Show statistics such as fps and timing information
+        sceneView.showsStatistics = true
     }
 }
