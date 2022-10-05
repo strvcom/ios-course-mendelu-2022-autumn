@@ -30,12 +30,14 @@ extension Fountain: SceneObject {
 // MARK: AnimatedObject
 extension Fountain: AnimatedObject {}
 
+// MARK: Animations
 private extension Fountain {
     enum Animations: String {
         case fountainFlowing
     }
 }
 
+// MARK: Private API
 private extension Fountain {
     func setupFountain() {
         zPosition = Layer.fountain
