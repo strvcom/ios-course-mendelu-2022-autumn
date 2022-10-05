@@ -38,7 +38,7 @@ private extension Fountain {
 
 private extension Fountain {
     func setupFountain() {
-        zPosition = Layer.shootingPumpkin // TODO: Modify for pumpkin
+        zPosition = Layer.fountain
     }
 
     func setupAction() {
