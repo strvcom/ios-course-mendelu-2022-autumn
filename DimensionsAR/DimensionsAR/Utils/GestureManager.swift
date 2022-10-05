@@ -48,8 +48,9 @@ private extension GestureManager {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinchGesture))
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture))
 
-        [tapGesture, panGesture, pinchGesture]
+        [tapGesture, panGesture, pinchGesture, longPressGesture]
             .forEach(sceneView.addGestureRecognizer)
     }
 
@@ -123,5 +124,93 @@ private extension GestureManager {
         gesture.scale = 1
 
         dimensionsSubject.send(boundingBox.dimensions)
+    }
+}
+
+// MARK: - Long Press Gesture
+
+private extension GestureManager {
+    @objc func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
+        guard isPackageNodeInHierarchy else {
+            return
+        }
+
+        let location = gesture.location(in: sceneView)
+
+        switch gesture.state {
+        case .began:
+            guard let camera = sceneView.pointOfView else {
+                return
+            }
+
+            for result in sceneView.hitTest(location, options: [.rootNode: boundingBox.facesNode]) {
+                if let face = result.node as? BoundingBoxFace {
+                    let generator = UIImpactFeedbackGenerator(style: .heavy)
+                    generator.impactOccurred()
+
+                    // Normalized normal vector in scene's world coordinates.
+                    let faceNormalInWorld = normalize(boundingBox.simdConvertVector(face.normal, to: nil))
+
+                    let ray = Ray(origin: SIMD3<Float>(result.worldCoordinates), direction: faceNormalInWorld)
+                    let transform = dragPlaneTransform(for: ray, cameraPos: camera.simdWorldPosition)
+
+                    currentDraggedFace = FaceDrag(
+                        face: face,
+                        planeTransform: transform,
+                        beginWorldPos: boundingBox.simdWorldPosition,
+                        beginExtent: boundingBox.extent
+                    )
+                }
+            }
+        case .changed:
+            guard
+                let currentDraggedFace = currentDraggedFace,
+                let hitPos = sceneView.unprojectPointLocal(location, ontoPlane: currentDraggedFace.planeTransform)
+            else {
+                return
+            }
+
+            // Compute a new position for this side of the bounding box based on the given screen position.
+            let movementAlongRay = hitPos.x
+
+            let extentOffset = currentDraggedFace.normal * movementAlongRay
+            let newExtent = currentDraggedFace.beginExtent + extentOffset
+            let minSize = boundingBox.minSize
+
+            guard newExtent.x >= minSize && newExtent.y >= minSize && newExtent.z >= minSize else {
+                return
+            }
+
+            // First column of the planeTransform is the ray along which the box
+            // is manipulated, in world coordinates. The center of the bounding box
+            // has to be moved by half of the finger's movement on that ray.
+            let originOffset = (currentDraggedFace.planeTransform.columns.0 * (movementAlongRay / 2)).xyz
+
+            // Push/pull a single side of the bounding box by a combination
+            // of moving & changing the extent of the box.
+            currentDraggedFace.face.geometry?.firstMaterial?.diffuse.contents = UIColor.green
+            boundingBox.simdWorldPosition = currentDraggedFace.beginWorldPos + originOffset
+            boundingBox.extent = newExtent
+        case .failed, .cancelled, .ended:
+            currentDraggedFace = nil
+        case .possible:
+            break
+        @unknown default:
+            break
+        }
+    }
+
+    func dragPlaneTransform(for dragRay: Ray, cameraPos: SIMD3<Float>) -> float4x4 {
+        let normalizedCameraToRayOrigin = normalize(dragRay.origin - cameraPos)
+        let xVector = dragRay.direction
+        let zVector = normalize(cross(xVector, normalizedCameraToRayOrigin))
+        let yVector = normalize(cross(xVector, zVector))
+
+        return float4x4([
+            SIMD4<Float>(xVector, 0),
+            SIMD4<Float>(yVector, 0),
+            SIMD4<Float>(zVector, 0),
+            SIMD4<Float>(dragRay.origin, 1)
+        ])
     }
 }
