@@ -161,6 +161,8 @@ private extension GestureManager {
                         beginExtent: boundingBox.extent
                     )
                 }
+
+                dimensionsSubject.send(boundingBox.dimensions)
             }
         case .changed:
             guard
@@ -191,6 +193,7 @@ private extension GestureManager {
             currentDraggedFace.face.geometry?.firstMaterial?.diffuse.contents = UIColor.green
             boundingBox.simdWorldPosition = currentDraggedFace.beginWorldPos + originOffset
             boundingBox.extent = newExtent
+            dimensionsSubject.send(boundingBox.dimensions)
         case .failed, .cancelled, .ended:
             currentDraggedFace = nil
         case .possible:

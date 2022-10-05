@@ -22,6 +22,7 @@
 		B5466CFD28EE3EA50049CF6E /* BoundingBoxFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466CFC28EE3EA50049CF6E /* BoundingBoxFace.swift */; };
 		B5466CFF28EE3EDC0049CF6E /* GestureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466CFE28EE3EDC0049CF6E /* GestureManager.swift */; };
 		B5466D0128EE3EEA0049CF6E /* FaceDrag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466D0028EE3EEA0049CF6E /* FaceDrag.swift */; };
+		B5466D0428EE445C0049CF6E /* DimensionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466D0328EE445C0049CF6E /* DimensionsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		B5466CFC28EE3EA50049CF6E /* BoundingBoxFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBoxFace.swift; sourceTree = "<group>"; };
 		B5466CFE28EE3EDC0049CF6E /* GestureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureManager.swift; sourceTree = "<group>"; };
 		B5466D0028EE3EEA0049CF6E /* FaceDrag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDrag.swift; sourceTree = "<group>"; };
+		B5466D0328EE445C0049CF6E /* DimensionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				B5466CF928EE3E7E0049CF6E /* Nodes */,
 				B5466CF128EE3CC60049CF6E /* Utils */,
 				B5466CE628EE3B2B0049CF6E /* Resources */,
+				B5466D0228EE44430049CF6E /* Views */,
 			);
 			path = DimensionsAR;
 			sourceTree = "<group>";
@@ -130,6 +133,14 @@
 				B5466CFC28EE3EA50049CF6E /* BoundingBoxFace.swift */,
 			);
 			path = Nodes;
+			sourceTree = "<group>";
+		};
+		B5466D0228EE44430049CF6E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B5466D0328EE445C0049CF6E /* DimensionsView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -211,6 +222,7 @@
 				B5466CFD28EE3EA50049CF6E /* BoundingBoxFace.swift in Sources */,
 				B5466CEF28EE3C140049CF6E /* SIMD4+Extensions.swift in Sources */,
 				B5466CFF28EE3EDC0049CF6E /* GestureManager.swift in Sources */,
+				B5466D0428EE445C0049CF6E /* DimensionsView.swift in Sources */,
 				B5466CD828EE3AC60049CF6E /* ARViewController.swift in Sources */,
 				B5466CEE28EE3C140049CF6E /* simd_quatf+Extensions.swift in Sources */,
 				B5466CD428EE3AC60049CF6E /* AppDelegate.swift in Sources */,
