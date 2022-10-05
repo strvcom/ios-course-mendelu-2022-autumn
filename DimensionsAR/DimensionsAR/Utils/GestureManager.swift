@@ -47,8 +47,9 @@ private extension GestureManager {
     func setupGestures() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinchGesture))
 
-        [tapGesture, panGesture]
+        [tapGesture, panGesture, pinchGesture]
             .forEach(sceneView.addGestureRecognizer)
     }
 
@@ -105,5 +106,22 @@ private extension GestureManager {
             lastPanLocation = nil
             lastPannedLocationZAxis = nil
         }
+    }
+}
+
+// MARK: - Pinch Gesture
+
+private extension GestureManager {
+    @objc func handlePinchGesture(_ gesture: UIPinchGestureRecognizer) {
+        guard isPackageNodeInHierarchy, gesture.state == .changed else {
+            return
+        }
+
+        boundingBox.extent *= Float(gesture.scale)
+
+        // To reset the velocity.
+        gesture.scale = 1
+
+        dimensionsSubject.send(boundingBox.dimensions)
     }
 }
