@@ -46,8 +46,9 @@ extension GestureManager {
 private extension GestureManager {
     func setupGestures() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
 
-        [tapGesture]
+        [tapGesture, panGesture]
             .forEach(sceneView.addGestureRecognizer)
     }
 
@@ -66,5 +67,43 @@ private extension GestureManager {
         sceneView.scene.rootNode.addChildNode(boundingBox)
         dimensionsSubject.send(boundingBox.dimensions)
         tapGestureRecognized = true
+    }
+}
+
+// MARK: - Pan Gesture
+
+private extension GestureManager {
+    @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
+        guard isPackageNodeInHierarchy else {
+            return
+        }
+
+        let location = gesture.location(in: sceneView)
+
+        switch gesture.state {
+        case .began:
+            guard let result = sceneView.hitTest(location).first else {
+                return
+            }
+
+            let worldCoordinates = result.worldCoordinates
+            lastPanLocation = simd_float3(worldCoordinates)
+            lastPannedLocationZAxis = CGFloat(sceneView.projectPoint(worldCoordinates).z)
+        case .changed:
+            guard let lastPanLocation = lastPanLocation else {
+                return
+            }
+
+            let worldPosition = simd_float3(sceneView.unprojectPoint(
+                SCNVector3(location.x, location.y, lastPannedLocationZAxis ?? 0)
+            ))
+
+            let translation = worldPosition - lastPanLocation
+            boundingBox.simdLocalTranslate(by: translation)
+            self.lastPanLocation = worldPosition
+        default:
+            lastPanLocation = nil
+            lastPannedLocationZAxis = nil
+        }
     }
 }
