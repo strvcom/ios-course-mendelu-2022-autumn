@@ -14,6 +14,10 @@ final class ARViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
 
+    // MARK: - Private Properties
+
+    private let gestureManager = GestureManager()
+
     // MARK: - View Lifecycle
 
     override func viewDidLoad() {
