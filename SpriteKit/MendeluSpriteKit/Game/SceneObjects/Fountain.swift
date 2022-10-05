@@ -9,7 +9,7 @@ import SpriteKit
 
 final class Fountain: SKSpriteNode {
     // MARK: Properties
-    private let waterFlowFrames = SKTextureAtlas(named: Assets.Atlas.fountainFlowing).textures
+    private let fountainFlowFrames = SKTextureAtlas(named: Assets.Atlas.fountainFlowing).textures
 
     private(set) var animations = [String : SKAction]()
 }
@@ -23,7 +23,7 @@ extension Fountain: SceneObject {
     }
 
     func update(_ currentTime: TimeInterval) {
-        playAnimation(key: Animations.flowing.rawValue)
+        playAnimation(key: Animations.fountainFlowing.rawValue)
     }
 }
 
@@ -32,7 +32,7 @@ extension Fountain: AnimatedObject {}
 
 private extension Fountain {
     enum Animations: String {
-        case flowing
+        case fountainFlowing
     }
 }
 
@@ -44,9 +44,9 @@ private extension Fountain {
     func setupAction() {
         let timePerFrame: TimeInterval = 0.12
 
-        animations[Animations.flowing.rawValue] = SKAction.repeatForever(
+        animations[Animations.fountainFlowing.rawValue] = SKAction.repeatForever(
             SKAction.animate(
-                with: waterFlowFrames,
+                with: fountainFlowFrames,
                 timePerFrame: timePerFrame,
                 resize: false,
                 restore: true
