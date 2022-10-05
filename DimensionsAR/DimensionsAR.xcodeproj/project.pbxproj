@@ -12,6 +12,10 @@
 		B5466CDB28EE3AC60049CF6E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5466CD928EE3AC60049CF6E /* Main.storyboard */; };
 		B5466CDD28EE3AC70049CF6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5466CDC28EE3AC70049CF6E /* Assets.xcassets */; };
 		B5466CE028EE3AC70049CF6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5466CDE28EE3AC70049CF6E /* LaunchScreen.storyboard */; };
+		B5466CED28EE3C140049CF6E /* simd_float3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466CE928EE3C140049CF6E /* simd_float3+Extensions.swift */; };
+		B5466CEE28EE3C140049CF6E /* simd_quatf+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466CEA28EE3C140049CF6E /* simd_quatf+Extensions.swift */; };
+		B5466CEF28EE3C140049CF6E /* SIMD4+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466CEB28EE3C140049CF6E /* SIMD4+Extensions.swift */; };
+		B5466CF028EE3C140049CF6E /* ARSCNView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466CEC28EE3C140049CF6E /* ARSCNView+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +25,10 @@
 		B5466CDA28EE3AC60049CF6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B5466CDC28EE3AC70049CF6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5466CDF28EE3AC70049CF6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B5466CE928EE3C140049CF6E /* simd_float3+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "simd_float3+Extensions.swift"; sourceTree = "<group>"; };
+		B5466CEA28EE3C140049CF6E /* simd_quatf+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "simd_quatf+Extensions.swift"; sourceTree = "<group>"; };
+		B5466CEB28EE3C140049CF6E /* SIMD4+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SIMD4+Extensions.swift"; sourceTree = "<group>"; };
+		B5466CEC28EE3C140049CF6E /* ARSCNView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ARSCNView+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				B5466CE728EE3B310049CF6E /* Application */,
+				B5466CE828EE3BF70049CF6E /* Extensions */,
 				B5466CE628EE3B2B0049CF6E /* Resources */,
 			);
 			path = DimensionsAR;
@@ -76,6 +85,17 @@
 				B5466CD928EE3AC60049CF6E /* Main.storyboard */,
 			);
 			path = Application;
+			sourceTree = "<group>";
+		};
+		B5466CE828EE3BF70049CF6E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B5466CEC28EE3C140049CF6E /* ARSCNView+Extensions.swift */,
+				B5466CE928EE3C140049CF6E /* simd_float3+Extensions.swift */,
+				B5466CEA28EE3C140049CF6E /* simd_quatf+Extensions.swift */,
+				B5466CEB28EE3C140049CF6E /* SIMD4+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,7 +169,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5466CF028EE3C140049CF6E /* ARSCNView+Extensions.swift in Sources */,
+				B5466CED28EE3C140049CF6E /* simd_float3+Extensions.swift in Sources */,
+				B5466CEF28EE3C140049CF6E /* SIMD4+Extensions.swift in Sources */,
 				B5466CD828EE3AC60049CF6E /* ViewController.swift in Sources */,
+				B5466CEE28EE3C140049CF6E /* simd_quatf+Extensions.swift in Sources */,
 				B5466CD428EE3AC60049CF6E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
