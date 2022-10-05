@@ -46,6 +46,7 @@ final class ARViewController: UIViewController, ARSCNViewDelegate {
 // MARK: - UI Setup
 extension ARViewController {
     func setup() {
+        gestureManager.setupGestures(in: sceneView)
         setupSceneView()
     }
 
