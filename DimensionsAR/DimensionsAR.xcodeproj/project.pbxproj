@@ -18,6 +18,8 @@
 		B5466CF028EE3C140049CF6E /* ARSCNView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466CEC28EE3C140049CF6E /* ARSCNView+Extensions.swift */; };
 		B5466CF628EE3CDA0049CF6E /* Axis.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466CF328EE3CDA0049CF6E /* Axis.swift */; };
 		B5466CF728EE3CDA0049CF6E /* Ray.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466CF428EE3CDA0049CF6E /* Ray.swift */; };
+		B5466CFB28EE3E8C0049CF6E /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466CFA28EE3E8C0049CF6E /* BoundingBox.swift */; };
+		B5466CFD28EE3EA50049CF6E /* BoundingBoxFace.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466CFC28EE3EA50049CF6E /* BoundingBoxFace.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		B5466CEC28EE3C140049CF6E /* ARSCNView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ARSCNView+Extensions.swift"; sourceTree = "<group>"; };
 		B5466CF328EE3CDA0049CF6E /* Axis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Axis.swift; sourceTree = "<group>"; };
 		B5466CF428EE3CDA0049CF6E /* Ray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ray.swift; sourceTree = "<group>"; };
+		B5466CFA28EE3E8C0049CF6E /* BoundingBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
+		B5466CFC28EE3EA50049CF6E /* BoundingBoxFace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBoxFace.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,7 @@
 			children = (
 				B5466CE728EE3B310049CF6E /* Application */,
 				B5466CE828EE3BF70049CF6E /* Extensions */,
+				B5466CF928EE3E7E0049CF6E /* Nodes */,
 				B5466CF128EE3CC60049CF6E /* Utils */,
 				B5466CE628EE3B2B0049CF6E /* Resources */,
 			);
@@ -110,6 +115,15 @@
 				B5466CF428EE3CDA0049CF6E /* Ray.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		B5466CF928EE3E7E0049CF6E /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				B5466CFA28EE3E8C0049CF6E /* BoundingBox.swift */,
+				B5466CFC28EE3EA50049CF6E /* BoundingBoxFace.swift */,
+			);
+			path = Nodes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,6 +200,8 @@
 				B5466CF028EE3C140049CF6E /* ARSCNView+Extensions.swift in Sources */,
 				B5466CED28EE3C140049CF6E /* simd_float3+Extensions.swift in Sources */,
 				B5466CF628EE3CDA0049CF6E /* Axis.swift in Sources */,
+				B5466CFB28EE3E8C0049CF6E /* BoundingBox.swift in Sources */,
+				B5466CFD28EE3EA50049CF6E /* BoundingBoxFace.swift in Sources */,
 				B5466CEF28EE3C140049CF6E /* SIMD4+Extensions.swift in Sources */,
 				B5466CD828EE3AC60049CF6E /* ARViewController.swift in Sources */,
 				B5466CEE28EE3C140049CF6E /* simd_quatf+Extensions.swift in Sources */,
