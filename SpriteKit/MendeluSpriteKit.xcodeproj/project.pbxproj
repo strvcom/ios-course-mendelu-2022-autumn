@@ -47,6 +47,8 @@
 		59EF42F328E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EF42F228E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift */; };
 		59EF42F528E0D437005CC691 /* Comparable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EF42F428E0D437005CC691 /* Comparable+Extension.swift */; };
 		59EF42F728E0DBBC005CC691 /* PlayerWalk.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 59EF42F628E0DBBB005CC691 /* PlayerWalk.atlas */; };
+		9D464E5B28EEEA630056964C /* DoorOpening.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 9D464E5A28EEEA630056964C /* DoorOpening.atlas */; };
+		9DB92CD628EDA2FF00635BAF /* Door.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB92CD528EDA2FF00635BAF /* Door.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +93,8 @@
 		59EF42F228E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryFloatingPoint+Extension.swift"; sourceTree = "<group>"; };
 		59EF42F428E0D437005CC691 /* Comparable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+Extension.swift"; sourceTree = "<group>"; };
 		59EF42F628E0DBBB005CC691 /* PlayerWalk.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PlayerWalk.atlas; sourceTree = "<group>"; };
+		9D464E5A28EEEA630056964C /* DoorOpening.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = DoorOpening.atlas; sourceTree = "<group>"; };
+		9DB92CD528EDA2FF00635BAF /* Door.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Door.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +128,7 @@
 			children = (
 				5922EAD028D8BF3300BE46DC /* Background.swift */,
 				59699EB428E1B40700999BE7 /* Camera.swift */,
+				9DB92CD528EDA2FF00635BAF /* Door.swift */,
 				59CC665A28E98C3E0010A82E /* HitBox.swift */,
 				59CC665C28E98C8C0010A82E /* HurtBox.swift */,
 				59A9DB4028E61C6700492DAA /* Level.swift */,
@@ -201,6 +206,7 @@
 				59A9DB3E28E618C500492DAA /* Tiles.sks */,
 				592E302628E57B5500603ECC /* Assets.swift */,
 				592E302328E494F400603ECC /* Assets.xcassets */,
+				9D464E5728EEE8550056964C /* Door */,
 				5922EADD28D8CDBB00BE46DC /* Player */,
 				59CC666128E99E6A0010A82E /* Pumpkin */,
 				59CC664028E84D1B0010A82E /* Zombie */,
@@ -261,6 +267,14 @@
 				59CC663C28E72B870010A82E /* ContolButtons.swift */,
 			);
 			path = Controls;
+			sourceTree = "<group>";
+		};
+		9D464E5728EEE8550056964C /* Door */ = {
+			isa = PBXGroup;
+			children = (
+				9D464E5A28EEEA630056964C /* DoorOpening.atlas */,
+			);
+			path = Door;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,6 +341,7 @@
 				59CC663728E717830010A82E /* PlayerAttack.atlas in Resources */,
 				59CC665528E8C7310010A82E /* ZombieDeath.atlas in Resources */,
 				599077A928D77E3C00659E6E /* LaunchScreen.storyboard in Resources */,
+				9D464E5B28EEEA630056964C /* DoorOpening.atlas in Resources */,
 				5922EADC28D8CD7300BE46DC /* PlayerIdle.atlas in Resources */,
 				59CC665028E87C0D0010A82E /* ZombieAttack.atlas in Resources */,
 				59A9DB3F28E618C500492DAA /* Tiles.sks in Resources */,
@@ -353,6 +368,7 @@
 				5922EAD528D8C0FB00BE46DC /* SceneObject.swift in Sources */,
 				59A9DB4128E61C6700492DAA /* Level.swift in Sources */,
 				59CC665228E8897E0010A82E /* AnimatedObject.swift in Sources */,
+				9DB92CD628EDA2FF00635BAF /* Door.swift in Sources */,
 				59CC663528E711E10010A82E /* ObjectNames.swift in Sources */,
 				5922EAD128D8BF3300BE46DC /* Background.swift in Sources */,
 				59CC663F28E84BC80010A82E /* Zombie.swift in Sources */,

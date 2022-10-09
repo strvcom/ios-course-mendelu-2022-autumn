@@ -106,7 +106,7 @@ extension Zombie: AnimatedObject {}
 
 // MARK: Zombie
 extension Zombie {
-    func hitted() {
+    func hit() {
         guard !isDead else {
             return
         }

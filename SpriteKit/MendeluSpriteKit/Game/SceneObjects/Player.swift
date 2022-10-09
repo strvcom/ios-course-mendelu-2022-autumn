@@ -240,7 +240,7 @@ private extension Player {
                 continue
             }
             
-            zombie.hitted()
+            zombie.hit()
         }
     }
     

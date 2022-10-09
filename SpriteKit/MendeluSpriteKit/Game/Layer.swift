@@ -23,6 +23,7 @@ enum Layer {
     static let shootingPumpkin: CGFloat = 11
     static let player: CGFloat = 12
     static let zombie: CGFloat = 12
+    static let door: CGFloat = 11
     static let projectile: CGFloat = 12
     
     // MARK: Controls
