@@ -65,7 +65,7 @@ private extension BoundingBoxFace {
     func setup(with extent: SIMD3<Float>) {
         size = size(from: extent)
         geometry = makeGeometry()
-        geometry?.firstMaterial?.diffuse.contents = UIColor.red.withAlphaComponent(0.6)
+        geometry?.firstMaterial?.diffuse.contents = UIColor.red.withAlphaComponent(0.9)
         translateAndRotate(face: face, extent: extent)
     }
 
