@@ -60,6 +60,8 @@ extension ARViewController {
 
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
+
+        sceneView.autoenablesDefaultLighting = true
     }
 
     func setupDimensionsView() {
