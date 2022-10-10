@@ -18,8 +18,12 @@ final class BoundingBox: SCNNode {
         )
     }
 
+    /// The minimum size of the bounding box's extent.
     var minSize: Float = 0.1
 
+    /// Represents the size of the box in all axis.
+    ///
+    /// Changing this property will re-render the box.
     var extent: SIMD3<Float> = .init(0.1, 0.1, 0.1) {
         didSet {
             extent = max(extent, minSize)
@@ -29,7 +33,10 @@ final class BoundingBox: SCNNode {
 
     // MARK: - Private Properties
 
+    /// Contains the nodes for all faces of the box.
     private(set) var faces: [BoundingBoxFace.Face: BoundingBoxFace] = [:]
+
+    /// A parent node for all faces nodes of the box.
     private(set) var facesNode: SCNNode = .init()
 
     private let sceneView: ARSCNView

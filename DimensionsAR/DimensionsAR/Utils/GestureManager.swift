@@ -65,6 +65,7 @@ private extension GestureManager {
             return
         }
 
+        // Set the bounding box's translation vector.
         boundingBox.simdPosition = simd_float3(result.worldTransform.columns.3)
         sceneView.scene.rootNode.addChildNode(boundingBox)
         dimensionsSubject.send(boundingBox.dimensions)
@@ -90,6 +91,8 @@ private extension GestureManager {
 
             let worldCoordinates = result.worldCoordinates
             lastPanLocation = simd_float3(worldCoordinates)
+
+            // Save the depth so that we do not change the depth of the bounding box when panning.
             lastPannedLocationZAxis = CGFloat(sceneView.projectPoint(worldCoordinates).z)
         case .changed:
             guard let lastPanLocation = lastPanLocation else {
@@ -100,8 +103,11 @@ private extension GestureManager {
                 SCNVector3(location.x, location.y, lastPannedLocationZAxis ?? 0)
             ))
 
+            // The translation vector is the difference between the current position in world coordinates
+            // and the position where we started the panning.
             let translation = worldPosition - lastPanLocation
             boundingBox.simdLocalTranslate(by: translation)
+
             self.lastPanLocation = worldPosition
         default:
             lastPanLocation = nil
@@ -173,12 +179,18 @@ private extension GestureManager {
             }
 
             // Compute a new position for this side of the bounding box based on the given screen position.
+            // In the face's local coordinate system we are interested in the x-axis movement.
             let movementAlongRay = hitPos.x
 
+            // Take the currently dragged face's normal vector and multiply it by the ray movement direction
+            // so that we are changing only the extent of the dragged face.
+            // (try removing the lhs of the multiplication)
             let extentOffset = currentDraggedFace.normal * movementAlongRay
-            let newExtent = currentDraggedFace.beginExtent + extentOffset
-            let minSize = boundingBox.minSize
 
+            // Calculate new extent by adding the offset.
+            let newExtent = currentDraggedFace.beginExtent + extentOffset
+
+            let minSize = boundingBox.minSize
             guard newExtent.x >= minSize && newExtent.y >= minSize && newExtent.z >= minSize else {
                 return
             }

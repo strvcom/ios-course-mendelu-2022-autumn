@@ -69,6 +69,10 @@ private extension BoundingBoxFace {
         translateAndRotate(face: face, extent: extent)
     }
 
+    /// Creates a custom geometry using a polygon primitive type.
+    ///
+    /// The resulting polygon will have the same size as the size property.
+    /// NOTE: We can change the implementation and use triangles instead of polygons and everything would be the same.
     func makeGeometry() -> SCNGeometry {
         let halfWidth = size.width / 2
         let halfHeight = size.height / 2
@@ -95,6 +99,7 @@ private extension BoundingBoxFace {
         )
     }
 
+    /// Returns the size for the specified extent along two axis based on the face.
     func size(from extent: SIMD3<Float>) -> CGSize {
         switch face {
         case .front, .back:
@@ -106,6 +111,9 @@ private extension BoundingBoxFace {
         }
     }
 
+    /// Translates and rotates the node so that it correctly matches the faces it represents.
+    ///
+    /// By default the node's geometry will be parallel and facing the camera.
     func translateAndRotate(face: Face, extent: SIMD3<Float>) {
         let angle: Float = .pi
         switch face {
