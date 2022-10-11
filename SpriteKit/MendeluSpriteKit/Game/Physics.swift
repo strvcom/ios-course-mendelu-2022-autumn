@@ -27,7 +27,8 @@ extension Physics {
         static let projectile = Physics.everyBitSet
         static let player = Physics.CategoryBitMask.boundary |
             Physics.CategoryBitMask.zombie |
-            Physics.CategoryBitMask.groundTile
+            Physics.CategoryBitMask.groundTile |
+            Physics.CategoryBitMask.door
         static let zombie = Physics.CategoryBitMask.player |
             Physics.CategoryBitMask.groundTile |
             Physics.CategoryBitMask.boundary
@@ -43,6 +44,5 @@ extension Physics {
     enum ContactTestBitMask {
         static let player = Physics.CategoryBitMask.groundTile
         static let projectile = Physics.everyBitSet
-        static let door = Physics.CategoryBitMask.player
     }
 }

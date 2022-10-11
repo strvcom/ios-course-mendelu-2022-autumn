@@ -11,10 +11,6 @@ final class Door: SKSpriteNode {
     // MARK: Properties
     private let openingDoorFrames = SKTextureAtlas(named: Assets.Atlas.doorOpening).textures
     private var isOpen: Bool = false
-    private lazy var openedDoorArea: SKPhysicsBody = {
-        let physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 120, height: 57))
-        return physicsBody
-    }()
 
     private(set) var animations = [String: SKAction]()
 }
@@ -59,6 +55,13 @@ private extension Door {
     func setupDoor() {
         zPosition = Layer.door
         texture = SKTexture(image: Images.closedDoorImage)
+        name = ObjectNames.door
+
+        physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 10), center: CGPoint(x: -self.size.width/4, y: 0))
+        physicsBody?.affectedByGravity = false
+        physicsBody?.usesPreciseCollisionDetection = true
+        physicsBody?.isDynamic = false
+        physicsBody?.restitution = 0
     }
 
     func setupActions() {

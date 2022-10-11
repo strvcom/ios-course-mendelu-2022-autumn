@@ -255,6 +255,11 @@ private extension Player {
             }
             
             isJumping = false
+
+        case ObjectNames.door:
+            // TODO: Animate exit
+            print("🐨 CONTACT")
+
         default:
             break
         }
