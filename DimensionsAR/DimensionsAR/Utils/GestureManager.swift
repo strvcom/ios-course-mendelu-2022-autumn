@@ -68,7 +68,9 @@ private extension GestureManager {
         }
 
         // Set the bounding box's translation vector.
-        boundingBox.simdPosition = simd_float3(result.worldTransform.columns.3)
+        boundingBox.simdWorldPosition = simd_float3(result.worldTransform.columns.3)
+        boundingBox.simdWorldPosition.y += boundingBox.extent.y / 2
+
         sceneView.scene.rootNode.addChildNode(boundingBox)
         dimensionsSubject.send(boundingBox.dimensions)
     }
