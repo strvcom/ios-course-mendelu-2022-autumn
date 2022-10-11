@@ -63,6 +63,9 @@ extension ARViewController: ARSCNViewDelegate {
             return nil
         }
 
+        // Enable gestures only if a mesh anchor was added to the scene.
+        gestureManager.isGestureEnabled = true
+
         let node = SCNNode(geometry: geometry)
 
         // Change the rendering order so it renders before our virtual object.

@@ -15,9 +15,11 @@ final class GestureManager {
         dimensionsSubject.eraseToAnyPublisher()
     }
 
+    var isGestureEnabled: Bool = false
+
     // MARK: - Private Properties
 
-    private var isPackageNodeInHierarchy: Bool {
+    private var isBoundingBoxInHierarchy: Bool {
         tapGestureRecognized
     }
 
@@ -58,7 +60,8 @@ private extension GestureManager {
         let location = gesture.location(in: sceneView)
 
         guard
-            isPackageNodeInHierarchy == false,
+            isGestureEnabled,
+            isBoundingBoxInHierarchy == false,
             let query = sceneView.raycastQuery(from: location, allowing: .estimatedPlane, alignment: .horizontal),
             let result = sceneView.session.raycast(query).first
         else {
@@ -77,7 +80,7 @@ private extension GestureManager {
 
 private extension GestureManager {
     @objc func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
-        guard isPackageNodeInHierarchy else {
+        guard isGestureEnabled, isBoundingBoxInHierarchy else {
             return
         }
 
@@ -120,7 +123,11 @@ private extension GestureManager {
 
 private extension GestureManager {
     @objc func handlePinchGesture(_ gesture: UIPinchGestureRecognizer) {
-        guard isPackageNodeInHierarchy, gesture.state == .changed else {
+        guard
+            isGestureEnabled,
+            isBoundingBoxInHierarchy,
+            gesture.state == .changed
+        else {
             return
         }
 
@@ -137,7 +144,7 @@ private extension GestureManager {
 
 private extension GestureManager {
     @objc func handleLongPressGesture(_ gesture: UILongPressGestureRecognizer) {
-        guard isPackageNodeInHierarchy else {
+        guard isGestureEnabled, isBoundingBoxInHierarchy else {
             return
         }
 
