@@ -100,4 +100,9 @@ extension LevelScene {
         
         zombies.remove(at: index)
     }
+
+    func playerEnteredDoor() {
+        player.isPaused = true
+        player.alpha = 0
+    }
 }

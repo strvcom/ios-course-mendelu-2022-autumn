@@ -257,8 +257,10 @@ private extension Player {
             isJumping = false
 
         case ObjectNames.door:
-            // TODO: Animate exit
-            print("🐨 CONTACT")
+            if let door = body.node as? Door {
+                levelScene?.playerEnteredDoor()
+                door.entered()
+            }
 
         default:
             break

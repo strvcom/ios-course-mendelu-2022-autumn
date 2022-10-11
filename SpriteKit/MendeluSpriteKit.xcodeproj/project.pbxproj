@@ -49,6 +49,7 @@
 		59EF42F728E0DBBC005CC691 /* PlayerWalk.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 59EF42F628E0DBBB005CC691 /* PlayerWalk.atlas */; };
 		9D464E5B28EEEA630056964C /* DoorOpening.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 9D464E5A28EEEA630056964C /* DoorOpening.atlas */; };
 		9D7EED9C28F573B5004F944E /* PlayerObservingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EED9B28F573B5004F944E /* PlayerObservingObject.swift */; };
+		9D7EED9E28F5A3AB004F944E /* PlayerEntering.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 9D7EED9D28F5A3AB004F944E /* PlayerEntering.atlas */; };
 		9DB92CD628EDA2FF00635BAF /* Door.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB92CD528EDA2FF00635BAF /* Door.swift */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +97,7 @@
 		59EF42F628E0DBBB005CC691 /* PlayerWalk.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PlayerWalk.atlas; sourceTree = "<group>"; };
 		9D464E5A28EEEA630056964C /* DoorOpening.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = DoorOpening.atlas; sourceTree = "<group>"; };
 		9D7EED9B28F573B5004F944E /* PlayerObservingObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerObservingObject.swift; sourceTree = "<group>"; };
+		9D7EED9D28F5A3AB004F944E /* PlayerEntering.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PlayerEntering.atlas; sourceTree = "<group>"; };
 		9DB92CD528EDA2FF00635BAF /* Door.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Door.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -275,6 +277,7 @@
 		9D464E5728EEE8550056964C /* Door */ = {
 			isa = PBXGroup;
 			children = (
+				9D7EED9D28F5A3AB004F944E /* PlayerEntering.atlas */,
 				9D464E5A28EEEA630056964C /* DoorOpening.atlas */,
 			);
 			path = Door;
@@ -338,6 +341,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D7EED9E28F5A3AB004F944E /* PlayerEntering.atlas in Resources */,
 				59CC664428E850210010A82E /* ZombieWalk.atlas in Resources */,
 				599077A428D77E3C00659E6E /* GameViewController.storyboard in Resources */,
 				59EF42F728E0DBBC005CC691 /* PlayerWalk.atlas in Resources */,

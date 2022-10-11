@@ -10,6 +10,7 @@ import SpriteKit
 final class Door: SKSpriteNode {
     // MARK: Properties
     private let openingDoorFrames = SKTextureAtlas(named: Assets.Atlas.doorOpening).textures
+    private let playerEnteringDoorFrames = SKTextureAtlas(named: Assets.Atlas.playerEnteringDoor).textures
     private var isOpen: Bool = false
     private var isUnlocked: Bool {
         levelScene?.canBeCompleted ?? false
@@ -46,6 +47,7 @@ private extension Door {
     enum Animations: String {
         case open // player comes to close proximity
         case close // player leaves close proximity
+        case enter // player enters the door
     }
 }
 
@@ -59,6 +61,14 @@ private extension Door {
 
 // MARK: AnimatedObject
 extension Door: AnimatedObject {}
+
+// MARK: Door public API
+extension Door {
+    func entered() {
+        playAnimation(key: Animations.enter.rawValue)
+        run(SKAction.fadeAlpha(to: 0, duration: 1))
+    }
+}
 
 // MARK: Private API
 private extension Door {
@@ -82,6 +92,13 @@ private extension Door {
         animations[Animations.close.rawValue] = SKAction.animate(
             with: openingDoorFrames.reversed(),
             timePerFrame: frameTimeInterval,
+            resize: false,
+            restore: false
+        )
+
+        animations[Animations.enter.rawValue] = SKAction.animate(
+            with: playerEnteringDoorFrames,
+            timePerFrame: 0.2,
             resize: false,
             restore: false
         )
