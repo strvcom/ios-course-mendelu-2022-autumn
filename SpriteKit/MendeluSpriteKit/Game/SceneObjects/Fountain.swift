@@ -44,12 +44,10 @@ private extension Fountain {
     }
 
     func setupAction() {
-        let timePerFrame: TimeInterval = 0.12
-
         animations[Animations.fountainFlowing.rawValue] = SKAction.repeatForever(
             SKAction.animate(
                 with: fountainFlowFrames,
-                timePerFrame: timePerFrame,
+                timePerFrame: 0.12,
                 resize: false,
                 restore: true
             )
