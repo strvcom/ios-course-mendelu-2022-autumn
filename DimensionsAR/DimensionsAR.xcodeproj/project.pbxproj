@@ -23,6 +23,9 @@
 		B5466CFF28EE3EDC0049CF6E /* GestureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466CFE28EE3EDC0049CF6E /* GestureManager.swift */; };
 		B5466D0128EE3EEA0049CF6E /* FaceDrag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466D0028EE3EEA0049CF6E /* FaceDrag.swift */; };
 		B5466D0428EE445C0049CF6E /* DimensionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466D0328EE445C0049CF6E /* DimensionsView.swift */; };
+		B5466D0828F46F310049CF6E /* SCNGeometrySource+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466D0728F46F310049CF6E /* SCNGeometrySource+Extensions.swift */; };
+		B5466D0A28F46FD70049CF6E /* ARMeshAnchor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466D0928F46FD70049CF6E /* ARMeshAnchor+Extensions.swift */; };
+		B5466D0C28F471960049CF6E /* SCNGeometryPrimitiveType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466D0B28F471960049CF6E /* SCNGeometryPrimitiveType+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +46,9 @@
 		B5466CFE28EE3EDC0049CF6E /* GestureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureManager.swift; sourceTree = "<group>"; };
 		B5466D0028EE3EEA0049CF6E /* FaceDrag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDrag.swift; sourceTree = "<group>"; };
 		B5466D0328EE445C0049CF6E /* DimensionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionsView.swift; sourceTree = "<group>"; };
+		B5466D0728F46F310049CF6E /* SCNGeometrySource+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNGeometrySource+Extensions.swift"; sourceTree = "<group>"; };
+		B5466D0928F46FD70049CF6E /* ARMeshAnchor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ARMeshAnchor+Extensions.swift"; sourceTree = "<group>"; };
+		B5466D0B28F471960049CF6E /* SCNGeometryPrimitiveType+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNGeometryPrimitiveType+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +117,9 @@
 				B5466CE928EE3C140049CF6E /* simd_float3+Extensions.swift */,
 				B5466CEA28EE3C140049CF6E /* simd_quatf+Extensions.swift */,
 				B5466CEB28EE3C140049CF6E /* SIMD4+Extensions.swift */,
+				B5466D0728F46F310049CF6E /* SCNGeometrySource+Extensions.swift */,
+				B5466D0928F46FD70049CF6E /* ARMeshAnchor+Extensions.swift */,
+				B5466D0B28F471960049CF6E /* SCNGeometryPrimitiveType+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -219,13 +228,16 @@
 				B5466D0128EE3EEA0049CF6E /* FaceDrag.swift in Sources */,
 				B5466CF628EE3CDA0049CF6E /* Axis.swift in Sources */,
 				B5466CFB28EE3E8C0049CF6E /* BoundingBox.swift in Sources */,
+				B5466D0828F46F310049CF6E /* SCNGeometrySource+Extensions.swift in Sources */,
 				B5466CFD28EE3EA50049CF6E /* BoundingBoxFace.swift in Sources */,
 				B5466CEF28EE3C140049CF6E /* SIMD4+Extensions.swift in Sources */,
 				B5466CFF28EE3EDC0049CF6E /* GestureManager.swift in Sources */,
 				B5466D0428EE445C0049CF6E /* DimensionsView.swift in Sources */,
+				B5466D0C28F471960049CF6E /* SCNGeometryPrimitiveType+Extensions.swift in Sources */,
 				B5466CD828EE3AC60049CF6E /* ARViewController.swift in Sources */,
 				B5466CEE28EE3C140049CF6E /* simd_quatf+Extensions.swift in Sources */,
 				B5466CD428EE3AC60049CF6E /* AppDelegate.swift in Sources */,
+				B5466D0A28F46FD70049CF6E /* ARMeshAnchor+Extensions.swift in Sources */,
 				B5466CF728EE3CDA0049CF6E /* Ray.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

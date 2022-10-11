@@ -10,7 +10,7 @@ import Combine
 import SceneKit
 import UIKit
 
-final class ARViewController: UIViewController, ARSCNViewDelegate {
+final class ARViewController: UIViewController {
     // MARK: - UI Components
 
     @IBOutlet private var sceneView: ARSCNView!
@@ -33,6 +33,12 @@ final class ARViewController: UIViewController, ARSCNViewDelegate {
         
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = .horizontal
+
+        if ARWorldTrackingConfiguration.supportsSceneReconstruction(.mesh) {
+            // Without this configuration the mesh anchor will not be added to the scene.
+            configuration.sceneReconstruction = .mesh
+        }
 
         // Run the view's session
         sceneView.session.run(configuration)
@@ -46,6 +52,38 @@ final class ARViewController: UIViewController, ARSCNViewDelegate {
     }
 }
 
+// MARK: - ARSCNViewDelegate
+
+extension ARViewController: ARSCNViewDelegate {
+    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+        guard
+            let meshAnchor = anchor as? ARMeshAnchor,
+            let geometry = meshAnchor.sceneGeometry()
+        else {
+            return nil
+        }
+
+        let node = SCNNode(geometry: geometry)
+
+        // Change the rendering order so it renders before our virtual object.
+        node.renderingOrder = -1
+
+        return node
+    }
+
+    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+        guard
+            let meshAnchor = anchor as? ARMeshAnchor,
+            let geometry = meshAnchor.sceneGeometry()
+        else {
+            return
+        }
+
+        // Update the node for mesh anchor with updated geometry.
+        node.geometry = geometry
+    }
+}
+
 // MARK: - UI Setup
 extension ARViewController {
     func setup() {
@@ -55,12 +93,13 @@ extension ARViewController {
     }
 
     func setupSceneView() {
-        // Set the view's delegate
+        // Set the view's delegate.
         sceneView.delegate = self
 
-        // Show statistics such as fps and timing information
+        // Show statistics such as fps and timing information.
         sceneView.showsStatistics = true
 
+        // Enable automatic lighting by SceneKit.
         sceneView.autoenablesDefaultLighting = true
     }
 
