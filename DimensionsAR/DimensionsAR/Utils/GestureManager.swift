@@ -98,6 +98,7 @@ private extension GestureManager {
             // Save the depth so that we do not change the depth of the bounding box when panning.
             lastPannedLocationZAxis = CGFloat(sceneView.projectPoint(worldCoordinates).z)
         case .changed:
+            // 1. Option
             guard let lastPanLocation = lastPanLocation else {
                 return
             }
@@ -108,10 +109,21 @@ private extension GestureManager {
 
             // The translation vector is the difference between the current position in world coordinates
             // and the position where we started the panning.
-            let translation = worldPosition - lastPanLocation
-            boundingBox.simdLocalTranslate(by: translation)
+//            let translation = worldPosition - lastPanLocation
+//            boundingBox.simdLocalTranslate(by: translation)
 
             self.lastPanLocation = worldPosition
+
+            // 2. Option - Move only on the plane, up and down panning moves on the z-axis rather than on the y-axis.
+            guard
+                let query = sceneView.raycastQuery(from: location, allowing: .estimatedPlane, alignment: .horizontal),
+                let result = sceneView.session.raycast(query).first
+            else {
+                return
+            }
+
+            boundingBox.simdWorldPosition = simd_float3(result.worldTransform.columns.3)
+            boundingBox.simdWorldPosition.y += boundingBox.extent.y / 2
         default:
             lastPanLocation = nil
             lastPannedLocationZAxis = nil
