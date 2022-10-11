@@ -19,6 +19,7 @@ final class ARViewController: UIViewController {
     // MARK: - Private Properties
 
     private let gestureManager = GestureManager()
+    private var coachingOverlayShouldReactive: Bool = true
     private var cancelables: Set<AnyCancellable> = []
 
     // MARK: - View Lifecycle
@@ -66,6 +67,9 @@ extension ARViewController: ARSCNViewDelegate {
         // Enable gestures only if a mesh anchor was added to the scene.
         gestureManager.isGestureEnabled = true
 
+        // Disable coaching overlay activation once a plane is detected.
+        coachingOverlayShouldReactive = false
+
         let node = SCNNode(geometry: geometry)
 
         // Change the rendering order so it renders before our virtual object.
@@ -87,6 +91,16 @@ extension ARViewController: ARSCNViewDelegate {
     }
 }
 
+// MARK: - ARCoachingOverlayViewDelegate
+
+extension ARViewController: ARCoachingOverlayViewDelegate {
+    func coachingOverlayViewDidDeactivate(_ coachingOverlayView: ARCoachingOverlayView) {
+        if coachingOverlayShouldReactive {
+            coachingOverlayView.setActive(true, animated: true)
+        }
+    }
+}
+
 // MARK: - UI Setup
 extension ARViewController {
     func setup() {
@@ -104,6 +118,8 @@ extension ARViewController {
 
         // Enable automatic lighting by SceneKit.
         sceneView.autoenablesDefaultLighting = true
+
+        sceneView.addCoaching(delegate: self)
     }
 
     func setupDimensionsView() {

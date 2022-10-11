@@ -20,3 +20,25 @@ extension ARSCNView {
         return localResult.xyz
     }
 }
+
+// MARK: - Coaching Overlay View
+extension ARSCNView {
+    func addCoaching(delegate: ARCoachingOverlayViewDelegate) {
+        let coachingOverlay = ARCoachingOverlayView()
+        coachingOverlay.goal = .horizontalPlane
+        coachingOverlay.delegate = delegate
+        coachingOverlay.session = session
+
+        addSubview(coachingOverlay)
+        coachingOverlay.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            coachingOverlay.leadingAnchor.constraint(equalTo: leadingAnchor),
+            coachingOverlay.trailingAnchor.constraint(equalTo: trailingAnchor),
+            coachingOverlay.topAnchor.constraint(equalTo: topAnchor),
+            coachingOverlay.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+
+        // Explicitly show the overlay.
+        coachingOverlay.setActive(true, animated: true)
+    }
+}
