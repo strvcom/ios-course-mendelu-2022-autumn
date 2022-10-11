@@ -8,29 +8,35 @@
 import SpriteKit
 
 final class Door: SKSpriteNode {
+    // MARK: Properties
     private let openingDoorFrames = SKTextureAtlas(named: Assets.Atlas.doorOpening).textures
     private var isOpen: Bool = false
+    private lazy var openedDoorArea: SKPhysicsBody = {
+        let physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 120, height: 57))
+        return physicsBody
+    }()
+
+    private(set) var animations = [String: SKAction]()
 }
 
+// MARK: Game Object
 extension Door: SceneObject {
-    
     func setup(scene: LevelScene) {
         setupDoor()
         setupActions()
     }
 
-    func handleContactStart(_ contact: SKPhysicsContact) {
-        // TODO: Open the door
-    }
-
-    func handleContactEnd(_ contact: SKPhysicsContact) {
-        // TODO: Close the door
+    func update(_ currentTime: TimeInterval) {
+        updateState()
     }
 }
 
+// MARK: PlayerReactiveObject
+extension Door: PlayerObservingObject {}
+
 // MARK: Animation
 private extension Door {
-    enum Animations {
+    enum Animations: String {
         case open // player comes to close proximity
         case close // player leaves close proximity
     }
@@ -44,16 +50,11 @@ private extension Door {
     }
 }
 
+// MARK: AnimatedObject
+extension Door: AnimatedObject {}
+
 // MARK: Private API
 private extension Door {
-
-    var playerPosition: CGPoint {
-        levelScene?.player.position ?? .zero
-    }
-
-    var distanceToPlayer: CGFloat {
-        playerPosition.distance(to: position)
-    }
 
     func setupDoor() {
         zPosition = Layer.door
@@ -61,6 +62,35 @@ private extension Door {
     }
 
     func setupActions() {
+        let frameTimeInterval: TimeInterval = 0.08
+
+        animations[Animations.open.rawValue] = SKAction.animate(
+            with: openingDoorFrames,
+            timePerFrame: frameTimeInterval,
+            resize: false,
+            restore: false
+        )
+
+        animations[Animations.close.rawValue] = SKAction.animate(
+            with: openingDoorFrames.reversed(),
+            timePerFrame: frameTimeInterval,
+            resize: false,
+            restore: false
+        )
+    }
+
+    func updateState() {
         
+        if distanceToPlayer <= 80 {
+            if !isOpen {
+                playAnimation(key: Animations.open.rawValue)
+                isOpen = true
+            }
+        } else {
+            if isOpen {
+                playAnimation(key: Animations.close.rawValue)
+                isOpen = false
+            }
+        }
     }
 }

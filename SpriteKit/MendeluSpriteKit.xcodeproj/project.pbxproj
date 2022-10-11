@@ -48,6 +48,7 @@
 		59EF42F528E0D437005CC691 /* Comparable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EF42F428E0D437005CC691 /* Comparable+Extension.swift */; };
 		59EF42F728E0DBBC005CC691 /* PlayerWalk.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 59EF42F628E0DBBB005CC691 /* PlayerWalk.atlas */; };
 		9D464E5B28EEEA630056964C /* DoorOpening.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 9D464E5A28EEEA630056964C /* DoorOpening.atlas */; };
+		9D7EED9C28F573B5004F944E /* PlayerObservingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EED9B28F573B5004F944E /* PlayerObservingObject.swift */; };
 		9DB92CD628EDA2FF00635BAF /* Door.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB92CD528EDA2FF00635BAF /* Door.swift */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +95,7 @@
 		59EF42F428E0D437005CC691 /* Comparable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+Extension.swift"; sourceTree = "<group>"; };
 		59EF42F628E0DBBB005CC691 /* PlayerWalk.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PlayerWalk.atlas; sourceTree = "<group>"; };
 		9D464E5A28EEEA630056964C /* DoorOpening.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = DoorOpening.atlas; sourceTree = "<group>"; };
+		9D7EED9B28F573B5004F944E /* PlayerObservingObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerObservingObject.swift; sourceTree = "<group>"; };
 		9DB92CD528EDA2FF00635BAF /* Door.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Door.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -230,6 +232,7 @@
 			children = (
 				59CC665128E8897E0010A82E /* AnimatedObject.swift */,
 				5922EAD428D8C0FB00BE46DC /* SceneObject.swift */,
+				9D7EED9B28F573B5004F944E /* PlayerObservingObject.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				59CC664B28E86CFD0010A82E /* CGPoint+Extension.swift in Sources */,
 				59EF42F528E0D437005CC691 /* Comparable+Extension.swift in Sources */,
 				59EF42F328E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift in Sources */,
+				9D7EED9C28F573B5004F944E /* PlayerObservingObject.swift in Sources */,
 				5990779928D77E3C00659E6E /* AppDelegate.swift in Sources */,
 				59CC663D28E72B870010A82E /* ContolButtons.swift in Sources */,
 				5922EADA28D8C53300BE46DC /* Player.swift in Sources */,

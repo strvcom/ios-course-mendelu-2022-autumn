@@ -39,15 +39,7 @@ final class Zombie: SKSpriteNode {
             updateNodeDirection(direction: direction)
         }
     }
-    
-    private var playerPosition: CGPoint {
-        levelScene?.player.position ?? .zero
-    }
-    
-    private var distanceToPlayer: CGFloat {
-        playerPosition.distance(to: position)
-    }
-    
+
     private var isWalking: Bool {
         velocity != 0
     }
@@ -100,6 +92,9 @@ extension Zombie: SceneObject {
         updateIsAttacking()
     }
 }
+
+// MARK: PlayerReactiveObject
+extension Zombie: PlayerObservingObject {}
 
 // MARK: AnimatedObject
 extension Zombie: AnimatedObject {}
