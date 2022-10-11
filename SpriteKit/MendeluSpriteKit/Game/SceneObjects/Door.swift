@@ -11,6 +11,17 @@ final class Door: SKSpriteNode {
     // MARK: Properties
     private let openingDoorFrames = SKTextureAtlas(named: Assets.Atlas.doorOpening).textures
     private var isOpen: Bool = false
+    private var isUnlocked: Bool {
+        levelScene?.canBeCompleted ?? false
+    }
+    private lazy var collisionPhysicsBody: SKPhysicsBody = {
+        let physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 10), center: CGPoint(x: -self.size.width/4, y: 0))
+        physicsBody.affectedByGravity = false
+        physicsBody.usesPreciseCollisionDetection = true
+        physicsBody.isDynamic = false
+        physicsBody.restitution = 0
+        return physicsBody
+    }()
 
     private(set) var animations = [String: SKAction]()
 }
@@ -56,12 +67,6 @@ private extension Door {
         zPosition = Layer.door
         texture = SKTexture(image: Images.closedDoorImage)
         name = ObjectNames.door
-
-        physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 10), center: CGPoint(x: -self.size.width/4, y: 0))
-        physicsBody?.affectedByGravity = false
-        physicsBody?.usesPreciseCollisionDetection = true
-        physicsBody?.isDynamic = false
-        physicsBody?.restitution = 0
     }
 
     func setupActions() {
@@ -83,17 +88,23 @@ private extension Door {
     }
 
     func updateState() {
-        
-        if distanceToPlayer <= 80 {
-            if !isOpen {
-                playAnimation(key: Animations.open.rawValue)
-                isOpen = true
+        switch distanceToPlayer {
+        case let distance where distance <= 80:
+            guard !isOpen, isUnlocked else { return }
+            playAnimation(key: Animations.open.rawValue)
+            isOpen = true
+
+            if physicsBody == nil {
+                physicsBody = collisionPhysicsBody
             }
-        } else {
-            if isOpen {
-                playAnimation(key: Animations.close.rawValue)
-                isOpen = false
-            }
+
+        case let distance where distance > 80:
+            guard isOpen else { return }
+            playAnimation(key: Animations.close.rawValue)
+            isOpen = false
+
+        default:
+            break
         }
     }
 }

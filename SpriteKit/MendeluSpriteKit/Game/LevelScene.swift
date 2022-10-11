@@ -32,6 +32,8 @@ final class LevelScene: SKScene {
     private(set) var controlButtons: ControlButtons!
     private(set) var zombies = [Zombie]()
     private(set) var others = [SceneObject]()
+
+    var canBeCompleted: Bool { zombies.isEmpty }
     
     // MARK: Overrides
     override func willMove(from view: SKView) {
