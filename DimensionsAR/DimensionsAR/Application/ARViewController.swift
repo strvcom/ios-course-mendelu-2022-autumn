@@ -148,6 +148,7 @@ extension ARViewController {
     }
 
     @objc func resetButtonTapped() {
+        gestureManager.boundingBox.extent = SIMD3(0.1, 0.1, 0.1)
         gestureManager.boundingBox.removeFromParentNode()
     }
 }
