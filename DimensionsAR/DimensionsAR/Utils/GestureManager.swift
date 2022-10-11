@@ -20,11 +20,10 @@ final class GestureManager {
     // MARK: - Private Properties
 
     private var isBoundingBoxInHierarchy: Bool {
-        tapGestureRecognized
+        boundingBox.parent != nil
     }
 
     private(set) lazy var boundingBox: BoundingBox = BoundingBox(sceneView: sceneView)
-    private(set) var tapGestureRecognized: Bool = false
 
     private(set) var lastPannedLocationZAxis: CGFloat?
     private(set) var lastPanLocation: simd_float3?
@@ -72,7 +71,6 @@ private extension GestureManager {
         boundingBox.simdPosition = simd_float3(result.worldTransform.columns.3)
         sceneView.scene.rootNode.addChildNode(boundingBox)
         dimensionsSubject.send(boundingBox.dimensions)
-        tapGestureRecognized = true
     }
 }
 

@@ -14,6 +14,7 @@ final class ARViewController: UIViewController {
     // MARK: - UI Components
 
     @IBOutlet private var sceneView: ARSCNView!
+    @IBOutlet private var resetButton: UIButton!
     private let dimensionsView = DimensionsView()
 
     // MARK: - Private Properties
@@ -107,6 +108,7 @@ extension ARViewController {
         gestureManager.setupGestures(in: sceneView)
         setupSceneView()
         setupDimensionsView()
+        setupResetButton()
     }
 
     func setupSceneView() {
@@ -139,5 +141,13 @@ extension ARViewController {
                 self?.dimensionsView.depthLabel.text = "Depth: " + formattedDimensions.depth
             }
             .store(in: &cancelables)
+    }
+
+    func setupResetButton() {
+        resetButton.addTarget(self, action: #selector(resetButtonTapped), for: .touchUpInside)
+    }
+
+    @objc func resetButtonTapped() {
+        gestureManager.boundingBox.removeFromParentNode()
     }
 }
