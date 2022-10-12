@@ -7,9 +7,16 @@
 
 import SpriteKit
 
+protocol LevelCompletionDelegate: AnyObject {
+    func levelCompleted(sceneImage: UIImage)
+    func levelFailed(sceneImage: UIImage)
+}
+
 final class LevelScene: SKScene {
     // MARK: Properties
     private let controlsHidden = true
+
+    weak var completionDelegate: LevelCompletionDelegate?
     
     var allSceneObjects: [SceneObject] {
         [
@@ -69,6 +76,13 @@ final class LevelScene: SKScene {
         }
         
         allSceneObjects.forEach { $0.setup(scene: self) }
+
+        // TODO: Test code, remove afterwards
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+            if let levelScreenshot = self?.makeScreenshot() {
+                self?.completionDelegate?.levelCompleted(sceneImage: levelScreenshot)
+            }
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -98,4 +112,20 @@ extension LevelScene {
         
         zombies.remove(at: index)
     }
+}
+
+
+private extension LevelScene {
+    func makeScreenshot() -> UIImage? {
+        let snapshotView = view?.snapshotView(afterScreenUpdates: true)
+        let bounds = UIScreen.main.bounds
+
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0)
+        snapshotView?.drawHierarchy(in: bounds, afterScreenUpdates: true)
+        let screenshotImage = UIGraphicsGetImageFromCurrentImageContext()
+
+        UIGraphicsEndImageContext()
+
+        return screenshotImage
+      }
 }

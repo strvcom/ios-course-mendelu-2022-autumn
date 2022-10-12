@@ -35,7 +35,8 @@ final class GameViewController: UIViewController {
         guard let scene = LevelScene(fileNamed: Assets.Scenes.level1) else {
             return
         }
-            
+        scene.completionDelegate = self
+
         skView.presentScene(scene)
     }
     
@@ -73,5 +74,26 @@ final class GameViewController: UIViewController {
         for gameObject in scene.allSceneObjects {
             gameObject.keyboardDown(presses: presses)
         }
+    }
+}
+
+extension GameViewController: LevelCompletionDelegate {
+    func levelCompleted(sceneImage: UIImage) {
+        guard let scene = LevelFinishedScene(fileNamed: Assets.Scenes.levelCompleted) else {
+            return
+        }
+        scene.setBackgroundImage(sceneImage)
+        scene.scaleMode = .aspectFill
+        let transition = SKTransition.crossFade(withDuration: 0.8)
+        skView.presentScene(scene, transition: transition)
+    }
+    
+    func levelFailed(sceneImage: UIImage) {
+        guard let scene = SKScene(fileNamed: Assets.Scenes.gameOver) else {
+            return
+        }
+        scene.scaleMode = .resizeFill
+        let transition = SKTransition.crossFade(withDuration: 0.6)
+        skView.presentScene(scene, transition: transition)
     }
 }
