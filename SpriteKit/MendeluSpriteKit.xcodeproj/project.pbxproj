@@ -53,6 +53,8 @@
 		9D26298328F6BE8B00969D80 /* LevelFinishedScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D26298228F6BE8B00969D80 /* LevelFinishedScene.swift */; };
 		9DDF1AE428F83D3B0013BED8 /* GameOver.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9DDF1AE328F83D3B0013BED8 /* GameOver.sks */; };
 		9DDF1AE628F847B50013BED8 /* FloatingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1AE528F847B50013BED8 /* FloatingNode.swift */; };
+		9DA5A6D728EC770800F76843 /* FountainFlowing.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 9DA5A6D628EC770800F76843 /* FountainFlowing.atlas */; };
+		9DD9BA8B28EC5377002AA59F /* Fountain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD9BA8A28EC5377002AA59F /* Fountain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +106,8 @@
 		9D26298228F6BE8B00969D80 /* LevelFinishedScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelFinishedScene.swift; sourceTree = "<group>"; };
 		9DDF1AE328F83D3B0013BED8 /* GameOver.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOver.sks; sourceTree = "<group>"; };
 		9DDF1AE528F847B50013BED8 /* FloatingNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingNode.swift; sourceTree = "<group>"; };
+		9DA5A6D628EC770800F76843 /* FountainFlowing.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = FountainFlowing.atlas; sourceTree = "<group>"; };
+		9DD9BA8A28EC5377002AA59F /* Fountain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fountain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +143,7 @@
 				5922EAD028D8BF3300BE46DC /* Background.swift */,
 				59699EB428E1B40700999BE7 /* Camera.swift */,
 				9DDF1AE528F847B50013BED8 /* FloatingNode.swift */,
+				9DD9BA8A28EC5377002AA59F /* Fountain.swift */,
 				59CC665A28E98C3E0010A82E /* HitBox.swift */,
 				59CC665C28E98C8C0010A82E /* HurtBox.swift */,
 				59A9DB4028E61C6700492DAA /* Level.swift */,
@@ -219,6 +224,7 @@
 				59A9DB3E28E618C500492DAA /* Tiles.sks */,
 				592E302628E57B5500603ECC /* Assets.swift */,
 				592E302328E494F400603ECC /* Assets.xcassets */,
+				9DDF5D2728EC3E3E0039409F /* Fountain */,
 				5922EADD28D8CDBB00BE46DC /* Player */,
 				59CC666128E99E6A0010A82E /* Pumpkin */,
 				59CC664028E84D1B0010A82E /* Zombie */,
@@ -297,6 +303,14 @@
 				9D26297B28F6AD0D00969D80 /* alagard.ttf */,
 			);
 			path = Fonts;
+            sourceTree = "<group>";
+        };
+		9DDF5D2728EC3E3E0039409F /* Fountain */ = {
+			isa = PBXGroup;
+			children = (
+				9DA5A6D628EC770800F76843 /* FountainFlowing.atlas */,
+			);
+			path = Fountain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,6 +386,7 @@
 				592E302528E494F400603ECC /* Assets.xcassets in Resources */,
 				59CC666328E99E870010A82E /* PumpkinEating.atlas in Resources */,
 				59A9DB3D28E5CF7300492DAA /* Level1.sks in Resources */,
+				9DA5A6D728EC770800F76843 /* FountainFlowing.atlas in Resources */,
 				59CC664228E84D470010A82E /* ZombieIdle.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,6 +422,7 @@
 				59CC664E28E8711B0010A82E /* Direction.swift in Sources */,
 				59CC666528E99FDC0010A82E /* ShootingPumpkin.swift in Sources */,
 				9DDF1AE628F847B50013BED8 /* FloatingNode.swift in Sources */,
+				9DD9BA8B28EC5377002AA59F /* Fountain.swift in Sources */,
 				59EF42F128E0BA42005CC691 /* Joystick.swift in Sources */,
 				592E302D28E588C100603ECC /* Tile.swift in Sources */,
 				59699EB128E1AEA700999BE7 /* SKNode+Extension.swift in Sources */,

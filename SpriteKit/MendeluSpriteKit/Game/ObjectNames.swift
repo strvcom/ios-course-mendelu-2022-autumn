@@ -11,4 +11,5 @@ enum ObjectNames {
     static let player = "Player"
     static let tile = "Tile"
     static let projectile = "Projectile"
+    static let fountain = "Fountain"
 }
