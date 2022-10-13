@@ -7,8 +7,12 @@
 
 import SpriteKit
 
+
 final class LevelFinishedScene: SKScene {
-    private var button: TouchNode?
+    // MARK: Properties
+    private var playAgainButton: TouchNode?
+
+    var playAgainButtonTapped: (() -> Void)?
 }
 
 // MARK: Public API
@@ -16,8 +20,9 @@ extension LevelFinishedScene {
     override func didMove(to view: SKView) {
         backgroundColor = .black
 
-        button = children.first(where: { $0 is TouchNode }) as? TouchNode
-        button?.tapAction = {
+        playAgainButton = children.first(where: { $0 is TouchNode }) as? TouchNode
+        playAgainButton?.tapAction = { [weak self] in
+            self?.playAgainButtonTapped?()
         }
     }
 

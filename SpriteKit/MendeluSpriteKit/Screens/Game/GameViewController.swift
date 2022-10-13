@@ -32,12 +32,7 @@ final class GameViewController: UIViewController {
         skView.preferredFramesPerSecond = 30
         skView.showsPhysics = Environment.sceneInDebugMode
         
-        guard let scene = LevelScene(fileNamed: Assets.Scenes.level1) else {
-            return
-        }
-        scene.completionDelegate = self
-
-        skView.presentScene(scene)
+        startGame()
     }
     
     override func pressesBegan(
@@ -75,25 +70,38 @@ final class GameViewController: UIViewController {
             gameObject.keyboardDown(presses: presses)
         }
     }
-}
 
-extension GameViewController: LevelCompletionDelegate {
-    func levelCompleted(sceneImage: UIImage) {
-        guard let scene = LevelFinishedScene(fileNamed: Assets.Scenes.levelCompleted) else {
+    func startGame() {
+        guard let scene = LevelScene(fileNamed: Assets.Scenes.level1) else {
             return
         }
-        scene.setBackgroundImage(sceneImage)
+        scene.completionDelegate = self
+
+        skView.presentScene(scene)
+    }
+
+    func showLevelFinishedScene(sceneFileName: String, backgroundImage: UIImage) {
+        guard let scene = LevelFinishedScene(fileNamed: sceneFileName) else {
+            return
+        }
+
+        scene.setBackgroundImage(backgroundImage)
+        scene.playAgainButtonTapped = { [weak self] in
+            self?.startGame()
+        }
+
         scene.scaleMode = .aspectFill
         let transition = SKTransition.crossFade(withDuration: 0.8)
         skView.presentScene(scene, transition: transition)
     }
+}
+
+extension GameViewController: LevelCompletionDelegate {
+    func levelCompleted(sceneImage: UIImage) {
+        showLevelFinishedScene(sceneFileName: Assets.Scenes.levelCompleted, backgroundImage: sceneImage)
+    }
     
     func levelFailed(sceneImage: UIImage) {
-        guard let scene = SKScene(fileNamed: Assets.Scenes.gameOver) else {
-            return
-        }
-        scene.scaleMode = .resizeFill
-        let transition = SKTransition.crossFade(withDuration: 0.6)
-        skView.presentScene(scene, transition: transition)
+        showLevelFinishedScene(sceneFileName: Assets.Scenes.gameOver, backgroundImage: sceneImage)
     }
 }
