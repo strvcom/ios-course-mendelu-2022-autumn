@@ -97,6 +97,7 @@ final class GameViewController: UIViewController {
     }
 }
 
+// MARK: LevelCompletionDelegate
 extension GameViewController: LevelCompletionDelegate {
     func levelCompleted(sceneImage: UIImage) {
         showLevelFinishedScene(sceneFileName: Assets.Scenes.levelCompleted, backgroundImage: sceneImage)

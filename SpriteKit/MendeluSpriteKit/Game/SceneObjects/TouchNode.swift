@@ -9,12 +9,14 @@ import SpriteKit
 
 final class TouchNode: SKSpriteNode {
 
+    // MARK: Properties
     var tapAction: (() -> Void)?
     override var isUserInteractionEnabled: Bool {
         set { }
         get { true }
     }
 
+    // MARK: Public
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         run(SKAction.sequence([
             SKAction.fadeAlpha(to: 0.5, duration: 0.2),
