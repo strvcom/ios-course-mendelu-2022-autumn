@@ -77,7 +77,8 @@ final class GameViewController: UIViewController {
         }
         scene.completionDelegate = self
 
-        skView.presentScene(scene)
+        let transition = SKTransition.crossFade(withDuration: 0.6)
+        skView.presentScene(scene, transition: transition)
     }
 
     func showLevelFinishedScene(sceneFileName: String, backgroundImage: UIImage) {
@@ -91,7 +92,7 @@ final class GameViewController: UIViewController {
         }
 
         scene.scaleMode = .aspectFill
-        let transition = SKTransition.crossFade(withDuration: 0.8)
+        let transition = SKTransition.crossFade(withDuration: 1)
         skView.presentScene(scene, transition: transition)
     }
 }

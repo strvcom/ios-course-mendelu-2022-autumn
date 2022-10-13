@@ -76,13 +76,6 @@ final class LevelScene: SKScene {
         }
         
         allSceneObjects.forEach { $0.setup(scene: self) }
-
-        // TODO: Test code, remove afterwards
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
-            if let levelScreenshot = self?.makeScreenshot() {
-                self?.completionDelegate?.levelCompleted(sceneImage: levelScreenshot)
-            }
-        }
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -109,7 +102,6 @@ extension LevelScene {
         guard let index = zombies.firstIndex(where: { $0 === zombie }) else {
             return
         }
-        
         zombies.remove(at: index)
     }
 }

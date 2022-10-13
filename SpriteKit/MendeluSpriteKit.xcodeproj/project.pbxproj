@@ -51,6 +51,8 @@
 		9D26297C28F6AD0D00969D80 /* alagard.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D26297B28F6AD0D00969D80 /* alagard.ttf */; };
 		9D26298128F6B22F00969D80 /* TouchNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D26298028F6B22F00969D80 /* TouchNode.swift */; };
 		9D26298328F6BE8B00969D80 /* LevelFinishedScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D26298228F6BE8B00969D80 /* LevelFinishedScene.swift */; };
+		9DDF1AE428F83D3B0013BED8 /* GameOver.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9DDF1AE328F83D3B0013BED8 /* GameOver.sks */; };
+		9DDF1AE628F847B50013BED8 /* FloatingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1AE528F847B50013BED8 /* FloatingNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +102,8 @@
 		9D26297D28F6AD2D00969D80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9D26298028F6B22F00969D80 /* TouchNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchNode.swift; sourceTree = "<group>"; };
 		9D26298228F6BE8B00969D80 /* LevelFinishedScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelFinishedScene.swift; sourceTree = "<group>"; };
+		9DDF1AE328F83D3B0013BED8 /* GameOver.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOver.sks; sourceTree = "<group>"; };
+		9DDF1AE528F847B50013BED8 /* FloatingNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +120,7 @@
 		5922EACF28D8958A00BE46DC /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				9D26297528F6ACBD00969D80 /* LevelCompleted */,
+				9D26297528F6ACBD00969D80 /* LevelFinished */,
 				592E302B28E588A000603ECC /* Levels */,
 				5922EAD628D8C1A400BE46DC /* SceneObjects */,
 				59CFC5ED28D78A5900F4E6AE /* Layer.swift */,
@@ -134,6 +138,7 @@
 			children = (
 				5922EAD028D8BF3300BE46DC /* Background.swift */,
 				59699EB428E1B40700999BE7 /* Camera.swift */,
+				9DDF1AE528F847B50013BED8 /* FloatingNode.swift */,
 				59CC665A28E98C3E0010A82E /* HitBox.swift */,
 				59CC665C28E98C8C0010A82E /* HurtBox.swift */,
 				59A9DB4028E61C6700492DAA /* Level.swift */,
@@ -276,13 +281,14 @@
 			path = Controls;
 			sourceTree = "<group>";
 		};
-		9D26297528F6ACBD00969D80 /* LevelCompleted */ = {
+		9D26297528F6ACBD00969D80 /* LevelFinished */ = {
 			isa = PBXGroup;
 			children = (
 				9D26297628F6ACDD00969D80 /* LevelCompleted.sks */,
 				9D26298228F6BE8B00969D80 /* LevelFinishedScene.swift */,
+				9DDF1AE328F83D3B0013BED8 /* GameOver.sks */,
 			);
-			path = LevelCompleted;
+			path = LevelFinished;
 			sourceTree = "<group>";
 		};
 		9D26297A28F6ACFF00969D80 /* Fonts */ = {
@@ -352,6 +358,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				59CC664428E850210010A82E /* ZombieWalk.atlas in Resources */,
+				9DDF1AE428F83D3B0013BED8 /* GameOver.sks in Resources */,
 				599077A428D77E3C00659E6E /* GameViewController.storyboard in Resources */,
 				59EF42F728E0DBBC005CC691 /* PlayerWalk.atlas in Resources */,
 				9D26297C28F6AD0D00969D80 /* alagard.ttf in Resources */,
@@ -399,6 +406,7 @@
 				5922EADA28D8C53300BE46DC /* Player.swift in Sources */,
 				59CC664E28E8711B0010A82E /* Direction.swift in Sources */,
 				59CC666528E99FDC0010A82E /* ShootingPumpkin.swift in Sources */,
+				9DDF1AE628F847B50013BED8 /* FloatingNode.swift in Sources */,
 				59EF42F128E0BA42005CC691 /* Joystick.swift in Sources */,
 				592E302D28E588C100603ECC /* Tile.swift in Sources */,
 				59699EB128E1AEA700999BE7 /* SKNode+Extension.swift in Sources */,

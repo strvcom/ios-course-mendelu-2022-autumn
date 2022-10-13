@@ -7,7 +7,7 @@
 
 import SpriteKit
 
-class TouchNode: SKSpriteNode {
+final class TouchNode: SKSpriteNode {
 
     var tapAction: (() -> Void)?
     override var isUserInteractionEnabled: Bool {
@@ -20,6 +20,7 @@ class TouchNode: SKSpriteNode {
             SKAction.fadeAlpha(to: 0.5, duration: 0.2),
             SKAction.fadeAlpha(to: 1, duration: 0.1)
         ]))
+
         tapAction?()
     }
 }
