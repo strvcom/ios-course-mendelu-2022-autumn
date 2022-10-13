@@ -13,7 +13,7 @@ final class Door: SKSpriteNode {
     private let playerEnteringDoorFrames = SKTextureAtlas(named: Assets.Atlas.playerEnteringDoor).textures
     private var isOpen: Bool = false
     private var isUnlocked: Bool {
-        levelScene?.canBeCompleted ?? false
+        levelScene?.levelCanBeCompleted ?? false
     }
     private lazy var collisionPhysicsBody: SKPhysicsBody = {
         let physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 10), center: CGPoint(x: -self.size.width/4, y: 0))

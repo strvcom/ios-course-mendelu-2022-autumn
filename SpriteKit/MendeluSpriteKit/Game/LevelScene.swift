@@ -33,7 +33,10 @@ final class LevelScene: SKScene {
     private(set) var zombies = [Zombie]()
     private(set) var others = [SceneObject]()
 
-    var canBeCompleted: Bool { zombies.isEmpty }
+    /// Indicates whether player is eligible to complete the level succesfully
+    /// and is based on conditions player must comply to to succeed.
+    /// For example player must kill all Zombies and only then is eligible to complete the level.
+    var levelCanBeCompleted: Bool { zombies.isEmpty }
     
     // MARK: Overrides
     override func willMove(from view: SKView) {
