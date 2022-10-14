@@ -13,6 +13,9 @@ struct CoordinatesAdapter {
 }
 
 extension CoordinatesAdapter {
+    /// Converts the specified point from the image provided by the camera to a point in the screen's coordinate system.
+    /// - parameter normalizedImagePoint: A normalized coordinates of a point in the image.
+    /// - returns: A point in the screen's coordinate system.
     func screenCoordinates(normalizedImagePoint: CGPoint) -> CGPoint {
         let normalizedScreenPoint = normalizeScreen(point: normalizedImagePoint)
         return CGPoint(

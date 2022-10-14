@@ -77,6 +77,8 @@ extension VisionHandExample: ARSessionDelegate {
 
                     // 7. Show the recognized point as a simple 2D point on screen.
                     DispatchQueue.main.async { [weak self] in
+                        // The vision's origin is at the lower-left corner.
+                        // We want to convert to UIKit's coordinate system, which is at the top-left corner.
                         self?.showIndexFingerPoint(CGPoint(x: indexTip.x, y: 1 - indexTip.y))
                     }
                 }
