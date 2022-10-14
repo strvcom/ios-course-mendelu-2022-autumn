@@ -87,7 +87,7 @@ final class GameViewController: UIViewController {
         }
 
         scene.setBackgroundImage(backgroundImage)
-        scene.playAgainButtonTapped = { [weak self] in
+        scene.newGameButtonTapped = { [weak self] in
             self?.startGame()
         }
 

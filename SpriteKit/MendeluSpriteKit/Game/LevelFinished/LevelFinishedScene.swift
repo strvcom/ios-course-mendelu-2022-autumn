@@ -12,7 +12,7 @@ final class LevelFinishedScene: SKScene {
     // MARK: Properties
     private var playAgainButton: TouchNode?
 
-    var playAgainButtonTapped: (() -> Void)?
+    var newGameButtonTapped: (() -> Void)?
 }
 
 // MARK: Public API
@@ -22,7 +22,7 @@ extension LevelFinishedScene {
 
         playAgainButton = children.first(where: { $0 is TouchNode }) as? TouchNode
         playAgainButton?.tapAction = { [weak self] in
-            self?.playAgainButtonTapped?()
+            self?.newGameButtonTapped?()
         }
     }
 
