@@ -72,7 +72,7 @@ private extension PlaneDetectionExample {
         configuration = ARWorldTrackingConfiguration()
 
         // 2. Assign scene view's delegate to self to respond to renderer's actions
-        sceneDelegate = self
+        sceneView.delegate = self
 
         // 3. Optionally show feature points
         sceneView.debugOptions = [.showFeaturePoints]

@@ -69,7 +69,7 @@ private extension BodyTrackingExample {
         // Set a configuration that trackings body parts.
         configuration = ARBodyTrackingConfiguration()
 
-        sessionDelegate = self
+        session.delegate = self
 
         sceneView.autoenablesDefaultLighting = true
     }

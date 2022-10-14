@@ -12,10 +12,6 @@ import UIKit
 class ARViewController: UIViewController {
     let sceneView = ARSCNView()
 
-    weak var sceneDelegate: ARSCNViewDelegate?
-
-    weak var sessionDelegate: ARSessionDelegate?
-
     var configuration: ARConfiguration?
 
     override func viewDidLoad() {
@@ -70,12 +66,6 @@ extension ARViewController {
 
 private extension ARViewController {
     func initialSetup() {
-        // Set scene view's delegate
-        sceneView.delegate = sceneDelegate
-
-        // Set scene session's delegate
-        sceneView.session.delegate = sessionDelegate
-
         // Enable lightning
         sceneView.autoenablesDefaultLighting = true
 

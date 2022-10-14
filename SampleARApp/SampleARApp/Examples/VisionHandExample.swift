@@ -95,7 +95,7 @@ private extension VisionHandExample {
     }
 
     func setupVision() {
-        sessionDelegate = self
+        session.delegate = self
     }
 
     func showIndexFingerPoint(_ point: CGPoint) {
