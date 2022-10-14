@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B5012EAA28F9705400F36633 /* CustomSceneExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5012EA928F9705400F36633 /* CustomSceneExample.swift */; };
 		B5466D1128F5A1350049CF6E /* CoordinatesAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466D1028F5A1350049CF6E /* CoordinatesAdapter.swift */; };
 		B5466D1328F5A1510049CF6E /* CVPixelBuffer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466D1228F5A1510049CF6E /* CVPixelBuffer+Extensions.swift */; };
 		B5466D1528F5A4550049CF6E /* BodyTrackingExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466D1428F5A4550049CF6E /* BodyTrackingExample.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B5012EA928F9705400F36633 /* CustomSceneExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSceneExample.swift; sourceTree = "<group>"; };
 		B5466D1028F5A1350049CF6E /* CoordinatesAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesAdapter.swift; sourceTree = "<group>"; };
 		B5466D1228F5A1510049CF6E /* CVPixelBuffer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+Extensions.swift"; sourceTree = "<group>"; };
 		B5466D1428F5A4550049CF6E /* BodyTrackingExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyTrackingExample.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				B5DE74CD28C773D700CD3A1E /* PlaneDetectionExample.swift */,
 				B5DE74D128C893AA00CD3A1E /* VisionHandExample.swift */,
 				B5466D1428F5A4550049CF6E /* BodyTrackingExample.swift */,
+				B5012EA928F9705400F36633 /* CustomSceneExample.swift */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 				B5466D1328F5A1510049CF6E /* CVPixelBuffer+Extensions.swift in Sources */,
 				B5DE74D228C893AA00CD3A1E /* VisionHandExample.swift in Sources */,
 				B5466D1528F5A4550049CF6E /* BodyTrackingExample.swift in Sources */,
+				B5012EAA28F9705400F36633 /* CustomSceneExample.swift in Sources */,
 				B5DE74C528C267DE00CD3A1E /* ARViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

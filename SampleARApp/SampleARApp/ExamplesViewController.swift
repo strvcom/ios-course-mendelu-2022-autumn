@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 enum Example: String, CaseIterable {
+    case customScene = "Custom scene"
     case customBezierPath = "Geometry from bezier path"
     case customGeometry = "Custom Geometry"
     case planeDetection = "Plane detection"
@@ -19,6 +20,8 @@ enum Example: String, CaseIterable {
 extension Example {
     func viewController() -> ARViewController {
         switch self {
+        case .customScene:
+            return CustomSceneExample()
         case .customBezierPath:
             return BezierPathGeometryExample()
         case .customGeometry:
