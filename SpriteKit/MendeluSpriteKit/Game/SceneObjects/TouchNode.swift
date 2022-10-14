@@ -18,11 +18,11 @@ final class TouchNode: SKSpriteNode {
 
     // MARK: Public
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        run(SKAction.sequence([
-            SKAction.fadeAlpha(to: 0.5, duration: 0.2),
-            SKAction.fadeAlpha(to: 1, duration: 0.1)
-        ]))
+        run(SKAction.fadeAlpha(to: 0.5, duration: 0.2))
+    }
 
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        run(SKAction.fadeAlpha(to: 1, duration: 0.01))
         tapAction?()
     }
 }
