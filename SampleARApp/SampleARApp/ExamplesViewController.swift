@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import ARKit
 
 enum Example: String, CaseIterable {
     case customBezierPath = "Geometry from bezier path"
