@@ -51,10 +51,10 @@
 		9D26297C28F6AD0D00969D80 /* alagard.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D26297B28F6AD0D00969D80 /* alagard.ttf */; };
 		9D26298128F6B22F00969D80 /* TouchNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D26298028F6B22F00969D80 /* TouchNode.swift */; };
 		9D26298328F6BE8B00969D80 /* LevelFinishedScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D26298228F6BE8B00969D80 /* LevelFinishedScene.swift */; };
-		9DDF1AE428F83D3B0013BED8 /* GameOver.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9DDF1AE328F83D3B0013BED8 /* GameOver.sks */; };
-		9DDF1AE628F847B50013BED8 /* FloatingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1AE528F847B50013BED8 /* FloatingNode.swift */; };
 		9DA5A6D728EC770800F76843 /* FountainFlowing.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 9DA5A6D628EC770800F76843 /* FountainFlowing.atlas */; };
 		9DD9BA8B28EC5377002AA59F /* Fountain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD9BA8A28EC5377002AA59F /* Fountain.swift */; };
+		9DDF1AE428F83D3B0013BED8 /* GameOver.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9DDF1AE328F83D3B0013BED8 /* GameOver.sks */; };
+		9DDF1AE628F847B50013BED8 /* FloatingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1AE528F847B50013BED8 /* FloatingNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,10 +104,10 @@
 		9D26297D28F6AD2D00969D80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9D26298028F6B22F00969D80 /* TouchNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchNode.swift; sourceTree = "<group>"; };
 		9D26298228F6BE8B00969D80 /* LevelFinishedScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelFinishedScene.swift; sourceTree = "<group>"; };
-		9DDF1AE328F83D3B0013BED8 /* GameOver.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOver.sks; sourceTree = "<group>"; };
-		9DDF1AE528F847B50013BED8 /* FloatingNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingNode.swift; sourceTree = "<group>"; };
 		9DA5A6D628EC770800F76843 /* FountainFlowing.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = FountainFlowing.atlas; sourceTree = "<group>"; };
 		9DD9BA8A28EC5377002AA59F /* Fountain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fountain.swift; sourceTree = "<group>"; };
+		9DDF1AE328F83D3B0013BED8 /* GameOver.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOver.sks; sourceTree = "<group>"; };
+		9DDF1AE528F847B50013BED8 /* FloatingNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,10 +124,11 @@
 		5922EACF28D8958A00BE46DC /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				9D26297528F6ACBD00969D80 /* LevelFinished */,
+				9D26297528F6ACBD00969D80 /* Scenes */,
 				592E302B28E588A000603ECC /* Levels */,
 				5922EAD628D8C1A400BE46DC /* SceneObjects */,
 				59CFC5ED28D78A5900F4E6AE /* Layer.swift */,
+				9D26298228F6BE8B00969D80 /* LevelFinishedScene.swift */,
 				5990779E28D77E3C00659E6E /* LevelScene.swift */,
 				5922EAD728D8C2E400BE46DC /* Physics.swift */,
 				59CC663428E711E10010A82E /* ObjectNames.swift */,
@@ -287,14 +288,13 @@
 			path = Controls;
 			sourceTree = "<group>";
 		};
-		9D26297528F6ACBD00969D80 /* LevelFinished */ = {
+		9D26297528F6ACBD00969D80 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
 				9D26297628F6ACDD00969D80 /* LevelCompleted.sks */,
-				9D26298228F6BE8B00969D80 /* LevelFinishedScene.swift */,
 				9DDF1AE328F83D3B0013BED8 /* GameOver.sks */,
 			);
-			path = LevelFinished;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		9D26297A28F6ACFF00969D80 /* Fonts */ = {
@@ -303,8 +303,8 @@
 				9D26297B28F6AD0D00969D80 /* alagard.ttf */,
 			);
 			path = Fonts;
-            sourceTree = "<group>";
-        };
+			sourceTree = "<group>";
+		};
 		9DDF5D2728EC3E3E0039409F /* Fountain */ = {
 			isa = PBXGroup;
 			children = (
