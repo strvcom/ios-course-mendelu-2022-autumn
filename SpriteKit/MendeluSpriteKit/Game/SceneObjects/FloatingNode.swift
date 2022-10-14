@@ -25,8 +25,9 @@ private extension FloatingNode {
         
         // Calculation of animation properties based on node size
         // to achieve seemingly "random" animation
-        let offset = size.height * 0.2
-        let duration = size.height * 0.02
+        let smallerSide = size.height < size.width ? size.height : size.width
+        let offset = smallerSide * 0.1
+        let duration = smallerSide * 0.02
         
         run(
             SKAction.repeatForever(
