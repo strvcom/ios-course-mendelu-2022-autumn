@@ -39,6 +39,7 @@ final class BoundingBoxFace: SCNNode {
     // MARK: - Private Properties
 
     private var size: CGSize = .zero
+    private var extent: SIMD3<Float> = .zero
     private let face: Face
 
     // MARK: - Initialization
@@ -48,6 +49,7 @@ final class BoundingBoxFace: SCNNode {
         boundingBoxExtent extent: SIMD3<Float>
     ) {
         self.face = face
+        self.extent = extent
         super.init()
         setup(with: extent)
     }

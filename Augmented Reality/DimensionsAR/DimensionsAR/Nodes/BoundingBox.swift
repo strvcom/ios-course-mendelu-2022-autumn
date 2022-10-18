@@ -39,12 +39,9 @@ final class BoundingBox: SCNNode {
     /// A parent node for all faces nodes of the box.
     private(set) var facesNode: SCNNode = .init()
 
-    private let sceneView: ARSCNView
-
     // MARK: - Initialization
 
-    init(sceneView: ARSCNView) {
-        self.sceneView = sceneView
+    override init() {
         super.init()
         render()
     }
@@ -66,13 +63,11 @@ private extension BoundingBox {
     func removeFaces() {
         facesNode.childNodes.forEach { $0.removeFromParentNode() }
         facesNode.removeFromParentNode()
-        faces.removeAll()
     }
 
     func renderFaces() {
         BoundingBoxFace.Face.allCases.forEach {
             let face = BoundingBoxFace($0, boundingBoxExtent: extent)
-            faces[$0] = face
             facesNode.addChildNode(face)
         }
         addChildNode(facesNode)
