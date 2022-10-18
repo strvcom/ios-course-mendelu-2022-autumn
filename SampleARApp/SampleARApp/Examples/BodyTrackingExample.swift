@@ -88,10 +88,3 @@ private extension BodyTrackingExample {
         }
     }
 }
-
-fileprivate extension simd_float4x4  {
-    /// Returns a 3x1 translation vector from the matrix.
-    var translation: simd_float3 {
-        simd_make_float3(columns.3)
-    }
-}
