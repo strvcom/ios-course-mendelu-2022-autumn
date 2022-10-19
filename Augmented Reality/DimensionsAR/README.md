@@ -1,5 +1,3 @@
-
-
 # DimensionsAR
 
 This folder contains an example application allowing users to measure an object's dimensions by placing a bounding box around it, and showcases a slightly advanced usage of ARKit and SceneKit.
@@ -40,7 +38,7 @@ The bounding box is displayed after a single tap gesture on any detected horizon
 
 Tapping on a button positioned in the top-right corner of the screen will hide (reset) the bounding box.
 
-<p align="center"><img src="Images/tap.gif" height="450"/></p>
+<p align="center"><img src="Images/tap.gif" height="450" width="200" /></p>
 
 ## Move
 
@@ -50,11 +48,11 @@ There are two options how this is implemented, see in [`handlePanGesture(_:)`](h
 
 The first option calculates the new position relative to the previous position by calculating an offset while maintaining the same z-axis coordinate. So when dragging up and down the box is moving on the y-axis only.
 
-<p align="center"><img src="Images/move-option-1.gif" height="450"/></p>
+<p align="center"><img src="Images/move-option-1.gif" height="450" width="200" /></p>
 
 The second option relies on results from [`raycast(_:)`](https://developer.apple.com/documentation/arkit/arsession/3132065-raycast). Each time the user moves the finger, we check for new intersections and move the box to the location of the closest intersection.
 
-<p align="center"><img src="Images/move-option-2.gif" height="450"/></p>
+<p align="center"><img src="Images/move-option-2.gif" height="450" width="200" /></p>
 
 ## Scale
 
@@ -62,7 +60,7 @@ The size of the bounding box can be changed by pinch gesture with two fingers (s
 
 The implementation behind this is very simple — we simply multiply the bounding box's extent by the scale factor of the gesture. After each change we also need to mutate the factor to one so that each pinch gesture update starts from the new factor (it is relative to the points of the two touches).
 
-<p align="center"><img src="Images/scale-all.gif" height="450"/></p>
+<p align="center"><img src="Images/scale-all.gif" height="450" width="200" /></p>
 
 To change the size about one axis, long press one of the box's face and drag it in the positive or negative direction of its normal vector to scale it. The application will let you know that you can start dragging with a haptic feedback.
 
@@ -81,4 +79,4 @@ Then, whenever we drag with the finger, we want to calculate a new extent and re
 
 Because the face's normal vector points to the same direction as its x-axis (because we defined the transformation matrix this way), we are only interested in the changes on the x-axis. The new extent is calculated by adding an offset to the current extent. This offset is obtained by a simple multiplication of the face's normal vector and the point's x coordinate — and thanks to the way we represent normal vectors, this multiplication will only scale the correct axis.
 
-<p align="center"><img src="Images/scale-face.gif" height="450"/></p>
+<p align="center"><img src="Images/scale-face.gif" height="450" width="200" /></p>
