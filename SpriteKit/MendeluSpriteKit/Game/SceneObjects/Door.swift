@@ -105,9 +105,12 @@ private extension Door {
     }
 
     func updateState() {
+        let distanceToPlayerToOpenTheDoor = 80
+
         switch distanceToPlayer {
-        case let distance where distance <= 80:
+        case let distance where distance <= distanceToPlayerToOpenTheDoor:
             guard !isOpen, isUnlocked else { return }
+
             playAnimation(key: Animations.open.rawValue)
             isOpen = true
 
@@ -115,8 +118,9 @@ private extension Door {
                 physicsBody = collisionPhysicsBody
             }
 
-        case let distance where distance > 80:
+        case let distance where distance > distanceToPlayerToOpenTheDoor:
             guard isOpen else { return }
+
             playAnimation(key: Animations.close.rawValue)
             isOpen = false
 
