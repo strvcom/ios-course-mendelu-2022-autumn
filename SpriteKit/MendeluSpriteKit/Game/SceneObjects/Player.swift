@@ -240,7 +240,7 @@ private extension Player {
                 continue
             }
             
-            zombie.hitted()
+            zombie.hit()
         }
     }
     
@@ -255,6 +255,13 @@ private extension Player {
             }
             
             isJumping = false
+
+        case ObjectNames.door:
+            if let door = body.node as? Door {
+                levelScene?.playerEnteredDoor()
+                door.entered()
+            }
+
         default:
             break
         }

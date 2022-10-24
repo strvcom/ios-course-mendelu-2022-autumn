@@ -29,6 +29,8 @@ extension Assets {
         static let zombieDeath = "ZombieDeath"
         static let zombieAttack = "ZombieAttack"
         static let pumpkinEating = "PumpkinEating"
+        static let doorOpening = "DoorOpening"
+        static let playerEnteringDoor = "PlayerEntering"
         static let fountainFlowing = "FountainFlowing"
     }
 }

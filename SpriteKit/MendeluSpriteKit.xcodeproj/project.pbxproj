@@ -47,6 +47,10 @@
 		59EF42F328E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EF42F228E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift */; };
 		59EF42F528E0D437005CC691 /* Comparable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EF42F428E0D437005CC691 /* Comparable+Extension.swift */; };
 		59EF42F728E0DBBC005CC691 /* PlayerWalk.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 59EF42F628E0DBBB005CC691 /* PlayerWalk.atlas */; };
+		9D464E5B28EEEA630056964C /* DoorOpening.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 9D464E5A28EEEA630056964C /* DoorOpening.atlas */; };
+		9D7EED9C28F573B5004F944E /* PlayerObservingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EED9B28F573B5004F944E /* PlayerObservingObject.swift */; };
+		9D7EED9E28F5A3AB004F944E /* PlayerEntering.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 9D7EED9D28F5A3AB004F944E /* PlayerEntering.atlas */; };
+		9DB92CD628EDA2FF00635BAF /* Door.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB92CD528EDA2FF00635BAF /* Door.swift */; };
 		9D26297828F6ACDD00969D80 /* LevelCompleted.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9D26297628F6ACDD00969D80 /* LevelCompleted.sks */; };
 		9D26297C28F6AD0D00969D80 /* alagard.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D26297B28F6AD0D00969D80 /* alagard.ttf */; };
 		9D26298128F6B22F00969D80 /* TouchNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D26298028F6B22F00969D80 /* TouchNode.swift */; };
@@ -99,6 +103,10 @@
 		59EF42F228E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryFloatingPoint+Extension.swift"; sourceTree = "<group>"; };
 		59EF42F428E0D437005CC691 /* Comparable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+Extension.swift"; sourceTree = "<group>"; };
 		59EF42F628E0DBBB005CC691 /* PlayerWalk.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PlayerWalk.atlas; sourceTree = "<group>"; };
+		9D464E5A28EEEA630056964C /* DoorOpening.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = DoorOpening.atlas; sourceTree = "<group>"; };
+		9D7EED9B28F573B5004F944E /* PlayerObservingObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerObservingObject.swift; sourceTree = "<group>"; };
+		9D7EED9D28F5A3AB004F944E /* PlayerEntering.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PlayerEntering.atlas; sourceTree = "<group>"; };
+		9DB92CD528EDA2FF00635BAF /* Door.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Door.swift; sourceTree = "<group>"; };
 		9D26297628F6ACDD00969D80 /* LevelCompleted.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = LevelCompleted.sks; path = MendeluSpriteKit/Game/Scenes/LevelCompleted.sks; sourceTree = SOURCE_ROOT; };
 		9D26297B28F6AD0D00969D80 /* alagard.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = alagard.ttf; sourceTree = "<group>"; };
 		9D26297D28F6AD2D00969D80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -143,6 +151,7 @@
 			children = (
 				5922EAD028D8BF3300BE46DC /* Background.swift */,
 				59699EB428E1B40700999BE7 /* Camera.swift */,
+				9DB92CD528EDA2FF00635BAF /* Door.swift */,
 				9DDF1AE528F847B50013BED8 /* FloatingNode.swift */,
 				9DD9BA8A28EC5377002AA59F /* Fountain.swift */,
 				59CC665A28E98C3E0010A82E /* HitBox.swift */,
@@ -225,6 +234,7 @@
 				59A9DB3E28E618C500492DAA /* Tiles.sks */,
 				592E302628E57B5500603ECC /* Assets.swift */,
 				592E302328E494F400603ECC /* Assets.xcassets */,
+				9D464E5728EEE8550056964C /* Door */,
 				9DDF5D2728EC3E3E0039409F /* Fountain */,
 				5922EADD28D8CDBB00BE46DC /* Player */,
 				59CC666128E99E6A0010A82E /* Pumpkin */,
@@ -249,6 +259,7 @@
 			children = (
 				59CC665128E8897E0010A82E /* AnimatedObject.swift */,
 				5922EAD428D8C0FB00BE46DC /* SceneObject.swift */,
+				9D7EED9B28F573B5004F944E /* PlayerObservingObject.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -288,6 +299,15 @@
 			path = Controls;
 			sourceTree = "<group>";
 		};
+		9D464E5728EEE8550056964C /* Door */ = {
+			isa = PBXGroup;
+			children = (
+				9D7EED9D28F5A3AB004F944E /* PlayerEntering.atlas */,
+				9D464E5A28EEEA630056964C /* DoorOpening.atlas */,
+			);
+			path = Door;
+            sourceTree = "<group>";
+        };
 		9D26297528F6ACBD00969D80 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -371,6 +391,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D7EED9E28F5A3AB004F944E /* PlayerEntering.atlas in Resources */,
 				59CC664428E850210010A82E /* ZombieWalk.atlas in Resources */,
 				9DDF1AE428F83D3B0013BED8 /* GameOver.sks in Resources */,
 				599077A428D77E3C00659E6E /* GameViewController.storyboard in Resources */,
@@ -379,6 +400,7 @@
 				59CC663728E717830010A82E /* PlayerAttack.atlas in Resources */,
 				59CC665528E8C7310010A82E /* ZombieDeath.atlas in Resources */,
 				599077A928D77E3C00659E6E /* LaunchScreen.storyboard in Resources */,
+				9D464E5B28EEEA630056964C /* DoorOpening.atlas in Resources */,
 				9D26297828F6ACDD00969D80 /* LevelCompleted.sks in Resources */,
 				5922EADC28D8CD7300BE46DC /* PlayerIdle.atlas in Resources */,
 				59CC665028E87C0D0010A82E /* ZombieAttack.atlas in Resources */,
@@ -408,6 +430,7 @@
 				9D26298128F6B22F00969D80 /* TouchNode.swift in Sources */,
 				59A9DB4128E61C6700492DAA /* Level.swift in Sources */,
 				59CC665228E8897E0010A82E /* AnimatedObject.swift in Sources */,
+				9DB92CD628EDA2FF00635BAF /* Door.swift in Sources */,
 				59CC663528E711E10010A82E /* ObjectNames.swift in Sources */,
 				5922EAD128D8BF3300BE46DC /* Background.swift in Sources */,
 				59CC663F28E84BC80010A82E /* Zombie.swift in Sources */,
@@ -415,6 +438,7 @@
 				59CC664B28E86CFD0010A82E /* CGPoint+Extension.swift in Sources */,
 				59EF42F528E0D437005CC691 /* Comparable+Extension.swift in Sources */,
 				59EF42F328E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift in Sources */,
+				9D7EED9C28F573B5004F944E /* PlayerObservingObject.swift in Sources */,
 				5990779928D77E3C00659E6E /* AppDelegate.swift in Sources */,
 				59CC663D28E72B870010A82E /* ContolButtons.swift in Sources */,
 				9D26298328F6BE8B00969D80 /* LevelFinishedScene.swift in Sources */,

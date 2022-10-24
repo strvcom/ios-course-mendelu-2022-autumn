@@ -17,6 +17,7 @@ extension Physics {
         static let player: UInt32 = 0b0000_0000_0000_0000_0000_0000_0000_0100
         static let zombie: UInt32 = 0b0000_0000_0000_0000_0000_0000_0000_1000
         static let projectile: UInt32 = 0b0000_0000_0000_0000_0000_0000_0001_0000
+        static let door: UInt32 = 0b0000_0000_0000_0000_0000_0000_0010_0000
     }
 }
 
@@ -26,10 +27,11 @@ extension Physics {
         static let projectile = Physics.everyBitSet
         static let player = Physics.CategoryBitMask.boundary |
             Physics.CategoryBitMask.zombie |
-            Physics.CategoryBitMask.groundTile
-        static let zombie = Physics.CategoryBitMask.player
-            | Physics.CategoryBitMask.groundTile
-            | Physics.CategoryBitMask.boundary
+            Physics.CategoryBitMask.groundTile |
+            Physics.CategoryBitMask.door
+        static let zombie = Physics.CategoryBitMask.player |
+            Physics.CategoryBitMask.groundTile |
+            Physics.CategoryBitMask.boundary
         static let groundTile = Physics.CategoryBitMask.player |
             Physics.CategoryBitMask.zombie
         static let boundary = Physics.CategoryBitMask.player |
