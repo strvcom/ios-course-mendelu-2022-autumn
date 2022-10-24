@@ -105,7 +105,7 @@ private extension Door {
     }
 
     func updateState() {
-        let distanceToPlayerToOpenTheDoor = 80
+        let distanceToPlayerToOpenTheDoor: CGFloat = 80
 
         switch distanceToPlayer {
         case let distance where distance <= distanceToPlayerToOpenTheDoor:

@@ -7,9 +7,16 @@
 
 import SpriteKit
 
+protocol LevelCompletionDelegate: AnyObject {
+    func levelCompleted(sceneImage: UIImage)
+    func levelFailed(sceneImage: UIImage)
+}
+
 final class LevelScene: SKScene {
     // MARK: Properties
     private let controlsHidden = true
+
+    weak var completionDelegate: LevelCompletionDelegate?
     
     var allSceneObjects: [SceneObject] {
         [
@@ -100,7 +107,6 @@ extension LevelScene {
         guard let index = zombies.firstIndex(where: { $0 === zombie }) else {
             return
         }
-        
         zombies.remove(at: index)
     }
 
@@ -108,4 +114,20 @@ extension LevelScene {
         player.isPaused = true
         player.alpha = 0
     }
+}
+
+
+private extension LevelScene {
+    func makeScreenshot() -> UIImage? {
+        let snapshotView = view?.snapshotView(afterScreenUpdates: true)
+        let bounds = UIScreen.main.bounds
+
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 0)
+        snapshotView?.drawHierarchy(in: bounds, afterScreenUpdates: true)
+        let screenshotImage = UIGraphicsGetImageFromCurrentImageContext()
+
+        UIGraphicsEndImageContext()
+
+        return screenshotImage
+      }
 }
