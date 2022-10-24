@@ -33,9 +33,6 @@ final class BoundingBox: SCNNode {
 
     // MARK: - Private Properties
 
-    /// Contains the nodes for all faces of the box.
-    private(set) var faces: [BoundingBoxFace.Face: BoundingBoxFace] = [:]
-
     /// A parent node for all faces nodes of the box.
     private(set) var facesNode: SCNNode = .init()
 
