@@ -10,7 +10,7 @@ This folder contains basic AR examples showcasing scene creation, custom geometr
 
 Shows how you can create a custom scene.
 
-By default the [`ARSCNView`](https://developer.apple.com/documentation/arkit/arscnview/) will create an empty scene. To load the the AR view with custom you need to assign [`SCNScene`](https://developer.apple.com/documentation/scenekit/scnscene/) instance to the view.
+By default the [`ARSCNView`](https://developer.apple.com/documentation/arkit/arscnview/) will create an empty scene. To load the AR view with custom scene you need to assign [`SCNScene`](https://developer.apple.com/documentation/scenekit/scnscene/) instance to the view.
 
 ```swift
 let scene = SCNScene(named: "Path to .scn file")
@@ -31,7 +31,7 @@ This example shows how you can create a simple [octahedron](https://en.wikipedia
 
 Geometry, also known as [mesh](https://en.wikipedia.org/wiki/Polygon_mesh), is represented by a collection of vertices. With the ability to describe these vertices, we are able to define how the geometry will be shaped. We can use the [`init(sources:elements:)`](https://developer.apple.com/documentation/scenekit/scngeometry/1522803-init) to do so.
 
-Firstly, we need to satisfy the first parameter, that is define the sources, which describe an attribute of all vertices (vertex position, surface normal vector, texture mapping coordinates, ...). 
+Firstly, we need to satisfy the first parameter, that is to define the sources, which describe an attribute of all vertices (vertex position, surface normal vector, texture mapping coordinates, ...). 
 
 An octahedron is consisted of 6 vertices.
 
