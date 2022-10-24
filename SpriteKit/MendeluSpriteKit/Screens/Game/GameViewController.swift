@@ -32,11 +32,7 @@ final class GameViewController: UIViewController {
         skView.preferredFramesPerSecond = 30
         skView.showsPhysics = Environment.sceneInDebugMode
         
-        guard let scene = LevelScene(fileNamed: Assets.Scenes.level1) else {
-            return
-        }
-            
-        skView.presentScene(scene)
+        startGame()
     }
     
     override func pressesBegan(
@@ -73,5 +69,41 @@ final class GameViewController: UIViewController {
         for gameObject in scene.allSceneObjects {
             gameObject.keyboardDown(presses: presses)
         }
+    }
+
+    func startGame() {
+        guard let scene = LevelScene(fileNamed: Assets.Scenes.level1) else {
+            return
+        }
+        scene.completionDelegate = self
+
+        let transition = SKTransition.crossFade(withDuration: 0.6)
+        skView.presentScene(scene, transition: transition)
+    }
+
+    func showLevelFinishedScene(sceneFileName: String, backgroundImage: UIImage) {
+        guard let scene = LevelFinishedScene(fileNamed: sceneFileName) else {
+            return
+        }
+
+        scene.setBackgroundImage(backgroundImage)
+        scene.newGameButtonTapped = { [weak self] in
+            self?.startGame()
+        }
+
+        scene.scaleMode = .aspectFill
+        let transition = SKTransition.crossFade(withDuration: 1)
+        skView.presentScene(scene, transition: transition)
+    }
+}
+
+// MARK: LevelCompletionDelegate
+extension GameViewController: LevelCompletionDelegate {
+    func levelCompleted(sceneImage: UIImage) {
+        showLevelFinishedScene(sceneFileName: Assets.Scenes.levelCompleted, backgroundImage: sceneImage)
+    }
+    
+    func levelFailed(sceneImage: UIImage) {
+        showLevelFinishedScene(sceneFileName: Assets.Scenes.gameOver, backgroundImage: sceneImage)
     }
 }

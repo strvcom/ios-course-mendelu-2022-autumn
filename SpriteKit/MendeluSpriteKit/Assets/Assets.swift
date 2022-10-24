@@ -37,5 +37,7 @@ extension Assets {
 extension Assets {
     enum Scenes {
         static let level1 = "Level1"
+        static let levelCompleted = "LevelCompleted"
+        static let gameOver = "GameOver"
     }
 }
