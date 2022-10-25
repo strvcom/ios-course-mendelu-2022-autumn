@@ -113,6 +113,10 @@ extension LevelScene {
     func playerEnteredDoor() {
         player.isPaused = true
         player.alpha = 0
+
+        guard let levelSceneScreenshot = makeScreenshot() else { return }
+
+        completionDelegate?.levelCompleted(sceneImage: levelSceneScreenshot)
     }
 }
 
@@ -129,5 +133,5 @@ private extension LevelScene {
         UIGraphicsEndImageContext()
 
         return screenshotImage
-      }
+    }
 }
