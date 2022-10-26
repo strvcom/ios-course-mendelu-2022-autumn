@@ -19,6 +19,7 @@ extension Assets {
         static let jumpButton = "Controls/JumpButton"
         static let joystickBackground = "Controls/JoystickBackground"
         static let joystickKnob = "Controls/JoystickKnob"
+        static let playerPhysicsBody = "PlayerPhysicsBody"
     }
 }
 
