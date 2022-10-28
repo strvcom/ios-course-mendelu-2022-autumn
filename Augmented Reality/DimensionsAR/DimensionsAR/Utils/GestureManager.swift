@@ -175,7 +175,6 @@ private extension GestureManager {
 
                     // Normalized normal vector in scene's world coordinates.
                     let faceNormalInWorld = normalize(boundingBox.simdConvertVector(face.normal, to: nil))
-                    print("Face normal in world:", faceNormalInWorld)
 
                     let ray = Ray(origin: SIMD3<Float>(result.worldCoordinates), direction: faceNormalInWorld)
                     let transform = dragPlaneTransform(for: ray, cameraPos: camera.simdWorldPosition)
