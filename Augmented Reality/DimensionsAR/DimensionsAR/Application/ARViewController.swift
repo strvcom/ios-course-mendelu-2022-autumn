@@ -37,11 +37,6 @@ final class ARViewController: UIViewController {
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = .horizontal
 
-        if ARWorldTrackingConfiguration.supportsSceneReconstruction(.mesh) {
-            // Without this configuration the mesh anchor will not be added to the scene.
-            configuration.sceneReconstruction = .mesh
-        }
-
         // Run the view's session
         sceneView.session.run(configuration)
     }
@@ -57,38 +52,46 @@ final class ARViewController: UIViewController {
 // MARK: - ARSCNViewDelegate
 
 extension ARViewController: ARSCNViewDelegate {
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        // Create a mesh to visualize the estimated shape of the plane.
         guard
-            let meshAnchor = anchor as? ARMeshAnchor,
-            let geometry = meshAnchor.sceneGeometry()
+            let planeAnchor = anchor as? ARPlaneAnchor,
+            let device = sceneView.device,
+            let planeGeometry = ARSCNPlaneGeometry(device: device)
         else {
-            return nil
+            return
         }
+
+        // Create a node to visualize the plane's bounding rectangle.
+        let planeNode = SCNNode(geometry: planeGeometry)
+        planeNode.opacity = 0
+        planeNode.name = "Plane"
+
+        node.addChildNode(planeNode)
+
+        // Change the rendering order so it renders before our virtual object.
+        node.renderingOrder = -1
+
+        planeGeometry.update(from: planeAnchor.geometry)
 
         // Enable gestures only if a mesh anchor was added to the scene.
         gestureManager.isGestureEnabled = true
 
         // Disable coaching overlay activation once a plane is detected.
         coachingOverlayShouldReactive = false
-
-        let node = SCNNode(geometry: geometry)
-
-        // Change the rendering order so it renders before our virtual object.
-        node.renderingOrder = -1
-
-        return node
     }
 
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         guard
-            let meshAnchor = anchor as? ARMeshAnchor,
-            let geometry = meshAnchor.sceneGeometry()
+            let planeAnchor = anchor as? ARPlaneAnchor,
+            let planeNode = node.childNode(withName: "Plane", recursively: false),
+            let planeGeometry = planeNode.geometry as? ARSCNPlaneGeometry
         else {
             return
         }
 
-        // Update the node for mesh anchor with updated geometry.
-        node.geometry = geometry
+        // Update ARSCNPlaneGeometry to the anchor's new estimated shape.
+        planeGeometry.update(from: planeAnchor.geometry)
     }
 }
 
