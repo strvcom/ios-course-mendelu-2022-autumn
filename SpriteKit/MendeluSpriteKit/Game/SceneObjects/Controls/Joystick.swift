@@ -7,19 +7,29 @@
 
 import SpriteKit
 
-final class Joystick: SKNode {
+final class Joystick: SKSpriteNode {
     // MARK: Properties
-    private var backgroundNode: SKShapeNode?
-    private var knobNode: SKShapeNode?
+    private var backgroundNode: SKSpriteNode?
+    private var knobNode: SKSpriteNode?
     private var pressedKeys = Set<String>()
     
-    private var maxPosition: CGFloat {
-        (backgroundNode?.frame.size.width ?? 0) / 2
+    private var positionTresholds: EdgePositions {
+        let halfOfJoystickWidth = joystickSize.width / 2
+        
+        return EdgePositions(
+            max: defaultPosition.x + halfOfJoystickWidth,
+            min: defaultPosition.x - halfOfJoystickWidth
+        )
     }
     
-    private var size: CGFloat {
-        (levelScene?.size.height ?? 0) * 0.13
+    private var defaultPosition: CGPoint {
+        CGPoint(
+            x: size.width / 2,
+            y: size.height / 2
+        )
     }
+    
+    private let joystickSize = CGSize(size: 64)
     
     /// Normalized value between -1 ... 1.
     private(set) var velocity: CGFloat = 0
@@ -35,7 +45,7 @@ final class Joystick: SKNode {
         
         let touchLocation = touch.location(in: self).x
         
-        let knobXPosition = touchLocation.clamped(to: -maxPosition ... maxPosition)
+        let knobXPosition = touchLocation.clamped(to: positionTresholds.min ... positionTresholds.max)
         
         updateKnobXPosition(knobXPosition: knobXPosition)
     }
@@ -58,34 +68,37 @@ final class Joystick: SKNode {
 // MARK: GameObject
 extension Joystick: SceneObject {
     func setup(scene: LevelScene) {
-        alpha = Environment.showControls
-            ? 1
-            : 0
+        size = CGSize(
+            width: joystickSize.width + 2 * 72,
+            height: joystickSize.height + 2 * 36
+        )
+        anchorPoint = .zero
+        zPosition = Layer.controls
         
         scene.cameraObject.addChild(self)
 
         isUserInteractionEnabled = true
         
-        backgroundNode = SKShapeNode(circleOfRadius: size / 2)
-        backgroundNode?.fillColor = .black
-        backgroundNode?.strokeColor = .white
-        backgroundNode?.alpha = 0.7
-        
-        addOptionalChild(backgroundNode)
-        
-        knobNode = SKShapeNode(circleOfRadius: (size * 0.8) / 2)
-        knobNode?.fillColor = .white
-
-        addOptionalChild(knobNode)
-        
-        zPosition = Layer.controls
-        
         let bottomLeft = scene.cameraObject.bottomLeftCorner
         
         position = CGPoint(
-            x: bottomLeft.x + 75,
-            y: bottomLeft.y + 75
+            x: bottomLeft.x,
+            y: bottomLeft.y
         )
+        
+        backgroundNode = SKSpriteNode(imageNamed: Assets.Image.joystickBackground)
+        backgroundNode?.size = joystickSize + 4
+        backgroundNode?.zPosition = zPosition
+        backgroundNode?.position = defaultPosition
+        
+        addOptionalChild(backgroundNode)
+        
+        knobNode = SKSpriteNode(imageNamed: Assets.Image.joystickKnob)
+        knobNode?.position = defaultPosition
+        knobNode?.zPosition = zPosition + 1
+        knobNode?.size = joystickSize
+
+        addOptionalChild(knobNode)
     }
     
     func keyboardUp(presses: Set<UIPress>) {
@@ -117,18 +130,26 @@ extension Joystick: SceneObject {
     }
 }
 
+// MARK: EdgePositions
+private extension Joystick {
+    struct EdgePositions {
+        let max: CGFloat
+        let min: CGFloat
+    }
+}
+
 // MARK: Private API
 private extension Joystick {
     func updateKnobXPositionKeyboardAfterPress() {
-        var knobXPosition: CGFloat = 0
+        var knobXPosition = defaultPosition.x
         
         for key in pressedKeys {
             if key == UIKeyCommand.inputLeftArrow {
-                knobXPosition -= maxPosition
+                knobXPosition = positionTresholds.min
             }
             
             if key == UIKeyCommand.inputRightArrow {
-                knobXPosition += maxPosition
+                knobXPosition = positionTresholds.max
             }
         }
         
@@ -138,12 +159,12 @@ private extension Joystick {
     func updateKnobXPosition(knobXPosition: CGFloat) {
         knobNode?.position = CGPoint(
             x: knobXPosition,
-            y: 0
+            y: defaultPosition.y
         )
         
         velocity = knobXPosition.normalize(
-            min: -maxPosition,
-            max: maxPosition,
+            min: positionTresholds.min,
+            max: positionTresholds.max,
             from: -1,
             to: 1
         )
@@ -155,7 +176,7 @@ private extension Joystick {
         velocity = 0
         
         let moveAction = SKAction.move(
-            to: .zero,
+            to: defaultPosition,
             duration: 0.1
         )
         moveAction.timingMode = .easeInEaseOut

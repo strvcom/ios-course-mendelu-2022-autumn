@@ -143,8 +143,8 @@ private extension Player {
         zPosition = Layer.player
         
         physicsBody = SKPhysicsBody(
-            rectangleOf: hitbox.size,
-            center: hitbox.position
+            texture: SKTexture(imageNamed: Assets.Image.playerPhysicsBody),
+            size: hitbox.size
         )
         physicsBody?.categoryBitMask = Physics.CategoryBitMask.player
         physicsBody?.collisionBitMask = Physics.CollisionBitMask.player

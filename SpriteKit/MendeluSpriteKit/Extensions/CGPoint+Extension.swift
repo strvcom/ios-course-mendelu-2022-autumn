@@ -11,4 +11,11 @@ extension CGPoint {
     func distance(to point: CGPoint) -> CGFloat {
         sqrt(pow((point.y - y), 2) + pow((point.x - x), 2))
     }
+    
+    init(position: CGFloat) {
+        self.init(
+            x: position,
+            y: position
+        )
+    }
 }
