@@ -8,6 +8,7 @@
 import ARKit
 import Foundation
 import UIKit
+import RealityKit
 
 class ARViewController: UIViewController {
     let sceneView = ARSCNView()
@@ -25,6 +26,10 @@ class ARViewController: UIViewController {
         // Run the scene view's session
         let configuration: ARConfiguration = self.configuration ?? ARWorldTrackingConfiguration()
         session.run(configuration)
+
+        let test = try? MyScene.loadCube()
+
+        let g = test?.scene
     }
 
     override func viewWillDisappear(_ animated: Bool) {
