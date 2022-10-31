@@ -15,6 +15,11 @@ extension Assets {
         static let background3 = "Background/b3"
         static let background4 = "Background/b4"
         static let projectile = "PumpkinProjectile"
+        static let attackButton = "Controls/AttackButton"
+        static let jumpButton = "Controls/JumpButton"
+        static let joystickBackground = "Controls/JoystickBackground"
+        static let joystickKnob = "Controls/JoystickKnob"
+        static let playerPhysicsBody = "PlayerPhysicsBody"
     }
 }
 

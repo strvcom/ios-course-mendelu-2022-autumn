@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		590A9EA8290850780006CD20 /* CGSize+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590A9EA7290850780006CD20 /* CGSize+Extension.swift */; };
 		5922EAD128D8BF3300BE46DC /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5922EAD028D8BF3300BE46DC /* Background.swift */; };
 		5922EAD528D8C0FB00BE46DC /* SceneObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5922EAD428D8C0FB00BE46DC /* SceneObject.swift */; };
 		5922EAD828D8C2E400BE46DC /* Physics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5922EAD728D8C2E400BE46DC /* Physics.swift */; };
@@ -47,21 +48,22 @@
 		59EF42F328E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EF42F228E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift */; };
 		59EF42F528E0D437005CC691 /* Comparable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EF42F428E0D437005CC691 /* Comparable+Extension.swift */; };
 		59EF42F728E0DBBC005CC691 /* PlayerWalk.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 59EF42F628E0DBBB005CC691 /* PlayerWalk.atlas */; };
-		9D464E5B28EEEA630056964C /* DoorOpening.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 9D464E5A28EEEA630056964C /* DoorOpening.atlas */; };
-		9D7EED9C28F573B5004F944E /* PlayerObservingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EED9B28F573B5004F944E /* PlayerObservingObject.swift */; };
-		9D7EED9E28F5A3AB004F944E /* PlayerEntering.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 9D7EED9D28F5A3AB004F944E /* PlayerEntering.atlas */; };
-		9DB92CD628EDA2FF00635BAF /* Door.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB92CD528EDA2FF00635BAF /* Door.swift */; };
 		9D26297828F6ACDD00969D80 /* LevelCompleted.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9D26297628F6ACDD00969D80 /* LevelCompleted.sks */; };
 		9D26297C28F6AD0D00969D80 /* alagard.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D26297B28F6AD0D00969D80 /* alagard.ttf */; };
 		9D26298128F6B22F00969D80 /* TouchNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D26298028F6B22F00969D80 /* TouchNode.swift */; };
 		9D26298328F6BE8B00969D80 /* LevelFinishedScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D26298228F6BE8B00969D80 /* LevelFinishedScene.swift */; };
+		9D464E5B28EEEA630056964C /* DoorOpening.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 9D464E5A28EEEA630056964C /* DoorOpening.atlas */; };
+		9D7EED9C28F573B5004F944E /* PlayerObservingObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7EED9B28F573B5004F944E /* PlayerObservingObject.swift */; };
+		9D7EED9E28F5A3AB004F944E /* PlayerEntering.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 9D7EED9D28F5A3AB004F944E /* PlayerEntering.atlas */; };
 		9DA5A6D728EC770800F76843 /* FountainFlowing.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 9DA5A6D628EC770800F76843 /* FountainFlowing.atlas */; };
+		9DB92CD628EDA2FF00635BAF /* Door.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB92CD528EDA2FF00635BAF /* Door.swift */; };
 		9DD9BA8B28EC5377002AA59F /* Fountain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD9BA8A28EC5377002AA59F /* Fountain.swift */; };
 		9DDF1AE428F83D3B0013BED8 /* GameOver.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9DDF1AE328F83D3B0013BED8 /* GameOver.sks */; };
 		9DDF1AE628F847B50013BED8 /* FloatingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DDF1AE528F847B50013BED8 /* FloatingNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		590A9EA7290850780006CD20 /* CGSize+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Extension.swift"; sourceTree = "<group>"; };
 		5922EAD028D8BF3300BE46DC /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		5922EAD428D8C0FB00BE46DC /* SceneObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneObject.swift; sourceTree = "<group>"; };
 		5922EAD728D8C2E400BE46DC /* Physics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Physics.swift; sourceTree = "<group>"; };
@@ -103,16 +105,16 @@
 		59EF42F228E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryFloatingPoint+Extension.swift"; sourceTree = "<group>"; };
 		59EF42F428E0D437005CC691 /* Comparable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+Extension.swift"; sourceTree = "<group>"; };
 		59EF42F628E0DBBB005CC691 /* PlayerWalk.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PlayerWalk.atlas; sourceTree = "<group>"; };
-		9D464E5A28EEEA630056964C /* DoorOpening.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = DoorOpening.atlas; sourceTree = "<group>"; };
-		9D7EED9B28F573B5004F944E /* PlayerObservingObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerObservingObject.swift; sourceTree = "<group>"; };
-		9D7EED9D28F5A3AB004F944E /* PlayerEntering.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PlayerEntering.atlas; sourceTree = "<group>"; };
-		9DB92CD528EDA2FF00635BAF /* Door.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Door.swift; sourceTree = "<group>"; };
 		9D26297628F6ACDD00969D80 /* LevelCompleted.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = LevelCompleted.sks; path = MendeluSpriteKit/Game/Scenes/LevelCompleted.sks; sourceTree = SOURCE_ROOT; };
 		9D26297B28F6AD0D00969D80 /* alagard.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = alagard.ttf; sourceTree = "<group>"; };
 		9D26297D28F6AD2D00969D80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9D26298028F6B22F00969D80 /* TouchNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchNode.swift; sourceTree = "<group>"; };
 		9D26298228F6BE8B00969D80 /* LevelFinishedScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelFinishedScene.swift; sourceTree = "<group>"; };
+		9D464E5A28EEEA630056964C /* DoorOpening.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = DoorOpening.atlas; sourceTree = "<group>"; };
+		9D7EED9B28F573B5004F944E /* PlayerObservingObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerObservingObject.swift; sourceTree = "<group>"; };
+		9D7EED9D28F5A3AB004F944E /* PlayerEntering.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PlayerEntering.atlas; sourceTree = "<group>"; };
 		9DA5A6D628EC770800F76843 /* FountainFlowing.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = FountainFlowing.atlas; sourceTree = "<group>"; };
+		9DB92CD528EDA2FF00635BAF /* Door.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Door.swift; sourceTree = "<group>"; };
 		9DD9BA8A28EC5377002AA59F /* Fountain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fountain.swift; sourceTree = "<group>"; };
 		9DDF1AE328F83D3B0013BED8 /* GameOver.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOver.sks; sourceTree = "<group>"; };
 		9DDF1AE528F847B50013BED8 /* FloatingNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingNode.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				59699EB028E1AEA700999BE7 /* SKNode+Extension.swift */,
 				5922EADF28D8CF8200BE46DC /* SKTextureAtlas+Extension.swift */,
 				59CC664A28E86CFD0010A82E /* CGPoint+Extension.swift */,
+				590A9EA7290850780006CD20 /* CGSize+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -299,15 +302,6 @@
 			path = Controls;
 			sourceTree = "<group>";
 		};
-		9D464E5728EEE8550056964C /* Door */ = {
-			isa = PBXGroup;
-			children = (
-				9D7EED9D28F5A3AB004F944E /* PlayerEntering.atlas */,
-				9D464E5A28EEEA630056964C /* DoorOpening.atlas */,
-			);
-			path = Door;
-            sourceTree = "<group>";
-        };
 		9D26297528F6ACBD00969D80 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -323,6 +317,15 @@
 				9D26297B28F6AD0D00969D80 /* alagard.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		9D464E5728EEE8550056964C /* Door */ = {
+			isa = PBXGroup;
+			children = (
+				9D7EED9D28F5A3AB004F944E /* PlayerEntering.atlas */,
+				9D464E5A28EEEA630056964C /* DoorOpening.atlas */,
+			);
+			path = Door;
 			sourceTree = "<group>";
 		};
 		9DDF5D2728EC3E3E0039409F /* Fountain */ = {
@@ -422,6 +425,7 @@
 			files = (
 				5990779F28D77E3C00659E6E /* LevelScene.swift in Sources */,
 				59CC665728E98B8B0010A82E /* Environment.swift in Sources */,
+				590A9EA8290850780006CD20 /* CGSize+Extension.swift in Sources */,
 				599077A128D77E3C00659E6E /* GameViewController.swift in Sources */,
 				59699EB528E1B40700999BE7 /* Camera.swift in Sources */,
 				5922EAD828D8C2E400BE46DC /* Physics.swift in Sources */,

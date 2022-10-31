@@ -11,6 +11,13 @@ final class ControlButtons: SKSpriteNode {
     private var jumpButton: JumpButton!
     private var attackButton: AttackButton!
     
+    private var center: CGPoint {
+        CGPoint(
+            x: size.width / 2,
+            y: size.height / 2
+        )
+    }
+    
     // MARK: Overrides
     func keyboardUp(presses: Set<UIPress>) {
         jumpButton.keyboardUp(presses: presses)
@@ -20,45 +27,39 @@ final class ControlButtons: SKSpriteNode {
 }
 // MARK: GameObject
 extension ControlButtons: SceneObject {
-    func setup(scene: LevelScene) {
-        alpha = Environment.showControls
-            ? 1
-            : 0
-        
+    func setup(scene: LevelScene) {        
         scene.cameraObject.addChild(self)
         
-        color = .clear
         zPosition = Layer.controls
+        anchorPoint = .zero
         
-        let buttonSize = scene.size.height * 0.13
+        let buttonSize: CGFloat = 72
         
         size = CGSize(
-            width: 4 * buttonSize,
-            height: 4 * buttonSize
+            width: 3 * buttonSize,
+            height: 3 * buttonSize
         )
         position = CGPoint(
-            x: scene.cameraObject.bottomRightCorner.x - 75,
-            y: scene.cameraObject.bottomRightCorner.y + (size.width / 2)
+            x: scene.cameraObject.bottomRightCorner.x - size.width - 16,
+            y: scene.cameraObject.bottomRightCorner.y + 16
         )
         
-        jumpButton = JumpButton(circleOfRadius: buttonSize / 2)
+        jumpButton = JumpButton(imageNamed: Assets.Image.jumpButton)
+        jumpButton.size = CGSize(size: buttonSize)
         jumpButton.isUserInteractionEnabled = true
-        jumpButton.fillColor = .black
-        jumpButton.strokeColor = .white
         jumpButton.position = CGPoint(
-            x: 0,
-            y: -buttonSize * 1.2
+            x: center.x,
+            y: center.y - buttonSize
         )
         
         addChild(jumpButton)
         
-        attackButton = AttackButton(circleOfRadius: buttonSize / 2)
+        attackButton = AttackButton(imageNamed: Assets.Image.attackButton)
+        attackButton.size = CGSize(size: buttonSize)
         attackButton.isUserInteractionEnabled = true
-        attackButton.fillColor = .red
-        attackButton.strokeColor = .white
         attackButton.position = CGPoint(
-            x: buttonSize * 1.2,
-            y: 0
+            x: center.x + buttonSize,
+            y: center.y
         )
         
         addChild(attackButton)
@@ -66,7 +67,7 @@ extension ControlButtons: SceneObject {
 }
 
 // MARK: JumpButton
-final class JumpButton: SKShapeNode {
+final class JumpButton: SKSpriteNode {
     // MARK: JumpButton + Overrides
     override func touchesBegan(
         _ touches: Set<UITouch>,
@@ -88,7 +89,7 @@ final class JumpButton: SKShapeNode {
 extension JumpButton: SceneObject {}
 
 // MARK: AttackButton
-final class AttackButton: SKShapeNode {
+final class AttackButton: SKSpriteNode {
     // MARK: AttackButton + Overrides
     override func touchesBegan(
         _ touches: Set<UITouch>,
@@ -107,8 +108,4 @@ final class AttackButton: SKShapeNode {
 }
 
 // MARK: AttackButton + SceneObject
-extension AttackButton: SceneObject {
-    func setup(scene: LevelScene) {
-        
-    }
-}
+extension AttackButton: SceneObject {}

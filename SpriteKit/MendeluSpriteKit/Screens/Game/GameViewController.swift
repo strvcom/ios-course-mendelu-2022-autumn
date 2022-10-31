@@ -31,6 +31,7 @@ final class GameViewController: UIViewController {
         skView.ignoresSiblingOrder = true
         skView.preferredFramesPerSecond = 30
         skView.showsPhysics = Environment.sceneInDebugMode
+        skView.isMultipleTouchEnabled = true
         
         startGame()
     }

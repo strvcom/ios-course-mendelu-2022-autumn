@@ -27,7 +27,6 @@ final class GestureManager {
 
     private(set) var lastPannedLocationZAxis: CGFloat?
     private(set) var lastPanLocation: simd_float3?
-    private(set) var lastRotation: simd_float3?
     private(set) var currentDraggedFace: FaceDrag?
     private var sceneView: ARSCNView = ARSCNView()
     private let dimensionsSubject: PassthroughSubject<BoundingBox.Dimensions, Never> = .init()
@@ -175,7 +174,6 @@ private extension GestureManager {
 
                     // Normalized normal vector in scene's world coordinates.
                     let faceNormalInWorld = normalize(boundingBox.simdConvertVector(face.normal, to: nil))
-                    print("Face normal in world:", faceNormalInWorld)
 
                     let ray = Ray(origin: SIMD3<Float>(result.worldCoordinates), direction: faceNormalInWorld)
                     let transform = dragPlaneTransform(for: ray, cameraPos: camera.simdWorldPosition)
