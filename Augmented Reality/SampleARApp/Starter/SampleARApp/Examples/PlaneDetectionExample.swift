@@ -31,51 +31,54 @@ final class PlaneDetectionExample: ARViewController {
 extension PlaneDetectionExample: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         // Create a mesh to visualize the estimated shape of the plane.
-        guard
-            let planeAnchor = anchor as? ARPlaneAnchor,
-            let device = sceneView.device,
-            let planeGeometry = ARSCNPlaneGeometry(device: device)
-        else {
-            fatalError()
-        }
 
-        // Create a node to visualize the plane's bounding rectangle.
-        let planeNode = SCNNode(geometry: planeGeometry)
-        planeNode.opacity = 0.7
-        planeNode.name = "Plane"
+        // 1. Check for ARPlaneAchors only, using guard let.
 
-        let color: UIColor = planeAnchor.alignment == .horizontal ? .blue : .green
-        planeNode.geometry?.firstMaterial?.diffuse.contents = color
 
-        node.addChildNode(planeNode)
+        // 2. Create ARSCNPlaneGeometry.
 
-        planeGeometry.update(from: planeAnchor.geometry)
+
+        // 3. Create a node to visualize the plane's bounding rectangle.
+
+
+        // 4. Name it for future usage.
+
+
+        // 5. Set colors to differentiate planes.
+
+
+        // 6. Add the created node as a child node of the added node.
+
+
+        // 7. Reshape the created node's geometry to match the anchor's mesh.
+
     }
 
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        guard
-            let planeAnchor = anchor as? ARPlaneAnchor,
-            let planeNode = node.childNode(withName: "Plane", recursively: false),
-            let planeGeometry = planeNode.geometry as? ARSCNPlaneGeometry
-        else {
-            return
-        }
+        // 1. Check for ARPlaneAchors only, using guard let.
 
-        // Update ARSCNPlaneGeometry to the anchor's new estimated shape.
-        planeGeometry.update(from: planeAnchor.geometry)
+
+        // 2. Check if the updated node is the one we added from the delegate method above.
+
+
+        // 3. Get its geometry.
+
+
+        // 4. Update ARSCNPlaneGeometry to the anchor's new estimated shape.
+
     }
 }
 
 private extension PlaneDetectionExample {
     func setupPlaneDetection() {
         // 1. Create configuration that supports plane detection
-        configuration = ARWorldTrackingConfiguration()
+
 
         // 2. Assign scene view's delegate to self to respond to renderer's actions
-        sceneView.delegate = self
+
 
         // 3. Optionally show feature points
-        sceneView.debugOptions = [.showFeaturePoints]
+
     }
 
     func setupDetectButton() {
@@ -90,18 +93,35 @@ private extension PlaneDetectionExample {
         ])
     }
 
+    func setupTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
+        sceneView.addGestureRecognizer(tapGesture)
+    }
+
+    @objc func handleTapGesture(_ gesture: UITapGestureRecognizer) {
+        // 1. Get location of the tap gesture.
+
+
+        // 2. Perform a raycast from the tap location to a horizontal plane.
+
+
+        // 3.  Show a box, using makeBoxNode method, in the scene at the position where the user tapped.
+    }
+
+    func makeBoxNode() -> SCNNode {
+        let boxGeometry = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0)
+        return SCNNode(geometry: boxGeometry)
+    }
+
     @objc func togglePlaneDetection() {
-        // Reset the session when turning the detection on
-        let options: ARSession.RunOptions = isDetecting ? [] : [.removeExistingAnchors, .resetSceneReconstruction, .resetTracking]
+        // 1. Reset the session when turning the detection on
 
-        isDetecting.toggle()
 
-        // Create new configuration for new detecting state
-        let newConfiguration = ARWorldTrackingConfiguration()
-        newConfiguration.planeDetection = isDetecting ? [.horizontal, .vertical] : []
+        // 2. Create new configuration for new detecting state
 
-        self.configuration = newConfiguration
-        session.run(newConfiguration, options: options)
+
+        // 3. Make the new configuration active
+
 
         let impact = UIImpactFeedbackGenerator(style: .heavy)
         impact.impactOccurred()

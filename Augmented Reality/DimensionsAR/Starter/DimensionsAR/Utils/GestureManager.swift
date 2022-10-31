@@ -55,23 +55,18 @@ private extension GestureManager {
     }
 
     @objc func handleTapGesture(_ gesture: UITapGestureRecognizer) {
-        let location = gesture.location(in: sceneView)
-
+        // 1. Create a raycast on the scene view's session and obtain its result.
         guard
             isGestureEnabled,
-            isBoundingBoxInHierarchy == false,
-            let query = sceneView.raycastQuery(from: location, allowing: .estimatedPlane, alignment: .horizontal),
-            let result = sceneView.session.raycast(query).first
+            isBoundingBoxInHierarchy == false
         else {
             return
         }
 
-        // Set the bounding box's translation vector.
-        boundingBox.simdWorldPosition = simd_float3(result.worldTransform.columns.3)
-        boundingBox.simdWorldPosition.y += boundingBox.extent.y / 2
+        // 2. Set the bounding box's position based on the raycast result.
 
-        sceneView.scene.rootNode.addChildNode(boundingBox)
-        dimensionsSubject.send(boundingBox.dimensions)
+
+        // 3. Add the bounding box to the scene.
     }
 }
 
@@ -87,6 +82,7 @@ private extension GestureManager {
 
         switch gesture.state {
         case .began:
+            // 1. Check if the location of the gesture is on
             guard let result = sceneView.hitTest(location).first else {
                 return
             }
