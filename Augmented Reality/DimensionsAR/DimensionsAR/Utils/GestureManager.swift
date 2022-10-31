@@ -27,7 +27,6 @@ final class GestureManager {
 
     private(set) var lastPannedLocationZAxis: CGFloat?
     private(set) var lastPanLocation: simd_float3?
-    private(set) var lastRotation: simd_float3?
     private(set) var currentDraggedFace: FaceDrag?
     private var sceneView: ARSCNView = ARSCNView()
     private let dimensionsSubject: PassthroughSubject<BoundingBox.Dimensions, Never> = .init()
