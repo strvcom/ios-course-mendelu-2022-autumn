@@ -10,6 +10,7 @@ import ARKit
 
 final class PlaneDetectionExample: ARViewController {
     private var isDetecting: Bool = false
+    private var hasDetectedPlane: Bool = false
 
     private lazy var detectButton: UIButton = {
         let button = UIButton()
@@ -23,6 +24,7 @@ final class PlaneDetectionExample: ARViewController {
         setupPlaneDetection()
         super.viewDidLoad()
         setupDetectButton()
+        setupTapGesture()
     }
 }
 
@@ -50,6 +52,8 @@ extension PlaneDetectionExample: ARSCNViewDelegate {
         node.addChildNode(planeNode)
 
         planeGeometry.update(from: planeAnchor.geometry)
+
+        hasDetectedPlane = true
     }
 
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
@@ -88,6 +92,32 @@ private extension PlaneDetectionExample {
             detectButton.widthAnchor.constraint(equalToConstant: 100),
             detectButton.heightAnchor.constraint(equalToConstant: 100)
         ])
+    }
+
+    func setupTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
+        sceneView.addGestureRecognizer(tapGesture)
+    }
+
+    @objc func handleTapGesture(_ gesture: UITapGestureRecognizer) {
+        let location = gesture.location(in: sceneView)
+
+        guard
+            let query = sceneView.raycastQuery(from: location, allowing: .estimatedPlane, alignment: .horizontal),
+            let result = sceneView.session.raycast(query).first
+        else {
+            return
+        }
+
+        let box = makeBoxNode()
+        box.simdWorldTransform = result.worldTransform
+        box.simdWorldPosition.y += 0.05
+        addNode(box)
+    }
+
+    func makeBoxNode() -> SCNNode {
+        let boxGeometry = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0)
+        return SCNNode(geometry: boxGeometry)
     }
 
     @objc func togglePlaneDetection() {

@@ -93,6 +93,26 @@ private extension PlaneDetectionExample {
         ])
     }
 
+    func setupTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
+        sceneView.addGestureRecognizer(tapGesture)
+    }
+
+    @objc func handleTapGesture(_ gesture: UITapGestureRecognizer) {
+        // 1. Get location of the tap gesture.
+
+
+        // 2. Perform a raycast from the tap location to a horizontal plane.
+
+
+        // 3.  Show a box, using makeBoxNode method, in the scene at the position where the user tapped.
+    }
+
+    func makeBoxNode() -> SCNNode {
+        let boxGeometry = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0)
+        return SCNNode(geometry: boxGeometry)
+    }
+
     @objc func togglePlaneDetection() {
         // 1. Reset the session when turning the detection on
 
