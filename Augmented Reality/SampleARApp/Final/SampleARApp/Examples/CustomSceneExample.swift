@@ -12,10 +12,6 @@ final class CustomSceneExample: ARViewController {
     override func viewDidLoad() {
         // The initialization can fail if the scene file does not exist.
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        let cube = SCNBox()
-        let node = SCNNode()
-        node.geometry = cube
-        add
         sceneView.scene = scene
         super.viewDidLoad()
     }
