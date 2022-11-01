@@ -23,16 +23,16 @@ class ARViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        // Run the scene view's session
-        let configuration: ARConfiguration = self.configuration ?? ARWorldTrackingConfiguration()
-        session.run(configuration)
+        // 1. Create Configuration
+
+
+        // 2. Run the configuration
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        // Pause the scene view's session
-        session.pause()
+        // 1. Pause the session.
     }
 }
 
@@ -46,22 +46,15 @@ extension ARViewController {
     }
 
     func addNode(_ node: SCNNode, to parentNode: SCNNode? = nil) {
-        let parentNode = parentNode ?? scene.rootNode
-        parentNode.addChildNode(node)
+        // Implement this method
     }
 
     func removeNode(_ node: SCNNode) {
-        scene.rootNode.enumerateChildNodes { childNode, _ in
-            if childNode == node {
-                childNode.removeFromParentNode()
-            }
-        }
+        // Implement this method
     }
 
     func removeAllNodes() {
-        sceneView.scene.rootNode.childNodes.forEach {
-            $0.removeFromParentNode()
-        }
+        // Implement this method
     }
 }
 
