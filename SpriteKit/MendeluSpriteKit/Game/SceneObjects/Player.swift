@@ -30,8 +30,6 @@ final class Player: SKSpriteNode {
         }
     }
      
-    // MARK: - Public properties
-    
     private lazy var hurtBox: HurtBox = {
         HurtBox(
             size: CGSize(
