@@ -189,9 +189,6 @@ private extension Zombie {
                 },
                 SKAction.wait(forDuration: attackTimePerFrame * Double(2)),
                 SKAction.run { [weak self] in
-//                    if let playerHitbox = self?.levelScene?.player.hitbox, self?.hurtBox.intersects(playerHitbox) == true {
-//                        self?.levelScene?.player.hit()
-//                    }
                     self?.hurtBox.removeFromParent()
                     self?.isAttacking = false
                 }

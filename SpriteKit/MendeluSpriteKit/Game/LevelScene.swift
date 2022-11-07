@@ -6,7 +6,6 @@
 //
 
 import SpriteKit
-import Combine
 
 protocol LevelCompletionDelegate: AnyObject {
     func levelCompleted(sceneImage: UIImage)
@@ -46,8 +45,6 @@ final class LevelScene: SKScene {
     /// and is based on conditions player must comply to to succeed.
     /// For example player must kill all Zombies and only then is eligible to complete the level.
     var levelCanBeCompleted: Bool { zombies.isEmpty }
-
-    private(set) var cancellables = Set<AnyCancellable>()
 
     // MARK: Overrides
     override func willMove(from view: SKView) {
