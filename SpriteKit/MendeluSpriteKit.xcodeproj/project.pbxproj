@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		207B9CFA291272D100855DF4 /* PlayerLifes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207B9CF9291272D100855DF4 /* PlayerLifes.swift */; };
+		207B9D0B29129B5C00855DF4 /* PlayerDeath.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 207B9D0A29129B5C00855DF4 /* PlayerDeath.atlas */; };
 		590A9EA8290850780006CD20 /* CGSize+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590A9EA7290850780006CD20 /* CGSize+Extension.swift */; };
 		5922EAD128D8BF3300BE46DC /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5922EAD028D8BF3300BE46DC /* Background.swift */; };
 		5922EAD528D8C0FB00BE46DC /* SceneObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5922EAD428D8C0FB00BE46DC /* SceneObject.swift */; };
@@ -63,6 +65,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		207B9CF9291272D100855DF4 /* PlayerLifes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerLifes.swift; sourceTree = "<group>"; };
+		207B9D0A29129B5C00855DF4 /* PlayerDeath.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PlayerDeath.atlas; sourceTree = "<group>"; };
 		590A9EA7290850780006CD20 /* CGSize+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Extension.swift"; sourceTree = "<group>"; };
 		5922EAD028D8BF3300BE46DC /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		5922EAD428D8C0FB00BE46DC /* SceneObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneObject.swift; sourceTree = "<group>"; };
@@ -151,6 +155,7 @@
 		5922EAD628D8C1A400BE46DC /* SceneObjects */ = {
 			isa = PBXGroup;
 			children = (
+				207B9CF9291272D100855DF4 /* PlayerLifes.swift */,
 				5922EAD028D8BF3300BE46DC /* Background.swift */,
 				59699EB428E1B40700999BE7 /* Camera.swift */,
 				9DB92CD528EDA2FF00635BAF /* Door.swift */,
@@ -173,6 +178,7 @@
 		5922EADD28D8CDBB00BE46DC /* Player */ = {
 			isa = PBXGroup;
 			children = (
+				207B9D0A29129B5C00855DF4 /* PlayerDeath.atlas */,
 				59CC663628E717830010A82E /* PlayerAttack.atlas */,
 				59EF42F628E0DBBB005CC691 /* PlayerWalk.atlas */,
 				5922EADB28D8CD7300BE46DC /* PlayerIdle.atlas */,
@@ -413,6 +419,7 @@
 				59A9DB3D28E5CF7300492DAA /* Level1.sks in Resources */,
 				9DA5A6D728EC770800F76843 /* FountainFlowing.atlas in Resources */,
 				59CC664228E84D470010A82E /* ZombieIdle.atlas in Resources */,
+				207B9D0B29129B5C00855DF4 /* PlayerDeath.atlas in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,6 +451,7 @@
 				59EF42F328E0D34D005CC691 /* BinaryFloatingPoint+Extension.swift in Sources */,
 				9D7EED9C28F573B5004F944E /* PlayerObservingObject.swift in Sources */,
 				5990779928D77E3C00659E6E /* AppDelegate.swift in Sources */,
+				207B9CFA291272D100855DF4 /* PlayerLifes.swift in Sources */,
 				59CC663D28E72B870010A82E /* ContolButtons.swift in Sources */,
 				9D26298328F6BE8B00969D80 /* LevelFinishedScene.swift in Sources */,
 				5922EADA28D8C53300BE46DC /* Player.swift in Sources */,
@@ -603,7 +611,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = S7MU8HQWPP;
+				DEVELOPMENT_TEAM = Q7X4226FQ6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MendeluSpriteKit/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -618,7 +626,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.strv.MendeluSpriteKit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.strv.MendeluSpriteKit2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -633,7 +641,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = S7MU8HQWPP;
+				DEVELOPMENT_TEAM = Q7X4226FQ6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MendeluSpriteKit/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -648,7 +656,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.strv.MendeluSpriteKit;
+				PRODUCT_BUNDLE_IDENTIFIER = com.strv.MendeluSpriteKit2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

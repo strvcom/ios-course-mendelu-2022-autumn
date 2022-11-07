@@ -6,14 +6,31 @@
 //
 
 import SpriteKit
+import Combine
 
 final class Player: SKSpriteNode {
-    // MARK: Properties
+    // MARK: Static
+    static let playerLifes = 3
+
+    // MARK: Private Properties
     private let idleFrames = SKTextureAtlas(named: Assets.Atlas.playerIdle).textures
     private let walkingFrames = SKTextureAtlas(named: Assets.Atlas.playerWalk).textures
     private let attackFrames = SKTextureAtlas(named: Assets.Atlas.playerAttack).textures
+    private let deathFrames = SKTextureAtlas(named: Assets.Atlas.playerDeath).textures
     private var isJumping = false
     private var isAttacking = false
+    private var lifes: Int = 3 {
+        willSet {
+            if newValue == .zero {
+                self.physicsBody = nil
+            }
+        }
+        didSet {
+            levelScene?.playerLifes.hearts[max(0, lifes)].alpha = 0.5
+        }
+    }
+     
+    // MARK: - Public properties
     
     private lazy var hurtBox: HurtBox = {
         HurtBox(
@@ -44,6 +61,10 @@ final class Player: SKSpriteNode {
     
     private var isWalking: Bool {
         velocity != 0
+    }
+    
+    private var isDead: Bool {
+        lifes == .zero
     }
     
     private(set) var animations = [String: SKAction]()
@@ -124,6 +145,10 @@ extension Player {
             )
         )
     }
+    
+    func hit() {
+        lifes -= 1
+    }
 }
 
 // MARK: PlayerState
@@ -132,6 +157,7 @@ private extension Player {
         case walking
         case idle
         case attacking
+        case death
     }
 }
 
@@ -172,6 +198,29 @@ private extension Player {
             )
         )
         
+        animations[Animations.death.rawValue] = SKAction.group([
+            SKAction.run { [weak self] in
+                self?.physicsBody = nil
+            },
+            SKAction.animate(
+                with: deathFrames,
+                timePerFrame: 0.5,
+                resize: true,
+                restore: true
+            ),
+            SKAction.sequence([
+                SKAction.wait(forDuration: 0.5 * Double(deathFrames.count)),
+                SKAction.run { [weak self] in
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    self.levelScene?.playerDied()
+                    self.removeFromParent()
+                }
+            ])
+        ])
+        
         let attackTimePerFrame: TimeInterval = 0.08
         
         animations[Animations.attacking.rawValue] = SKAction.group([
@@ -201,13 +250,16 @@ private extension Player {
     }
     
     func updateState() {
-        if isAttacking {
+        if isDead {
+            playAnimation(key: Animations.death.rawValue)
+        } else if isAttacking {
             playAnimation(key: Animations.attacking.rawValue)
         } else {
             isWalking
                 ? playAnimation(key: Animations.walking.rawValue)
                 : playAnimation(key: Animations.idle.rawValue)
         }
+        
     }
     
     func updateDirection() {

@@ -6,6 +6,7 @@
 //
 
 import SpriteKit
+import Combine
 
 final class Zombie: SKSpriteNode {
     // MARK: Properties
@@ -90,6 +91,8 @@ extension Zombie: SceneObject {
         updatePosition()
         
         updateIsAttacking()
+        
+        updateHurtBox()
     }
 }
 
@@ -187,8 +190,10 @@ private extension Zombie {
                 },
                 SKAction.wait(forDuration: attackTimePerFrame * Double(2)),
                 SKAction.run { [weak self] in
+                    if let playerHitbox = self?.levelScene?.player.hitbox, self?.hurtBox.intersects(playerHitbox) == true {
+                        self?.levelScene?.player.hit()
+                    }
                     self?.hurtBox.removeFromParent()
-                    
                     self?.isAttacking = false
                 }
             ])
@@ -268,5 +273,14 @@ private extension Zombie {
         }
         
         isAttacking = true
+    }
+    
+    func updateHurtBox() {
+        guard
+            hurtBox.parent != nil,
+            let levelScene = levelScene
+        else {
+            return
+        }
     }
 }
