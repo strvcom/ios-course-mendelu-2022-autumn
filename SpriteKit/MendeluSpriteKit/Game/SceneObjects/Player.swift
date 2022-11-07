@@ -19,12 +19,9 @@ final class Player: SKSpriteNode {
     private let deathFrames = SKTextureAtlas(named: Assets.Atlas.playerDeath).textures
     private var isJumping = false
     private var isAttacking = false
-    private var lifes: Int = 3 {
-        willSet {
-            if newValue == .zero {
-                self.physicsBody = nil
-            }
-        }
+    private var isHurt = false
+
+    private var lifes: Int = Player.playerLifes {
         didSet {
             levelScene?.playerLifes.hearts[max(0, lifes)].alpha = 0.5
         }
@@ -145,7 +142,24 @@ extension Player {
     }
     
     func hit() {
+        guard isHurt == false else { return }
+        
+        isHurt = true
         lifes -= 1
+
+        run(
+            SKAction.sequence([
+                SKAction.fadeIn(withDuration: 0.1),
+                SKAction.fadeOut(withDuration: 0.1),
+                SKAction.fadeIn(withDuration: 0.1),
+                SKAction.fadeOut(withDuration: 0.1),
+                SKAction.fadeIn(withDuration: 0.1),
+                SKAction.wait(forDuration: 1.0),
+                SKAction.run { [weak self] in
+                    self?.isHurt = false
+                }
+            ])
+        )
     }
 }
 
@@ -155,6 +169,7 @@ private extension Player {
         case walking
         case idle
         case attacking
+        case hurt
         case death
     }
 }
@@ -170,6 +185,7 @@ private extension Player {
             texture: SKTexture(imageNamed: Assets.Image.playerPhysicsBody),
             size: hitbox.size
         )
+
         physicsBody?.categoryBitMask = Physics.CategoryBitMask.player
         physicsBody?.collisionBitMask = Physics.CollisionBitMask.player
         physicsBody?.restitution = 0

@@ -126,9 +126,6 @@ extension LevelScene {
     }
     
     func playerDied() {
-        player.isPaused = true
-        player.alpha = 0
-
         guard let levelSceneScreenshot = makeScreenshot() else { return }
 
         completionDelegate?.levelFailed(sceneImage: levelSceneScreenshot)
