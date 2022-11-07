@@ -91,8 +91,6 @@ extension Zombie: SceneObject {
         updatePosition()
         
         updateIsAttacking()
-        
-        updateHurtBox()
     }
 }
 
@@ -273,14 +271,5 @@ private extension Zombie {
         }
         
         isAttacking = true
-    }
-    
-    func updateHurtBox() {
-        guard
-            hurtBox.parent != nil,
-            let levelScene = levelScene
-        else {
-            return
-        }
     }
 }
