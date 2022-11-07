@@ -26,15 +26,15 @@ extension PlayerLifes: SceneObject {
         
         zPosition = Layer.controls
         
-        let topLeft = scene.cameraObject.bottomLeftCorner
+        let corner = scene.cameraObject.bottomLeftCorner
 
         for index in 0...Player.playerLifes - 1 {
             let heart = SKSpriteNode(texture: SKTexture(image: UIImage(named: Assets.Image.playerLife) ?? UIImage()))
             heart.zPosition = zPosition
             heart.size = CGSize(width: 40, height: 40)
             heart.position = CGPoint(
-                x: topLeft.x + CGFloat(index * 45),
-                y: (topLeft.y + UIScreen.main.bounds.height / 1.5) + 75
+                x: corner.x + CGFloat(index * 45),
+                y: (corner.y + UIScreen.main.bounds.height / 1.5) + 75
             )
 
             addOptionalChild(heart)
