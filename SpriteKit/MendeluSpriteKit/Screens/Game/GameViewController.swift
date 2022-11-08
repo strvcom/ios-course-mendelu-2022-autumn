@@ -33,7 +33,7 @@ final class GameViewController: UIViewController {
         skView.showsPhysics = Environment.sceneInDebugMode
         skView.isMultipleTouchEnabled = true
         
-        startGame()
+        welcomeScreen()
     }
     
     override func pressesBegan(
@@ -71,11 +71,31 @@ final class GameViewController: UIViewController {
             gameObject.keyboardDown(presses: presses)
         }
     }
+    
+    func welcomeScreen() {
+        guard
+            let scene = WelcomeScreen(fileNamed: Assets.Scenes.welcomeScreen),
+            let welcomeBackground = UIImage(named: Assets.Image.welcomeBackground)
+        else {
+            return
+        }
+        
+        scene.newGameButtonTapped = { [weak self] in
+            self?.startGame()
+        }
+        scene.setBackgroundImage(welcomeBackground)
+        
+        scene.scaleMode = .aspectFill
+        let transition = SKTransition.crossFade(withDuration: 0.6)
+
+        skView.presentScene(scene, transition: transition)
+    }
 
     func startGame() {
         guard let scene = LevelScene(fileNamed: Assets.Scenes.level1) else {
             return
         }
+        
         scene.completionDelegate = self
 
         let transition = SKTransition.crossFade(withDuration: 0.6)

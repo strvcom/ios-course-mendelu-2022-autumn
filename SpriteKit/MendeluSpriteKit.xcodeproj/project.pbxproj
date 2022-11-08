@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2079C751291A46EB0055A9EB /* WelcomeScreen.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2079C750291A46EB0055A9EB /* WelcomeScreen.sks */; };
+		2079C753291A4D020055A9EB /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2079C752291A4D020055A9EB /* WelcomeScreen.swift */; };
 		590A9EA8290850780006CD20 /* CGSize+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590A9EA7290850780006CD20 /* CGSize+Extension.swift */; };
 		5922EAD128D8BF3300BE46DC /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5922EAD028D8BF3300BE46DC /* Background.swift */; };
 		5922EAD528D8C0FB00BE46DC /* SceneObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5922EAD428D8C0FB00BE46DC /* SceneObject.swift */; };
@@ -63,6 +65,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2079C750291A46EB0055A9EB /* WelcomeScreen.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WelcomeScreen.sks; sourceTree = "<group>"; };
+		2079C752291A4D020055A9EB /* WelcomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
 		590A9EA7290850780006CD20 /* CGSize+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Extension.swift"; sourceTree = "<group>"; };
 		5922EAD028D8BF3300BE46DC /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		5922EAD428D8C0FB00BE46DC /* SceneObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneObject.swift; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 				59CFC5ED28D78A5900F4E6AE /* Layer.swift */,
 				9D26298228F6BE8B00969D80 /* LevelFinishedScene.swift */,
 				5990779E28D77E3C00659E6E /* LevelScene.swift */,
+				2079C752291A4D020055A9EB /* WelcomeScreen.swift */,
 				5922EAD728D8C2E400BE46DC /* Physics.swift */,
 				59CC663428E711E10010A82E /* ObjectNames.swift */,
 				59CC664D28E8711B0010A82E /* Direction.swift */,
@@ -307,6 +312,7 @@
 			children = (
 				9D26297628F6ACDD00969D80 /* LevelCompleted.sks */,
 				9DDF1AE328F83D3B0013BED8 /* GameOver.sks */,
+				2079C750291A46EB0055A9EB /* WelcomeScreen.sks */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -402,6 +408,7 @@
 				9D26297C28F6AD0D00969D80 /* alagard.ttf in Resources */,
 				59CC663728E717830010A82E /* PlayerAttack.atlas in Resources */,
 				59CC665528E8C7310010A82E /* ZombieDeath.atlas in Resources */,
+				2079C751291A46EB0055A9EB /* WelcomeScreen.sks in Resources */,
 				599077A928D77E3C00659E6E /* LaunchScreen.storyboard in Resources */,
 				9D464E5B28EEEA630056964C /* DoorOpening.atlas in Resources */,
 				9D26297828F6ACDD00969D80 /* LevelCompleted.sks in Resources */,
@@ -455,6 +462,7 @@
 				592E302D28E588C100603ECC /* Tile.swift in Sources */,
 				59699EB128E1AEA700999BE7 /* SKNode+Extension.swift in Sources */,
 				5922EAE028D8CF8200BE46DC /* SKTextureAtlas+Extension.swift in Sources */,
+				2079C753291A4D020055A9EB /* WelcomeScreen.swift in Sources */,
 				59CC665D28E98C8C0010A82E /* HurtBox.swift in Sources */,
 				59CC665B28E98C3E0010A82E /* HitBox.swift in Sources */,
 			);

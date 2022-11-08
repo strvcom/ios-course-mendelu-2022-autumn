@@ -14,6 +14,7 @@ extension Assets {
         static let background2 = "Background/b2"
         static let background3 = "Background/b3"
         static let background4 = "Background/b4"
+        static let welcomeBackground = "Background/background"
         static let projectile = "PumpkinProjectile"
         static let attackButton = "Controls/AttackButton"
         static let jumpButton = "Controls/JumpButton"
@@ -43,6 +44,7 @@ extension Assets {
 // MARK: Scenes
 extension Assets {
     enum Scenes {
+        static let welcomeScreen = "WelcomeScreen"
         static let level1 = "Level1"
         static let levelCompleted = "LevelCompleted"
         static let gameOver = "GameOver"
