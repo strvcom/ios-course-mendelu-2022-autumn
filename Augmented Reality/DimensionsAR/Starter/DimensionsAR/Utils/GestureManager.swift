@@ -24,9 +24,6 @@ final class GestureManager {
     }
 
     private(set) lazy var boundingBox: BoundingBox = BoundingBox()
-
-    private(set) var lastPannedLocationZAxis: CGFloat?
-    private(set) var lastPanLocation: simd_float3?
     private(set) var currentDraggedFace: FaceDrag?
     private var sceneView: ARSCNView = ARSCNView()
     private let dimensionsSubject: PassthroughSubject<BoundingBox.Dimensions, Never> = .init()
@@ -55,16 +52,12 @@ private extension GestureManager {
     }
 
     @objc func handleTapGesture(_ gesture: UITapGestureRecognizer) {
+        
+        // TODO: 3
+        
         // 1. Create a raycast on the scene view's session and obtain its result.
-        guard
-            isGestureEnabled,
-            isBoundingBoxInHierarchy == false
-        else {
-            return
-        }
 
         // 2. Set the bounding box's position based on the raycast result.
-
 
         // 3. Add the bounding box to the scene.
     }
@@ -82,46 +75,21 @@ private extension GestureManager {
 
         switch gesture.state {
         case .began:
+            print("TODO 4")
+            //        TODO: 4
             // 1. Check if the location of the gesture is on
-            guard let result = sceneView.hitTest(location).first else {
-                return
-            }
+           
+            
+            // 2. Get coordinates of last pan location
 
-            let worldCoordinates = result.worldCoordinates
-            lastPanLocation = simd_float3(worldCoordinates)
-
-            // Save the depth so that we do not change the depth of the bounding box when panning.
-            lastPannedLocationZAxis = CGFloat(sceneView.projectPoint(worldCoordinates).z)
+            // 3. Save the depth so that we do not change the depth of the bounding box when panning.
+            
         case .changed:
-            // 1. Option
-            guard let lastPanLocation = lastPanLocation else {
-                return
-            }
-
-            let worldPosition = simd_float3(sceneView.unprojectPoint(
-                SCNVector3(location.x, location.y, lastPannedLocationZAxis ?? 0)
-            ))
-
-            // The translation vector is the difference between the current position in world coordinates
-            // and the position where we started the panning.
-//            let translation = worldPosition - lastPanLocation
-//            boundingBox.simdLocalTranslate(by: translation)
-
-            self.lastPanLocation = worldPosition
-
-            // 2. Option - Move only on the plane, up and down panning moves on the z-axis rather than on the y-axis.
-            guard
-                let query = sceneView.raycastQuery(from: location, allowing: .estimatedPlane, alignment: .horizontal),
-                let result = sceneView.session.raycast(query).first
-            else {
-                return
-            }
-
-            boundingBox.simdWorldPosition = simd_float3(result.worldTransform.columns.3)
-            boundingBox.simdWorldPosition.y += boundingBox.extent.y / 2
+            print("TODO 4")
+            // Move only on the plane, up and down panning moves on the z-axis rather than on the y-axis.
+            
         default:
-            lastPanLocation = nil
-            lastPannedLocationZAxis = nil
+            break
         }
     }
 }
@@ -130,20 +98,13 @@ private extension GestureManager {
 
 private extension GestureManager {
     @objc func handlePinchGesture(_ gesture: UIPinchGestureRecognizer) {
-        guard
-            isGestureEnabled,
-            isBoundingBoxInHierarchy,
-            gesture.state == .changed
-        else {
-            return
-        }
-
-        boundingBox.extent *= Float(gesture.scale)
-
-        // To reset the velocity.
-        gesture.scale = 1
-
-        dimensionsSubject.send(boundingBox.dimensions)
+        // TODO: 5
+        
+        // Check gesture state
+        
+        // Count new extent by scale
+        
+        // Update dimensions
     }
 }
 

@@ -10,6 +10,8 @@ import Combine
 import SceneKit
 import UIKit
 
+// TODO: 0 - the app + extensions
+
 final class ARViewController: UIViewController {
     // MARK: - UI Components
 
@@ -53,45 +55,23 @@ final class ARViewController: UIViewController {
 
 extension ARViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        // Create a mesh to visualize the estimated shape of the plane.
-        guard
-            let planeAnchor = anchor as? ARPlaneAnchor,
-            let device = sceneView.device,
-            let planeGeometry = ARSCNPlaneGeometry(device: device)
-        else {
-            return
-        }
+        // Create a plane to visualize the estimated shape of the detected plane.
+        // TODO: 1
+        
+        // Validate anchor and create plane geometry
 
         // Create a node to visualize the plane's bounding rectangle.
-        let planeNode = SCNNode(geometry: planeGeometry)
-        planeNode.opacity = 0
-        planeNode.name = "Plane"
-
-        node.addChildNode(planeNode)
-
+        
         // Change the rendering order so it renders before our virtual object.
-        node.renderingOrder = -1
-
-        planeGeometry.update(from: planeAnchor.geometry)
-
-        // Enable gestures only if a mesh anchor was added to the scene.
-        gestureManager.isGestureEnabled = true
+        
+        // Enable gestures only if a plane anchor was added to the scene.
 
         // Disable coaching overlay activation once a plane is detected.
-        coachingOverlayShouldReactive = false
     }
 
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        guard
-            let planeAnchor = anchor as? ARPlaneAnchor,
-            let planeNode = node.childNode(withName: "Plane", recursively: false),
-            let planeGeometry = planeNode.geometry as? ARSCNPlaneGeometry
-        else {
-            return
-        }
-
-        // Update ARSCNPlaneGeometry to the anchor's new estimated shape.
-        planeGeometry.update(from: planeAnchor.geometry)
+        // TODO: 2
+        // Update plane geometry
     }
 }
 

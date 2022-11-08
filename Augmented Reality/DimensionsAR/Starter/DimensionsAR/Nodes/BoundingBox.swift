@@ -11,7 +11,7 @@ final class BoundingBox: SCNNode {
     // MARK: - Public Properties
 
     var dimensions: Dimensions {
-        return Dimensions(
+        Dimensions(
             width: extent.x,
             height: extent.y,
             depth: extent.z

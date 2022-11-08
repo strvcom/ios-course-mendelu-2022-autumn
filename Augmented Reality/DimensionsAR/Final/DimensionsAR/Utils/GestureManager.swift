@@ -56,7 +56,7 @@ private extension GestureManager {
 
     @objc func handleTapGesture(_ gesture: UITapGestureRecognizer) {
         let location = gesture.location(in: sceneView)
-
+        
         guard
             isGestureEnabled,
             isBoundingBoxInHierarchy == false,
