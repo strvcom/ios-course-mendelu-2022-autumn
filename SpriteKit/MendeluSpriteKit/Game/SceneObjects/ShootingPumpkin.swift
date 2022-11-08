@@ -121,10 +121,7 @@ private extension ShootingPumpkin {
     ) {
         projectile.node?.removeFromParent()
         
-        print("Projectile collision with \(body)")
-        
-        if body == levelScene?.player.physicsBody {
-            levelScene?.player.hit()
-        }
+        guard body == levelScene?.player.physicsBody else { return }
+        levelScene?.player.hit()
     }
 }

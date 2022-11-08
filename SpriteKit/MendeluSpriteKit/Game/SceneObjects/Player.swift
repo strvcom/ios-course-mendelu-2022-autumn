@@ -168,7 +168,6 @@ private extension Player {
         case walking
         case idle
         case attacking
-        case hurt
         case death
     }
 }
