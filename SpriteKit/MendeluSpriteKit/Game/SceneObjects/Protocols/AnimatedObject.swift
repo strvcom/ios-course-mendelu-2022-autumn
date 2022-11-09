@@ -23,7 +23,9 @@ extension AnimatedObject where Self: SKNode {
             return
         }
         
-        removeAllActions()
+        for animation in animations.keys {
+            removeAction(forKey: animation)
+        }
         
         run(
             action,

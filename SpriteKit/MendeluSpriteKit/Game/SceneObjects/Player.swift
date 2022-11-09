@@ -8,13 +8,24 @@
 import SpriteKit
 
 final class Player: SKSpriteNode {
-    // MARK: Properties
+    // MARK: Static
+    static let playerLifes = 3
+
+    // MARK: Private Properties
     private let idleFrames = SKTextureAtlas(named: Assets.Atlas.playerIdle).textures
     private let walkingFrames = SKTextureAtlas(named: Assets.Atlas.playerWalk).textures
     private let attackFrames = SKTextureAtlas(named: Assets.Atlas.playerAttack).textures
+    private let deathFrames = SKTextureAtlas(named: Assets.Atlas.playerDeath).textures
     private var isJumping = false
     private var isAttacking = false
-    
+    private var isHurt = false
+
+    private var lifes: Int = Player.playerLifes {
+        didSet {
+            levelScene?.playerLifes.hearts[max(0, lifes)].alpha = 0.5
+        }
+    }
+     
     private lazy var hurtBox: HurtBox = {
         HurtBox(
             size: CGSize(
@@ -44,6 +55,10 @@ final class Player: SKSpriteNode {
     
     private var isWalking: Bool {
         velocity != 0
+    }
+    
+    private var isDead: Bool {
+        lifes == .zero
     }
     
     private(set) var animations = [String: SKAction]()
@@ -124,6 +139,27 @@ extension Player {
             )
         )
     }
+    
+    func hit() {
+        guard isHurt == false else { return }
+        
+        isHurt = true
+        lifes -= 1
+
+        run(
+            SKAction.sequence([
+                SKAction.fadeIn(withDuration: 0.1),
+                SKAction.fadeOut(withDuration: 0.1),
+                SKAction.fadeIn(withDuration: 0.1),
+                SKAction.fadeOut(withDuration: 0.1),
+                SKAction.fadeIn(withDuration: 0.1),
+                SKAction.wait(forDuration: 1.0),
+                SKAction.run { [weak self] in
+                    self?.isHurt = false
+                }
+            ])
+        )
+    }
 }
 
 // MARK: PlayerState
@@ -132,6 +168,7 @@ private extension Player {
         case walking
         case idle
         case attacking
+        case death
     }
 }
 
@@ -146,6 +183,7 @@ private extension Player {
             texture: SKTexture(imageNamed: Assets.Image.playerPhysicsBody),
             size: hitbox.size
         )
+
         physicsBody?.categoryBitMask = Physics.CategoryBitMask.player
         physicsBody?.collisionBitMask = Physics.CollisionBitMask.player
         physicsBody?.restitution = 0
@@ -171,6 +209,29 @@ private extension Player {
                 restore: true
             )
         )
+        
+        animations[Animations.death.rawValue] = SKAction.group([
+            SKAction.run { [weak self] in
+                self?.physicsBody = nil
+            },
+            SKAction.animate(
+                with: deathFrames,
+                timePerFrame: 0.5,
+                resize: true,
+                restore: true
+            ),
+            SKAction.sequence([
+                SKAction.wait(forDuration: 0.5 * Double(deathFrames.count)),
+                SKAction.run { [weak self] in
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    self.levelScene?.playerDied()
+                    self.removeFromParent()
+                }
+            ])
+        ])
         
         let attackTimePerFrame: TimeInterval = 0.08
         
@@ -201,13 +262,16 @@ private extension Player {
     }
     
     func updateState() {
-        if isAttacking {
+        if isDead {
+            playAnimation(key: Animations.death.rawValue)
+        } else if isAttacking {
             playAnimation(key: Animations.attacking.rawValue)
         } else {
             isWalking
                 ? playAnimation(key: Animations.walking.rawValue)
                 : playAnimation(key: Animations.idle.rawValue)
         }
+        
     }
     
     func updateDirection() {

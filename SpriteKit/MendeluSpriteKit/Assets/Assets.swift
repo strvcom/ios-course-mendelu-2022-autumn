@@ -21,6 +21,7 @@ extension Assets {
         static let joystickBackground = "Controls/JoystickBackground"
         static let joystickKnob = "Controls/JoystickKnob"
         static let playerPhysicsBody = "PlayerPhysicsBody"
+        static let playerLife = "Scenery/Heart/heart"
     }
 }
 
@@ -30,6 +31,7 @@ extension Assets {
         static let playerIdle = "PlayerIdle"
         static let playerWalk = "PlayerWalk"
         static let playerAttack = "PlayerAttack"
+        static let playerDeath = "PlayerDeath"
         static let zombieIdle = "ZombieIdle"
         static let zombieWalk = "ZombieWalk"
         static let zombieDeath = "ZombieDeath"
