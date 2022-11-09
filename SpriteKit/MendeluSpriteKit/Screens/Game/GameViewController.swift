@@ -77,10 +77,7 @@ final class GameViewController: UIViewController {
             return
         }
         
-        scene.newGameButtonTapped = { [weak self] in
-            self?.startGame()
-        }
-        
+        scene.welcomeScreenDelegate = self
         scene.scaleMode = .aspectFill
         let transition = SKTransition.crossFade(withDuration: 0.6)
 
@@ -122,5 +119,12 @@ extension GameViewController: LevelCompletionDelegate {
     
     func levelFailed(sceneImage: UIImage) {
         showLevelFinishedScene(sceneFileName: Assets.Scenes.gameOver, backgroundImage: sceneImage)
+    }
+}
+
+// MARK: WelcomeScreenDelegate
+extension GameViewController: WelcomeScreenDelegate {
+    func newGameButtonTapped() {
+        startGame()
     }
 }
