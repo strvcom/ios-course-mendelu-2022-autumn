@@ -22,9 +22,13 @@ extension WelcomeScreen {
         newGameButton?.tapAction = { [weak self] in
             self?.newGameButtonTapped?()
         }
+        
+        if let welcomeBackground = UIImage(named: Assets.Image.welcomeBackground) {
+            setBackgroundImage(welcomeBackground)
+        }
     }
     
-    func setBackgroundImage(_ image: UIImage) {
+    private func setBackgroundImage(_ image: UIImage) {
         let background = SKSpriteNode(texture: SKTexture(image: image))
         let aspectRatio = image.size.height / image.size.width
         let backgroundSize = CGSize(width: size.width, height: size.width * aspectRatio)

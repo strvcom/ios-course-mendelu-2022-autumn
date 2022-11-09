@@ -73,17 +73,13 @@ final class GameViewController: UIViewController {
     }
     
     func welcomeScreen() {
-        guard
-            let scene = WelcomeScreen(fileNamed: Assets.Scenes.welcomeScreen),
-            let welcomeBackground = UIImage(named: Assets.Image.welcomeBackground)
-        else {
+        guard let scene = WelcomeScreen(fileNamed: Assets.Scenes.welcomeScreen) else {
             return
         }
         
         scene.newGameButtonTapped = { [weak self] in
             self?.startGame()
         }
-        scene.setBackgroundImage(welcomeBackground)
         
         scene.scaleMode = .aspectFill
         let transition = SKTransition.crossFade(withDuration: 0.6)
