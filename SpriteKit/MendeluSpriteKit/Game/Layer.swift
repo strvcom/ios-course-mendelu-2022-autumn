@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Definition of the Z position of the objects
 enum Layer {
     // MARK: Level 0
     static let background1: CGFloat = 0

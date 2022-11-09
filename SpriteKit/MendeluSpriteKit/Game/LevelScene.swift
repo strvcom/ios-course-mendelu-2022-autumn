@@ -53,9 +53,7 @@ final class LevelScene: SKScene {
         scaleMode = .aspectFill
     }
 
-    override func didMove(to view: SKView) {
-        super.didMove(to: view)
-
+    override func sceneDidLoad() {
         physicsWorld.contactDelegate = self
 
         cameraObject = Camera()
@@ -121,7 +119,7 @@ extension LevelScene {
 
         completionDelegate?.levelCompleted(sceneImage: levelSceneScreenshot)
     }
-    
+
     func playerDied() {
         guard let levelSceneScreenshot = makeScreenshot() else { return }
 

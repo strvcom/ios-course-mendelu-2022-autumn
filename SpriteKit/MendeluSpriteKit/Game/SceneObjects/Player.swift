@@ -7,6 +7,8 @@
 
 import SpriteKit
 
+/// `SKSpriteNode` onscreen graphical element that can be initialized
+/// from an image or a solid color.
 final class Player: SKSpriteNode {
     // MARK: Static
     static let playerLifes = 3
