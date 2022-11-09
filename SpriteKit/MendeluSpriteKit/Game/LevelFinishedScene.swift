@@ -16,7 +16,7 @@ final class LevelFinishedScene: SKScene {
 
 // MARK: Public API
 extension LevelFinishedScene {
-    override func sceneDidLoad() {
+    override func didMove(to view: SKView) {
         backgroundColor = .black
 
         playAgainButton = children.first(where: { $0 is TouchNode }) as? TouchNode

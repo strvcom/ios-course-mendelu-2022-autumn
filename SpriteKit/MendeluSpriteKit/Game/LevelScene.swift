@@ -53,7 +53,7 @@ final class LevelScene: SKScene {
         scaleMode = .aspectFill
     }
 
-    override func sceneDidLoad() {
+    override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
 
         cameraObject = Camera()
