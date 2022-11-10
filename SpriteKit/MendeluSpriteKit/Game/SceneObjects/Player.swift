@@ -285,6 +285,7 @@ private extension Player {
     }
     
     func updatePosition() {
+        guard isDead == false else { return }
         let moveBy = size.width * 0.2 * velocity
         
         position = CGPoint(
