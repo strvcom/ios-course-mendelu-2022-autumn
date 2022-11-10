@@ -33,7 +33,9 @@ extension PlayerLifes: SceneObject {
 
         // We create as many of hearts as player has number of lifes.
         for index in 0...Player.playerLifes - 1 {
-            let heart = SKSpriteNode(texture: SKTexture(image: UIImage(named: Assets.Image.playerLife) ?? UIImage()))
+            let heart = SKSpriteNode(
+                texture: SKTexture(image: UIImage(named: Assets.Image.playerLife) ?? UIImage())
+            )
             heart.zPosition = zPosition
             heart.size = CGSize(size: 40)
             heart.position = CGPoint(
