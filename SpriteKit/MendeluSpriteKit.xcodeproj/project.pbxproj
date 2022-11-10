@@ -20,7 +20,6 @@
 		5922EAE028D8CF8200BE46DC /* SKTextureAtlas+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5922EADF28D8CF8200BE46DC /* SKTextureAtlas+Extension.swift */; };
 		592E302528E494F400603ECC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 592E302328E494F400603ECC /* Assets.xcassets */; };
 		592E302728E57B5500603ECC /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E302628E57B5500603ECC /* Assets.swift */; };
-		592E302D28E588C100603ECC /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592E302C28E588C100603ECC /* Tile.swift */; };
 		59699EB128E1AEA700999BE7 /* SKNode+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59699EB028E1AEA700999BE7 /* SKNode+Extension.swift */; };
 		59699EB528E1B40700999BE7 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59699EB428E1B40700999BE7 /* Camera.swift */; };
 		5990779928D77E3C00659E6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5990779828D77E3C00659E6E /* AppDelegate.swift */; };
@@ -80,7 +79,6 @@
 		5922EADF28D8CF8200BE46DC /* SKTextureAtlas+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKTextureAtlas+Extension.swift"; sourceTree = "<group>"; };
 		592E302328E494F400603ECC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		592E302628E57B5500603ECC /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
-		592E302C28E588C100603ECC /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		59699EB028E1AEA700999BE7 /* SKNode+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKNode+Extension.swift"; sourceTree = "<group>"; };
 		59699EB428E1B40700999BE7 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		5990779528D77E3C00659E6E /* MendeluSpriteKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MendeluSpriteKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,7 +169,6 @@
 				59A9DB4028E61C6700492DAA /* Level.swift */,
 				5922EAD928D8C53300BE46DC /* Player.swift */,
 				59CC666428E99FDC0010A82E /* ShootingPumpkin.swift */,
-				592E302C28E588C100603ECC /* Tile.swift */,
 				9D26298028F6B22F00969D80 /* TouchNode.swift */,
 				59CC663E28E84BC80010A82E /* Zombie.swift */,
 				59EF42EF28E0BA38005CC691 /* Controls */,
@@ -468,7 +465,6 @@
 				9DD9BA8B28EC5377002AA59F /* Fountain.swift in Sources */,
 				59EF42F128E0BA42005CC691 /* Joystick.swift in Sources */,
 				2079C75F291BF7970055A9EB /* WelcomeScreen.swift in Sources */,
-				592E302D28E588C100603ECC /* Tile.swift in Sources */,
 				59699EB128E1AEA700999BE7 /* SKNode+Extension.swift in Sources */,
 				5922EAE028D8CF8200BE46DC /* SKTextureAtlas+Extension.swift in Sources */,
 				59CC665D28E98C8C0010A82E /* HurtBox.swift in Sources */,

@@ -7,11 +7,15 @@
 
 import SpriteKit
 
+protocol LevelFinishedSceneDelegate: AnyObject {
+    func levelFinishedSceneNewGameButtonTapped()
+}
+
 final class LevelFinishedScene: SKScene {
     // MARK: Properties
     private var playAgainButton: TouchNode?
 
-    var newGameButtonTapped: (() -> Void)?
+    weak var levelFinishedSceneDelegate: LevelFinishedSceneDelegate?
 }
 
 // MARK: Public API
@@ -21,7 +25,7 @@ extension LevelFinishedScene {
 
         playAgainButton = children.first(where: { $0 is TouchNode }) as? TouchNode
         playAgainButton?.tapAction = { [weak self] in
-            self?.newGameButtonTapped?()
+            self?.levelFinishedSceneDelegate?.levelFinishedSceneNewGameButtonTapped()
         }
     }
 

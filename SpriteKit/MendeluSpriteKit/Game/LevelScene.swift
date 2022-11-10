@@ -8,16 +8,16 @@
 import SpriteKit
 
 /// Delegate to comunicate, when the player finishes the level.
-protocol LevelCompletionDelegate: AnyObject {
-    func levelCompleted(sceneImage: UIImage)
-    func levelFailed(sceneImage: UIImage)
+protocol LevelSceneDelegate: AnyObject {
+    func levelSceneLevelCompleted(sceneImage: UIImage)
+    func levelSceneLevelFailed(sceneImage: UIImage)
 }
 
 /// Scene, where the game is played. It passes values to all `SceneObjects`, handles
 /// physics contants and communicates with `GameViewController`.
 final class LevelScene: SKScene {
     // MARK: Properties
-    weak var completionDelegate: LevelCompletionDelegate?
+    weak var levelSceneDelegate: LevelSceneDelegate?
 
     var allSceneObjects: [SceneObject] {
         [
@@ -134,7 +134,7 @@ extension LevelScene {
             return
         }
 
-        completionDelegate?.levelCompleted(sceneImage: levelSceneScreenshot)
+        levelSceneDelegate?.levelSceneLevelCompleted(sceneImage: levelSceneScreenshot)
     }
 
     func playerDied() {
@@ -142,7 +142,7 @@ extension LevelScene {
             return
         }
 
-        completionDelegate?.levelFailed(sceneImage: levelSceneScreenshot)
+        levelSceneDelegate?.levelSceneLevelFailed(sceneImage: levelSceneScreenshot)
     }
 }
 

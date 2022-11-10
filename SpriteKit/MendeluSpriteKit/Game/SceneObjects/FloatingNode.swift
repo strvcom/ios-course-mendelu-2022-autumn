@@ -7,6 +7,7 @@
 
 import SpriteKit
 
+/// Represents node, which has ilusion of floating (it moves up and down).
 final class FloatingNode: SKSpriteNode {
     // MARK: Lifecycle
     required init?(coder aDecoder: NSCoder) {
@@ -19,11 +20,10 @@ final class FloatingNode: SKSpriteNode {
 // MARK: Private API
 private extension FloatingNode {
     func animate() {
-        
         let startingPointY = position.y
         
         // Calculation of animation properties based on node size
-        // to achieve seemingly "random" animation
+        // to achieve seemingly "random" animation.
         let smallerSide = size.height < size.width ? size.height : size.width
         let offset = smallerSide * 0.1
         let duration = smallerSide * 0.02

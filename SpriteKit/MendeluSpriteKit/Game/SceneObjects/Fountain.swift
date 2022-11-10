@@ -7,6 +7,7 @@
 
 import SpriteKit
 
+/// Represnets bloody fountain object.
 final class Fountain: SKSpriteNode {
     // MARK: Properties
     private let fountainFlowFrames = SKTextureAtlas(named: Assets.Atlas.fountainFlowing).textures

@@ -9,6 +9,7 @@ import SpriteKit
 
 final class Level {
     // MARK: Properties
+    /// `SKTileMapNode` which represents ground. It consits only from `Tiles`.
     let ground: SKTileMapNode
     
     // MARK: Init
@@ -22,6 +23,8 @@ extension Level: SceneObject {
     func setup(scene: LevelScene) {
         ground.zPosition = Layer.tiles
         
+        // When we find node, which is scenery, we are going to set
+        // correct zPosition to it.
         for child in scene.children {
             guard child.name == ObjectNames.scenery else {
                 continue
@@ -31,6 +34,12 @@ extension Level: SceneObject {
         }
         
         addPhysicsToTileMapNodes(scene: scene)
+        
+        // Here, we are creating 4 invisible boundaries around SKTileMapNode,
+        // which represents our level. The reason is that we don't want player
+        // or any other thing to fall from boundary of level.
+        // You can imagine this boundaries as very small invisible rectangles,
+        // which are placed at top, left, right and bottom side of SKTileMapNode.
         
         createTopBoundary(scene: scene)
         
@@ -44,7 +53,13 @@ extension Level: SceneObject {
 
 // MARK: Private API
 private extension Level {
+    /// Adds physics to every tile node in scene.
+    ///
+    /// Due to spritekit limitations, we are not able to easily say, that each tile should have some kind of
+    /// physics category, so we have to implement this functionality by ourselfs.
     func addPhysicsToTileMapNodes(scene: LevelScene) {
+        // Because SKTileMapNode is basically grid, we can easily iterate
+        // through every grid tiles.
         for columnNumber in 0 ..< ground.numberOfColumns {
             for rowNumber in 0 ..< ground.numberOfColumns {
                 let definition = ground.tileDefinition(
@@ -52,9 +67,15 @@ private extension Level {
                     row: rowNumber
                 )
                 
+                // When tile definition is nil, it means that grid tile is empty,
+                // which means it doesn't have texture, so we don't care about it.
                 guard definition != nil else {
                     continue
                 }
+                
+                // After finding out, that we are in grid tile, which has texture,
+                // we are going to create SKNode, which has exast same size and
+                // position as grid tile and enable physics on it.
                 
                 let xPosition = ground.tileSize.width * CGFloat(columnNumber)
                 
@@ -78,6 +99,8 @@ private extension Level {
                         y: ground.tileSize.height * 0.5
                     )
                 )
+                // Node is not dynamic, so it's not affected by physics and stays
+                // at one place.
                 node.physicsBody?.isDynamic = false
                 node.physicsBody?.restitution = 0
                 node.physicsBody?.categoryBitMask = Physics.CategoryBitMask.groundTile
@@ -178,7 +201,10 @@ private extension Level {
                 y: size.height * 0.5
             )
         )
+        // Node is not dynamic, so it's not affected by physics and stays
+        // at one place.
         node.physicsBody?.isDynamic = false
+        // Prevents boucing when coliding with some other object.
         node.physicsBody?.restitution = 0
         node.physicsBody?.categoryBitMask = Physics.CategoryBitMask.boundary
         node.physicsBody?.collisionBitMask = Physics.CollisionBitMask.boundary
