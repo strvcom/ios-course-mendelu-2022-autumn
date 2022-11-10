@@ -8,6 +8,7 @@
 import SpriteKit
 
 extension SKTextureAtlas {
+    /// Returns `SKTextures` from `SKTextureAtlas`.
     var textures: [SKTexture] {
         textureNames
             .sorted()

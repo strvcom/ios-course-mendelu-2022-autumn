@@ -7,6 +7,8 @@
 
 import SpriteKit
 
+/// Node, which describes where attack can be effective. To see hitbox during development,
+/// set  `Environment` `showHitboxesAndHurtBoxes` value to `true`.
 final class HitBox: SKSpriteNode {
     convenience init(
         size: CGSize,

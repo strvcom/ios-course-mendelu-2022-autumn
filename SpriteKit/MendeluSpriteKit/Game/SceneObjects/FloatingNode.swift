@@ -8,7 +8,6 @@
 import SpriteKit
 
 final class FloatingNode: SKSpriteNode {
-    
     // MARK: Lifecycle
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

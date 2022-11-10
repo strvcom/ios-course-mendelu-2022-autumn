@@ -26,6 +26,7 @@ final class Player: SKSpriteNode {
         }
     }
      
+    /// Hutbox positioned to player hand when attacking.
     private lazy var hurtBox: HurtBox = {
         HurtBox(
             size: CGSize(
@@ -39,6 +40,7 @@ final class Player: SKSpriteNode {
         )
     }()
     
+    /// Direction, where player is facing towards.
     private var direction: Direction = .right {
         didSet {
             guard oldValue != direction else {
@@ -63,6 +65,7 @@ final class Player: SKSpriteNode {
     
     private(set) var animations = [String: SKAction]()
     
+    /// Hitbox positioned to player physics body.
     private(set) lazy var hitbox: HitBox = {
         HitBox(
             size: CGSize(
@@ -126,6 +129,8 @@ extension Player {
     }
     
     func jump() {
+        // We can jump only when isJumping is set to false, otherwise we would
+        // be able to jump in the air.
         guard !isJumping else {
             return
         }
@@ -141,11 +146,16 @@ extension Player {
     }
     
     func hit() {
-        guard isHurt == false else { return }
+        guard isHurt == false else {
+            return
+        }
         
         isHurt = true
+        
         lifes -= 1
 
+        // Start player blinking upon taking damage. In this state, player
+        // is invulnerable, which means that he / she can't take damage.
         run(
             SKAction.sequence([
                 SKAction.fadeIn(withDuration: 0.1),
@@ -162,7 +172,7 @@ extension Player {
     }
 }
 
-// MARK: PlayerState
+// MARK: Animations
 private extension Player {
     enum Animations: String {
         case walking
@@ -181,14 +191,18 @@ private extension Player {
         
         physicsBody = SKPhysicsBody(
             texture: SKTexture(imageNamed: Assets.Image.playerPhysicsBody),
+            // Physics body has same size as hitbox.
             size: hitbox.size
         )
 
         physicsBody?.categoryBitMask = Physics.CategoryBitMask.player
         physicsBody?.collisionBitMask = Physics.CollisionBitMask.player
-        physicsBody?.restitution = 0
-        physicsBody?.allowsRotation = false
         physicsBody?.contactTestBitMask = Physics.ContactTestBitMask.player
+        // Prevents boucing when falling to ground.
+        physicsBody?.restitution = 0
+        // If allowsRotatin woudl be true, than there is a possibility that player
+        // could fall to one side.
+        physicsBody?.allowsRotation = false
     }
     
     func setupActions() {
@@ -212,6 +226,9 @@ private extension Player {
         
         animations[Animations.death.rawValue] = SKAction.group([
             SKAction.run { [weak self] in
+                // We set physicsBody to nil, because we don't want to
+                // be able to interact with other objects in physics world
+                // upon death.
                 self?.physicsBody = nil
             },
             SKAction.animate(
@@ -242,6 +259,7 @@ private extension Player {
                 resize: false,
                 restore: true
             ),
+            // Hurbox is only going to be shown between 4th and last frame.
             SKAction.sequence([
                 SKAction.wait(forDuration: attackTimePerFrame * Double(4)),
                 SKAction.run { [weak self] in
@@ -261,6 +279,10 @@ private extension Player {
         ])
     }
     
+    /// Handles animation state according values. If you want to implement this functionality clearer,
+    /// use [GKStateMachine](https://developer.apple.com/documentation/gameplaykit/gkstatemachine).
+    ///
+    /// Animations have priority and we play them after certain coditions are met.
     func updateState() {
         if isDead {
             playAnimation(key: Animations.death.rawValue)
@@ -271,7 +293,6 @@ private extension Player {
                 ? playAnimation(key: Animations.walking.rawValue)
                 : playAnimation(key: Animations.idle.rawValue)
         }
-        
     }
     
     func updateDirection() {
@@ -291,8 +312,10 @@ private extension Player {
         )
     }
     
+    /// Evaluates, if `hurtbox` hitted something.
     func updateHurtBox() {
         guard
+            // Only evaluate, when hurbox is actually visible.
             hurtBox.parent != nil,
             let levelScene = levelScene
         else {
@@ -314,18 +337,20 @@ private extension Player {
     ) {
         switch body.node?.name {
         case ObjectNames.tile:
+            // Contactnormal > 0 indicates that player hit the ground with legs.
             guard contact.contactNormal.dy > 0 else {
                 return
             }
             
             isJumping = false
-
         case ObjectNames.door:
-            if let door = body.node as? Door {
-                levelScene?.playerEnteredDoor()
-                door.entered()
+            guard let door = body.node as? Door else {
+                return
             }
 
+            levelScene?.playerEnteredDoor()
+            
+            door.entered()
         default:
             break
         }
