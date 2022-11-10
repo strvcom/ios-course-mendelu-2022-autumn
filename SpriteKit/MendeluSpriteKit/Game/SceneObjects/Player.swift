@@ -7,8 +7,6 @@
 
 import SpriteKit
 
-/// `SKSpriteNode` onscreen graphical element that can be initialized
-/// from an image or a solid color.
 final class Player: SKSpriteNode {
     // MARK: Static
     static let playerLifes = 3
@@ -200,9 +198,9 @@ private extension Player {
         physicsBody?.categoryBitMask = Physics.CategoryBitMask.player
         physicsBody?.collisionBitMask = Physics.CollisionBitMask.player
         physicsBody?.contactTestBitMask = Physics.ContactTestBitMask.player
-        // Prevents boucing when falling to ground.
+        // Prevents boucing when coliding with some other object.
         physicsBody?.restitution = 0
-        // If allowsRotatin woudl be true, than there is a possibility that player
+        // If allowsRotatin would be true, than there is a possibility that node
         // could fall to one side.
         physicsBody?.allowsRotation = false
     }
@@ -228,7 +226,7 @@ private extension Player {
         
         animations[Animations.death.rawValue] = SKAction.group([
             SKAction.run { [weak self] in
-                // We set physicsBody to nil, because we don't want to
+                // We set physicsBody to nil, because we don't want player to
                 // be able to interact with other objects in physics world
                 // upon death.
                 self?.physicsBody = nil

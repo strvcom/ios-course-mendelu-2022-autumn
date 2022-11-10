@@ -14,8 +14,9 @@ extension Physics {
     /// Defines what physics category the body belongs to.
     /// Every physics body in a scene can be assigned to up to 32 different categories,
     /// each corresponding to a bit in the bit mask. You define the mask values
-    /// used in your game. In conjunction with the collisionBitMask and contactTestBitMask properties,
-    /// you define which physics bodies interact with each other and when your game is notified of these interactions.
+    /// used in your game. In conjunction with the `collisionBitMask` and `contactTestBitMask`
+    /// properties, you define which physics bodies interact with each other and when your
+    /// game is notified of these interactions.
     enum CategoryBitMask {
         static let groundTile: UInt32 = 0b0000_0000_0000_0000_0000_0000_0000_0001
         static let boundary: UInt32 = 0b0000_0000_0000_0000_0000_0000_0000_0010

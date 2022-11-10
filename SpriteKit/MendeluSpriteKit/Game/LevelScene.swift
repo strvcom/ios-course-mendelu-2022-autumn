@@ -7,15 +7,16 @@
 
 import SpriteKit
 
+/// Delegate to comunicate, when the player finishes the level.
 protocol LevelCompletionDelegate: AnyObject {
     func levelCompleted(sceneImage: UIImage)
     func levelFailed(sceneImage: UIImage)
 }
 
+/// Scene, where the game is played. It passes values to all `SceneObjects`, handles
+/// physics contants and communicates with `GameViewController`.
 final class LevelScene: SKScene {
     // MARK: Properties
-    private let controlsHidden = true
-
     weak var completionDelegate: LevelCompletionDelegate?
 
     var allSceneObjects: [SceneObject] {
@@ -32,6 +33,10 @@ final class LevelScene: SKScene {
         + others
     }
 
+    // We are using force unwrapping here, which is not good practice,
+    // so we have to make sure, that all SceneObjects are initialized
+    // before we are working with them. The initialisation is done in
+    // didMove(to view: SKView) function.
     private(set) var cameraObject: Camera!
     private(set) var background: Background!
     private(set) var level: Level!
@@ -50,12 +55,16 @@ final class LevelScene: SKScene {
     override func willMove(from view: SKView) {
         super.willMove(from: view)
 
+        // Setting scale mode so that objects in scene are sized correctly.
         scaleMode = .aspectFill
     }
 
+    /// We have to ensure that all objects are initialized here, before we start using them.
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
 
+        // Some objects are initialized directly, because they are not located
+        // in sks file.
         cameraObject = Camera()
 
         background = Background()
@@ -66,6 +75,8 @@ final class LevelScene: SKScene {
 
         playerLifes = PlayerLifes()
 
+        // Other objets are found in sks file and initialized
+        // according correct downcasting.
         for child in children {
             switch child {
             case let zombie as Zombie:
@@ -81,6 +92,8 @@ final class LevelScene: SKScene {
             }
         }
 
+        // After everything is initialized, we can safely start
+        // calling functions on SceneObjects.
         allSceneObjects.forEach { $0.setup(scene: self) }
     }
 
@@ -104,10 +117,12 @@ extension LevelScene: SKPhysicsContactDelegate {
 
 // MARK: Public API
 extension LevelScene {
+    /// Removes zombie from `zombies` array.
     func zombieDied(zombie: Zombie) {
         guard let index = zombies.firstIndex(where: { $0 === zombie }) else {
             return
         }
+        
         zombies.remove(at: index)
     }
 
@@ -115,20 +130,25 @@ extension LevelScene {
         player.isPaused = true
         player.alpha = 0
 
-        guard let levelSceneScreenshot = makeScreenshot() else { return }
+        guard let levelSceneScreenshot = makeScreenshot() else {
+            return
+        }
 
         completionDelegate?.levelCompleted(sceneImage: levelSceneScreenshot)
     }
 
     func playerDied() {
-        guard let levelSceneScreenshot = makeScreenshot() else { return }
+        guard let levelSceneScreenshot = makeScreenshot() else {
+            return
+        }
 
         completionDelegate?.levelFailed(sceneImage: levelSceneScreenshot)
     }
 }
 
-
+// MARK: Private API
 private extension LevelScene {
+    /// Creates screenshot from current view and returns it as `UIImage`.
     func makeScreenshot() -> UIImage? {
         let snapshotView = view?.snapshotView(afterScreenUpdates: true)
         let bounds = UIScreen.main.bounds
