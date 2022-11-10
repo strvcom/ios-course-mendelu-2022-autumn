@@ -33,7 +33,7 @@ private extension FloatingNode {
                 SKAction.sequence([
                     SKAction.moveTo(y: startingPointY - offset, duration: duration),
                     SKAction.moveTo(y: startingPointY + offset, duration: duration)
-                ]))
+            ]))
         )
     }
 }
