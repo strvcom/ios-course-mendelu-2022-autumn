@@ -7,6 +7,8 @@
 
 import SpriteKit
 
+/// Hurtbox show an area, which can hit a hitbox, hence cause damage. To see hutbox during development,
+/// set  `Environment` `showHitboxesAndHurtBoxes` value to `true`.
 final class HurtBox: SKSpriteNode {
     convenience init(
         size: CGSize,

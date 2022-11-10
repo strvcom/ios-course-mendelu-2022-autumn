@@ -7,6 +7,8 @@
 
 import SpriteKit
 
+/// Represents background in `LevelScene`, which consists of 4 layers. It is always going to be scaled
+/// on entire ground width.
 final class Background {
     // MARK: Properties
     private var backgrounds: [(backgroundName: String, layer: CGFloat)] {
@@ -46,6 +48,8 @@ private extension Background {
         
         let aspectRatio = backgroundImageSize.height / backgroundImageSize.width
         
+        // We don't want to deform the image, so we have to multiply height
+        // with image aspect ratio.
         return CGSize(
             width: scene.level.ground.mapSize.width,
             height: scene.level.ground.mapSize.width * aspectRatio

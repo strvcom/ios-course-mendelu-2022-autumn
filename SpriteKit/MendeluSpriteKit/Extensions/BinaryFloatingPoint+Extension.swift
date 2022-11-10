@@ -6,6 +6,12 @@
 //
 
 extension BinaryFloatingPoint {
+    /// Normalizes given value.
+    ///
+    /// You have 2 set boundaries, which are `min` and `max` and output of this
+    /// function will return value between `from` and `to`. For example, if you
+    /// set `from` to 0 and `to` to `1`, return of this function will be some value
+    /// between 0 and 1.
     func normalize(
         min: Self,
         max: Self,

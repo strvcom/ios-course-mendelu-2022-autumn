@@ -8,6 +8,7 @@
 import CoreGraphics
 
 extension CGSize {
+    /// Operator which enable us to use '+' between `CGSize`.
     static func + (left: CGSize, right: CGFloat) -> CGSize {
         CGSize(
             width: left.width + right,
@@ -15,6 +16,7 @@ extension CGSize {
         )
     }
     
+    /// Init with `width` and `height` to same value.
     init(size: CGFloat) {
         self.init(
             width: size,

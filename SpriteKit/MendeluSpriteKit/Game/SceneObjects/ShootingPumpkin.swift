@@ -60,6 +60,9 @@ private extension ShootingPumpkin {
     func setupActions() {
         let eatingTimePerFrame: TimeInterval = 0.25
         
+        // Wait duration is duration between frames when pumpkin has its
+        // mouth opened. When the pumpkin has fully opened mouth, we will
+        // shoot pumpkin out of them.
         let waitDuration = (Double(eatingFrames.count) / 2) * eatingTimePerFrame
         
         animations[Animations.eating.rawValue] = SKAction.repeatForever(
@@ -82,18 +85,27 @@ private extension ShootingPumpkin {
     }
     
     func shoot() {
+        // Direction is calculated so that we can rotate pumpkin around y axis
+        // without hardcoding anything.
         let pumpkinDirection = Direction(xScale: xScale)
 
         let projectile = SKSpriteNode(texture: SKTexture(imageNamed: Assets.Image.projectile))
         projectile.name = ObjectNames.projectile
         projectile.zPosition = Layer.projectile
+        // Node is centered to pumpkin mouth.
         projectile.position = CGPoint(
             x: position.x,
             y: position.y - 20
         )
+        // Here, we update projectile node direction according pumpkin direction.
         projectile.updateNodeDirection(direction: pumpkinDirection)
         projectile.physicsBody = SKPhysicsBody(rectangleOf: projectile.size)
+        // Gravity is turned of because we don't want projectile to fall on
+        // the ground, we want it to travel in straight line.
         projectile.physicsBody?.affectedByGravity = false
+        // When fireing a lot of elements in quick succession, we are recommended
+        // to enable usesPreciseCollisionDetection, so that all collisions of
+        // projectile are going to be properly detected.
         projectile.physicsBody?.usesPreciseCollisionDetection = true
         projectile.physicsBody?.contactTestBitMask = Physics.ContactTestBitMask.projectile
         
@@ -121,7 +133,11 @@ private extension ShootingPumpkin {
     ) {
         projectile.node?.removeFromParent()
         
-        guard body == levelScene?.player.physicsBody else { return }
+        // We only evaluate, if player was hit.
+        guard body == levelScene?.player.physicsBody else {
+            return
+        }
+        
         levelScene?.player.hit()
     }
 }

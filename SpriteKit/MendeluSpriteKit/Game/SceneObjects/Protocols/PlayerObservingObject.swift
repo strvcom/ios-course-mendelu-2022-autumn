@@ -7,10 +7,11 @@
 
 import SpriteKit
 
+/// Protocol used to prevent copy pasting of code.
 protocol PlayerObservingObject: SceneObject, SKNode { }
 
 extension PlayerObservingObject {
-
+    /// Returns current player position, if the position is not available, `.zero` is returned.
     var playerPosition: CGPoint {
         levelScene?.player.position ?? .zero
     }

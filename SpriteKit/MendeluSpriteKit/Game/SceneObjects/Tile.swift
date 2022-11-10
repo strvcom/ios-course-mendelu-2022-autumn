@@ -7,6 +7,7 @@
 
 import SpriteKit
 
+/// Object representing ground tile in `LevelScene`.
 final class Tile: SKSpriteNode {}
 
 // MARK: Constants

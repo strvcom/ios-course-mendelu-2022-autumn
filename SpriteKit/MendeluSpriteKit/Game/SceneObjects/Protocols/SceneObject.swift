@@ -8,17 +8,25 @@
 import UIKit
 import SpriteKit
 
+/// Protocol representating object in scene. Every method is optional, you can implement only those
+/// you need to.
 protocol SceneObject {
+    /// Called one, after every scene object is initialized. You can perform custom setup or add another child nodes here.
     func setup(scene: LevelScene)
     
+    /// Function, which is called every frame.
     func update(_ currentTime: TimeInterval)
     
+    /// Called, when the user presses key on keyboard, only for simulator debug purposes.
     func keyboardDown(presses: Set<UIPress>)
     
+    /// Called, when the user lifts the finger from key on keyboard, only for simulator debug purposes.
     func keyboardUp(presses: Set<UIPress>)
     
+    /// Called, when some contact in scene was detected.
     func handleContactStart(_ contact: SKPhysicsContact)
     
+    /// Called, when object in scene lost contact.
     func handleContactEnd(_ contact: SKPhysicsContact)
 }
 
@@ -39,6 +47,7 @@ extension SceneObject {
 
 // MARK: SceneObject + SKNode
 extension SceneObject where Self: SKNode {
+    /// Returns downcasted level scene.
     var levelScene: LevelScene? {
         scene as? LevelScene
     }
