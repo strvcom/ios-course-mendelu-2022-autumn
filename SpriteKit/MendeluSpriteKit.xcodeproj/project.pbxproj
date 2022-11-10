@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2079C75D291BF7750055A9EB /* WelcomeScreen.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2079C75C291BF7750055A9EB /* WelcomeScreen.sks */; };
+		2079C75F291BF7970055A9EB /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2079C75E291BF7970055A9EB /* WelcomeScreen.swift */; };
 		207B9CFA291272D100855DF4 /* PlayerLifes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207B9CF9291272D100855DF4 /* PlayerLifes.swift */; };
 		207B9D0B29129B5C00855DF4 /* PlayerDeath.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 207B9D0A29129B5C00855DF4 /* PlayerDeath.atlas */; };
 		590A9EA8290850780006CD20 /* CGSize+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590A9EA7290850780006CD20 /* CGSize+Extension.swift */; };
@@ -65,6 +67,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2079C75C291BF7750055A9EB /* WelcomeScreen.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WelcomeScreen.sks; sourceTree = "<group>"; };
+		2079C75E291BF7970055A9EB /* WelcomeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
 		207B9CF9291272D100855DF4 /* PlayerLifes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerLifes.swift; sourceTree = "<group>"; };
 		207B9D0A29129B5C00855DF4 /* PlayerDeath.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = PlayerDeath.atlas; sourceTree = "<group>"; };
 		590A9EA7290850780006CD20 /* CGSize+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Extension.swift"; sourceTree = "<group>"; };
@@ -142,6 +146,7 @@
 				592E302B28E588A000603ECC /* Levels */,
 				5922EAD628D8C1A400BE46DC /* SceneObjects */,
 				59CFC5ED28D78A5900F4E6AE /* Layer.swift */,
+				2079C75E291BF7970055A9EB /* WelcomeScreen.swift */,
 				9D26298228F6BE8B00969D80 /* LevelFinishedScene.swift */,
 				5990779E28D77E3C00659E6E /* LevelScene.swift */,
 				5922EAD728D8C2E400BE46DC /* Physics.swift */,
@@ -311,6 +316,7 @@
 		9D26297528F6ACBD00969D80 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				2079C75C291BF7750055A9EB /* WelcomeScreen.sks */,
 				9D26297628F6ACDD00969D80 /* LevelCompleted.sks */,
 				9DDF1AE328F83D3B0013BED8 /* GameOver.sks */,
 			);
@@ -413,6 +419,7 @@
 				9D26297828F6ACDD00969D80 /* LevelCompleted.sks in Resources */,
 				5922EADC28D8CD7300BE46DC /* PlayerIdle.atlas in Resources */,
 				59CC665028E87C0D0010A82E /* ZombieAttack.atlas in Resources */,
+				2079C75D291BF7750055A9EB /* WelcomeScreen.sks in Resources */,
 				59A9DB3F28E618C500492DAA /* Tiles.sks in Resources */,
 				592E302528E494F400603ECC /* Assets.xcassets in Resources */,
 				59CC666328E99E870010A82E /* PumpkinEating.atlas in Resources */,
@@ -460,6 +467,7 @@
 				9DDF1AE628F847B50013BED8 /* FloatingNode.swift in Sources */,
 				9DD9BA8B28EC5377002AA59F /* Fountain.swift in Sources */,
 				59EF42F128E0BA42005CC691 /* Joystick.swift in Sources */,
+				2079C75F291BF7970055A9EB /* WelcomeScreen.swift in Sources */,
 				592E302D28E588C100603ECC /* Tile.swift in Sources */,
 				59699EB128E1AEA700999BE7 /* SKNode+Extension.swift in Sources */,
 				5922EAE028D8CF8200BE46DC /* SKTextureAtlas+Extension.swift in Sources */,
