@@ -36,6 +36,8 @@ final class GameViewController: UIViewController {
         welcomeScreen()
     }
     
+    /// React to presses began and passes them to `LevelScene`. We found out, when you
+    /// override methods in `SKNode`, it doesn't always work.
     override func pressesBegan(
         _ presses: Set<UIPress>,
         with event: UIPressesEvent?
@@ -54,6 +56,8 @@ final class GameViewController: UIViewController {
         }
     }
     
+    /// React to presses ended and passes them to `LevelScene`. We found out, when you
+    /// override methods in `SKNode`, it doesn't always work.
     override func pressesEnded(
         _ presses: Set<UIPress>,
         with event: UIPressesEvent?
@@ -72,6 +76,7 @@ final class GameViewController: UIViewController {
         }
     }
     
+    /// Presents `WelcomeScreen` in `skView`.
     func welcomeScreen() {
         guard let scene = WelcomeScreen(fileNamed: Assets.Scenes.welcomeScreen) else {
             return
@@ -79,52 +84,79 @@ final class GameViewController: UIViewController {
         
         scene.welcomeScreenDelegate = self
         scene.scaleMode = .aspectFill
+        
         let transition = SKTransition.crossFade(withDuration: 0.6)
 
-        skView.presentScene(scene, transition: transition)
+        skView.presentScene(
+            scene,
+            transition: transition
+        )
     }
 
+    /// Presents `LevelScene` in `skView`.
     func startGame() {
         guard let scene = LevelScene(fileNamed: Assets.Scenes.level1) else {
             return
         }
         
-        scene.completionDelegate = self
+        scene.levelSceneDelegate = self
 
         let transition = SKTransition.crossFade(withDuration: 0.6)
-        skView.presentScene(scene, transition: transition)
+        
+        skView.presentScene(
+            scene,
+            transition: transition
+        )
     }
 
-    func showLevelFinishedScene(sceneFileName: String, backgroundImage: UIImage) {
+    /// Presents `LevelFinishedScene` in `skView`.
+    func showLevelFinishedScene(
+        sceneFileName: String,
+        backgroundImage: UIImage
+    ) {
         guard let scene = LevelFinishedScene(fileNamed: sceneFileName) else {
             return
         }
 
         scene.setBackgroundImage(backgroundImage)
-        scene.newGameButtonTapped = { [weak self] in
-            self?.startGame()
-        }
-
+        scene.levelFinishedSceneDelegate = self
         scene.scaleMode = .aspectFill
+        
         let transition = SKTransition.crossFade(withDuration: 1)
-        skView.presentScene(scene, transition: transition)
+        
+        skView.presentScene(
+            scene,
+            transition: transition
+        )
     }
 }
 
 // MARK: LevelCompletionDelegate
-extension GameViewController: LevelCompletionDelegate {
-    func levelCompleted(sceneImage: UIImage) {
-        showLevelFinishedScene(sceneFileName: Assets.Scenes.levelCompleted, backgroundImage: sceneImage)
+extension GameViewController: LevelSceneDelegate {
+    func levelSceneLevelCompleted(sceneImage: UIImage) {
+        showLevelFinishedScene(
+            sceneFileName: Assets.Scenes.levelCompleted,
+            backgroundImage: sceneImage
+        )
     }
     
-    func levelFailed(sceneImage: UIImage) {
-        showLevelFinishedScene(sceneFileName: Assets.Scenes.gameOver, backgroundImage: sceneImage)
+    func levelSceneLevelFailed(sceneImage: UIImage) {
+        showLevelFinishedScene(
+            sceneFileName: Assets.Scenes.gameOver,
+            backgroundImage: sceneImage
+        )
     }
 }
 
 // MARK: WelcomeScreenDelegate
 extension GameViewController: WelcomeScreenDelegate {
-    func newGameButtonTapped() {
+    func welcomeScreenNewGameButtonTapped() {
+        startGame()
+    }
+}
+
+extension GameViewController: LevelFinishedSceneDelegate {
+    func levelFinishedSceneNewGameButtonTapped() {
         startGame()
     }
 }

@@ -66,16 +66,23 @@ extension Door: AnimatedObject {}
 extension Door {
     func entered() {
         playAnimation(key: Animations.enter.rawValue)
-        run(SKAction.fadeAlpha(to: 0, duration: 1))
+        
+        run(
+            SKAction.fadeAlpha(
+                to: 0,
+                duration: 1
+            )
+        )
     }
 }
 
 // MARK: Private API
 private extension Door {
-
     func setupDoor() {
         zPosition = Layer.door
+        
         texture = SKTexture(image: Images.closedDoorImage)
+        
         name = ObjectNames.door
     }
 
@@ -107,23 +114,38 @@ private extension Door {
     func updateState() {
         let distanceToPlayerToOpenTheDoor: CGFloat = 80
 
+        // When player is close enough and doors are unlocked (all zombies
+        // are dead), we play opening door animation.
         switch distanceToPlayer {
         case let distance where distance <= distanceToPlayerToOpenTheDoor:
-            guard !isOpen, isUnlocked else { return }
-
-            playAnimation(key: Animations.open.rawValue)
-            isOpen = true
-
-            if physicsBody == nil {
-                physicsBody = collisionPhysicsBody
+            guard
+                !isOpen,
+                isUnlocked
+            else {
+                return
             }
 
+            playAnimation(key: Animations.open.rawValue)
+            
+            isOpen = true
+
+            // We set physics body to door, only when then can be opened, otherwise
+            // player wouldn't be able to walk in front of them.
+            guard physicsBody == nil else {
+                return
+            }
+
+            physicsBody = collisionPhysicsBody
+        
+        // When player is too far, doors are going to be closed.
         case let distance where distance > distanceToPlayerToOpenTheDoor:
-            guard isOpen else { return }
+            guard isOpen else {
+                return
+            }
 
             playAnimation(key: Animations.close.rawValue)
+            
             isOpen = false
-
         default:
             break
         }

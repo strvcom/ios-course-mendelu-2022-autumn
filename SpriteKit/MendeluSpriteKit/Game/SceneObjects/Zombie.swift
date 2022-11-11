@@ -13,10 +13,12 @@ final class Zombie: SKSpriteNode {
     private var walkingFrames = SKTextureAtlas(named: Assets.Atlas.zombieWalk).textures
     private var attackFrames = SKTextureAtlas(named: Assets.Atlas.zombieAttack).textures
     private var deathFrames = SKTextureAtlas(named: Assets.Atlas.zombieDeath).textures
+    /// Same as `Joystick` velocity, indicates, how fast and where is zombie moving.
     private var velocity: CGFloat = 0
     private var isDead = false
     private var isAttacking = false
     
+    /// Hutbox positioned to zombie hands when attacking.
     private lazy var hurtBox: HurtBox = {
         HurtBox(
             size: CGSize(
@@ -30,6 +32,7 @@ final class Zombie: SKSpriteNode {
         )
     }()
     
+    /// Direction, where zombie is facing towards.
     private var direction: Direction = .right {
         didSet {
             guard oldValue != direction else {
@@ -46,6 +49,7 @@ final class Zombie: SKSpriteNode {
     
     private(set) var animations = [String: SKAction]()
     
+    /// Hitbox positioned to zombie physics body.
     private(set) lazy var hitBox: HitBox = {
         HitBox(
             size: CGSize(
@@ -73,13 +77,19 @@ extension Zombie: SceneObject {
     func update(_ currentTime: TimeInterval) {
         updateState()
         
+        // Zombie is by default in idle braindead state, until there is
+        // player around.
         guard
+            // First, we send ray to player position, which returns the first
+            // physics body along its way.
             let body = levelScene?.physicsWorld.body(
                 alongRayStart: position,
                 end: playerPosition
             ),
+            // When the physics body is player, then we can start moving zombie.
             body.categoryBitMask == Physics.CategoryBitMask.player
         else {
+            // Otherwise, zombie just stay in one place.
             velocity = 0
             
             return
@@ -103,6 +113,8 @@ extension Zombie: AnimatedObject {}
 
 // MARK: Zombie
 extension Zombie {
+    /// Call, when zombie should be hit by something. Zombie has only one life, so
+    /// he dies immediatelly after one hit.
     func hit() {
         guard !isDead else {
             return
@@ -147,6 +159,9 @@ private extension Zombie {
         
         animations[Animations.death.rawValue] = SKAction.group([
             SKAction.run { [weak self] in
+                // We set physicsBody to nil, because we don't want zombie to
+                // be able to interact with other objects in physics world
+                // upon death.
                 self?.physicsBody = nil
             },
             SKAction.animate(
@@ -178,6 +193,7 @@ private extension Zombie {
                 resize: false,
                 restore: true
             ),
+            // Hurbox is only going to be shown between 4th and last frame.
             SKAction.sequence([
                 SKAction.wait(forDuration: attackTimePerFrame * Double(4)),
                 SKAction.run { [weak self] in
@@ -205,7 +221,10 @@ private extension Zombie {
         )
         physicsBody?.categoryBitMask = Physics.CategoryBitMask.zombie
         physicsBody?.collisionBitMask = Physics.CollisionBitMask.zombie
+        // Prevents boucing when coliding with some other object.
         physicsBody?.restitution = 0
+        // If allowsRotatin would be true, than there is a possibility that node
+        // could fall to one side.
         physicsBody?.allowsRotation = false
         
         addChild(hitBox)
@@ -223,6 +242,7 @@ private extension Zombie {
         }
     }
     
+    /// Updates zombie direction to face player.
     func updateDirection() {
         guard
             !isDead,
@@ -236,6 +256,7 @@ private extension Zombie {
             : .left
     }
     
+    /// Updates zombie position to walk to player.
     func updatePosition() {
         guard
             !isDead,
@@ -244,14 +265,18 @@ private extension Zombie {
             return
         }
         
+        // When player is far, zombie is too lazy to go, he waits until
+        // there is player close enough.
         if distanceToPlayer > 200 {
             velocity = 0
         } else {
+            // After player moved closer, zombie starts to walk towards him / her.
             velocity = playerPosition.x > position.x
                 ? 1
                 : -1
         }
         
+        // Calculated zombie speed.
         let moveBy = size.width * 0.07 * velocity
         
         position = CGPoint(
@@ -260,8 +285,12 @@ private extension Zombie {
         )
     }
     
+    /// Updates zombie to attacking state. When player is close enought to zombie, we
+    /// can switch `isAttacking` value to `true`.
     func updateIsAttacking() {
         guard
+            // This indicates that player is in contact with zombie, becuase
+            // distance to player is point from center of zombie node.
             distanceToPlayer < size.width / 2,
             !isAttacking
         else {
@@ -271,6 +300,7 @@ private extension Zombie {
         isAttacking = true
     }
     
+    /// Evaluates, if `hurtbox` hitted something.
     func updateHurtBox() {
         guard
             hurtBox.parent != nil,
@@ -281,7 +311,8 @@ private extension Zombie {
         
         guard
             let player = levelScene.player,
-            hurtBox.intersects(player.hitbox) else {
+            hurtBox.intersects(player.hitbox)
+        else {
             return
         }
         

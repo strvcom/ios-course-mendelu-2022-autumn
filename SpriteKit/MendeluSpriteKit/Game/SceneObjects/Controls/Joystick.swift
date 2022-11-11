@@ -9,19 +9,26 @@ import SpriteKit
 
 final class Joystick: SKSpriteNode {
     // MARK: Properties
+    /// Joystick background, the black circle which is not moving.
     private var backgroundNode: SKSpriteNode?
+    /// Moving part of joystick (orange circle).
     private var knobNode: SKSpriteNode?
+    /// Stored keys, which users holds down.
     private var pressedKeys = Set<String>()
     
+    /// Edges, which indicates max `x` position of `knobNode`
     private var positionTresholds: EdgePositions {
         let halfOfJoystickWidth = joystickSize.width / 2
         
+        // We always use default joystick position, so that we have
+        // same edge positions at any point in time.
         return EdgePositions(
             max: defaultPosition.x + halfOfJoystickWidth,
             min: defaultPosition.x - halfOfJoystickWidth
         )
     }
     
+    /// Default position of `backgroundNode` and `knobNobe`, returns center in `Joystick` node.
     private var defaultPosition: CGPoint {
         CGPoint(
             x: size.width / 2,
@@ -45,6 +52,8 @@ final class Joystick: SKSpriteNode {
         
         let touchLocation = touch.location(in: self).x
         
+        // We have to restrict knobXPositon to EdgePositions, otherwise, we
+        // would be able to move it out of bounds.
         let knobXPosition = touchLocation.clamped(to: positionTresholds.min ... positionTresholds.max)
         
         updateKnobXPosition(knobXPosition: knobXPosition)
@@ -87,6 +96,8 @@ extension Joystick: SceneObject {
         )
         
         backgroundNode = SKSpriteNode(imageNamed: Assets.Image.joystickBackground)
+        // We increased background size a little, so that it's clearly
+        // visible at all times.
         backgroundNode?.size = joystickSize + 4
         backgroundNode?.zPosition = zPosition
         backgroundNode?.position = defaultPosition
@@ -95,6 +106,7 @@ extension Joystick: SceneObject {
         
         knobNode = SKSpriteNode(imageNamed: Assets.Image.joystickKnob)
         knobNode?.position = defaultPosition
+        // We want to have knobNode always above backgroundNode
         knobNode?.zPosition = zPosition + 1
         knobNode?.size = joystickSize
 
@@ -102,6 +114,7 @@ extension Joystick: SceneObject {
     }
     
     func keyboardUp(presses: Set<UIPress>) {
+        // Storing right and left arrow in pressedKeys set.
         for press in presses {
             if press.key?.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow {
                 pressedKeys.insert(UIKeyCommand.inputLeftArrow)
@@ -116,6 +129,7 @@ extension Joystick: SceneObject {
     }
     
     func keyboardDown(presses: Set<UIPress>) {
+        // Removing right and left arrow from pressedKeys set.
         for press in presses {
             if press.key?.charactersIgnoringModifiers == UIKeyCommand.inputLeftArrow {
                 pressedKeys.remove(UIKeyCommand.inputLeftArrow)
@@ -140,9 +154,12 @@ private extension Joystick {
 
 // MARK: Private API
 private extension Joystick {
+    /// Updates knob position after using keyboard.
     func updateKnobXPositionKeyboardAfterPress() {
         var knobXPosition = defaultPosition.x
         
+        // We set knob position either to max or min treshold,
+        // according which keys are contained in pressedKeys
         for key in pressedKeys {
             if key == UIKeyCommand.inputLeftArrow {
                 knobXPosition = positionTresholds.min
@@ -156,12 +173,17 @@ private extension Joystick {
         updateKnobXPosition(knobXPosition: knobXPosition)
     }
     
+    /// Updates `knobNode` position in parent.
     func updateKnobXPosition(knobXPosition: CGFloat) {
+        // We are updaring only x position, since we want to move joystick
+        // only to left and right.
         knobNode?.position = CGPoint(
             x: knobXPosition,
             y: defaultPosition.y
         )
         
+        // After knob is moved, we can take its position and normalize it to
+        // velocity value, so that velocity is always in range between -1 and 1.
         velocity = knobXPosition.normalize(
             min: positionTresholds.min,
             max: positionTresholds.max,
@@ -170,6 +192,9 @@ private extension Joystick {
         )
     }
     
+    /// Resets knob position.
+    ///
+    /// When knob position is reseting, we are not able to interact with it.
     func resetKnobNodePosition() {
         isUserInteractionEnabled = false
         

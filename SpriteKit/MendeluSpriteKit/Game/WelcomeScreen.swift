@@ -9,7 +9,7 @@ import Foundation
 import SpriteKit
 
 protocol WelcomeScreenDelegate: AnyObject {
-    func newGameButtonTapped()
+    func welcomeScreenNewGameButtonTapped()
 }
 
 final class WelcomeScreen: SKScene {
@@ -24,7 +24,7 @@ extension WelcomeScreen {
     override func didMove(to view: SKView) {
         newGameButton = children.first(where: { $0 is TouchNode }) as? TouchNode
         newGameButton?.tapAction = { [welcomeScreenDelegate] in
-            welcomeScreenDelegate?.newGameButtonTapped()
+            welcomeScreenDelegate?.welcomeScreenNewGameButtonTapped()
         }
         
         if let welcomeBackground = UIImage(named: Assets.Image.welcomeBackground) {
