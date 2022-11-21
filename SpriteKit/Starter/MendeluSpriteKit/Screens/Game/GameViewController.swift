@@ -40,6 +40,11 @@ final class GameViewController: UIViewController {
     
     func startGame() {
         // TODO: Show Level scene
+        guard let scene = SKScene(fileNamed: Assets.Scenes.level2) else {
+            return
+        }
+        
+        skView.presentScene(scene)
     }
 
     func showLevelFinishedScene(

@@ -46,15 +46,41 @@ extension Camera: SceneObject {
         scene.camera = self
         scene.addChild(self)
         
+        xScale = 0.5
+        yScale = 0.5
         // TODO: Change camera size
     }
     
     func update(_ currentTime: TimeInterval) {
         // TODO: Center camera to player
+        guard
+            let playerPosition = levelScene?.player.position,
+            let boundingRectangle = calculateBoundingRectangle()
+        else {
+            return
+        }
+        
+        let widthRange = (boundingRectangle.minX ... boundingRectangle.minX + boundingRectangle.width)
+        
+        let heightRange = (boundingRectangle.minY ... boundingRectangle.minY + boundingRectangle.height)
+        
+        position = CGPoint(
+            x: playerPosition.x.clamped(to: widthRange),
+            y: playerPosition.y.clamped(to: heightRange)
+        )
     }
     
     func calculateBoundingRectangle() -> CGRect? {
         // TODO: Calculate bounding rectangle
-        nil
+        guard let mapSize = levelScene?.level.ground.mapSize else {
+            return nil
+        }
+        
+        return CGRect(
+            x: cameraSize.width / 2,
+            y: cameraSize.height / 2,
+            width: mapSize.width - cameraSize.width,
+            height: mapSize.height - cameraSize.height
+        )
     }
 }

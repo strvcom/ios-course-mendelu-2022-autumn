@@ -15,18 +15,23 @@ final class LevelScene: SKScene {
     weak var levelSceneDelegate: LevelSceneDelegate?
     
     var allSceneObjects: [SceneObject] {
-        []
+        [
+            cameraObject,
+            level,
+            player,
+            joystick
+        ]
     }
     // TODO: Add Camera
-    
+    private(set) var cameraObject: Camera!
     // TODO: Add Background
     
     // TODO: Add Level
-    
+    private(set) var level: Level!
     // TODO: Add Player
-
+    private(set) var player: Player!
     // TODO: Add Joystick
-    
+    private(set) var joystick: Joystick!
     // TODO: Add ControlButtons
     
     // TODO: Add PlayerLifes
@@ -47,15 +52,32 @@ final class LevelScene: SKScene {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         
+        cameraObject = Camera()
+        joystick = Joystick()
+
+        for child in children {
+            switch child {
+            case let map as SKTileMapNode:
+                level = Level(ground: map)
+            case let player as Player:
+                self.player = player
+            // TODO: Add other pending objects
+            default:
+                break
+            }
+        }
+        
         // MARK: Set physics contact delegate
         
         // MARK: Initialize Scene objects
+        allSceneObjects.forEach { $0.setup(scene: self) }
     }
     
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
         
         // TODO: Update Scene objects
+        allSceneObjects.forEach { $0.update(currentTime) }
     }
 }
 
