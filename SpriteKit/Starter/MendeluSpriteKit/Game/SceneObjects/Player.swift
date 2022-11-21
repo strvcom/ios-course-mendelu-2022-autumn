@@ -54,10 +54,12 @@ extension Player: SceneObject {
 extension Player {
     func attack() {
         // TODO: Implement Player Attack
+        print("TODO: Implement attack")
     }
     
     func jump() {
         // TODO: Implement Player Jump
+        print("TODO: Implement jump")
     }
     
     func hit() {
@@ -68,6 +70,8 @@ extension Player {
 // MARK: Private API
 private extension Player {
     func setupPlayer() {
+        zPosition = Layer.player
+        
         physicsBody = SKPhysicsBody(
             texture: SKTexture(imageNamed: Assets.Image.playerPhysicsBody),
             size: CGSize(

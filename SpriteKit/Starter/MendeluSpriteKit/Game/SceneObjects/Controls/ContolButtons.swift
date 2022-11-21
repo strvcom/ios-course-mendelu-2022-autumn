@@ -29,8 +29,7 @@ final class ControlButtons: SKSpriteNode {
 // MARK: GameObject
 extension ControlButtons: SceneObject {
     func setup(scene: LevelScene) {
-        // TODO: Implement after camera object
-        let cameraBottomRightCorner: CGPoint = .zero
+        scene.cameraObject.addChild(self)
         
         zPosition = Layer.controls
         anchorPoint = .zero
@@ -52,8 +51,8 @@ extension ControlButtons: SceneObject {
             // We are substracting controls size, since we want to move it to
             // left. If we didn't substract this value, controls would be rendered
             // outside of camera (on right).
-            x: cameraBottomRightCorner.x - size.width - 16,
-            y: cameraBottomRightCorner.y + 16
+            x: scene.cameraObject.bottomRightCorner.x - size.width - 16,
+            y: scene.cameraObject.bottomRightCorner.y + 16
         )
         
         jumpButton = JumpButton(imageNamed: Assets.Image.jumpButton)
@@ -87,14 +86,14 @@ final class JumpButton: SKSpriteNode {
         _ touches: Set<UITouch>,
         with event: UIEvent?
     ) {
-        // TODO: Jump with player
+        levelScene?.player.jump()
     }
     
     func keyboardUp(presses: Set<UIPress>) {
         for press in presses {
             // After space is pressed in keyboard, character is going to jump.
             if press.key?.charactersIgnoringModifiers == " " {
-                // TODO: Jump with player
+                levelScene?.player.jump()
             }
         }
     }
@@ -110,13 +109,13 @@ final class AttackButton: SKSpriteNode {
         _ touches: Set<UITouch>,
         with event: UIEvent?
     ) {
-        // TODO: Attack with player
+        levelScene?.player.attack()
     }
     
     func keyboardUp(presses: Set<UIPress>) {
         for press in presses {
             if press.key?.charactersIgnoringModifiers == "a" {
-                // TODO: Attack with player
+                levelScene?.player.attack()
             }
         }
     }
