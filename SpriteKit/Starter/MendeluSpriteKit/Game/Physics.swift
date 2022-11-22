@@ -19,9 +19,9 @@ extension Physics {
     /// game is notified of these interactions.
     // TODO: Implement CategoryBitMask
     enum CategoryBitMask {
-        static let groundTile: UInt32 = 0
+        static let groundTile: UInt32 = 0b10
         static let boundary: UInt32 = 0
-        static let player: UInt32 = 0
+        static let player: UInt32 = 0b1
         static let zombie: UInt32 = 0
         static let projectile: UInt32 = 0
         static let door: UInt32 = 0
@@ -38,9 +38,9 @@ extension Physics {
     // TODO: Implement CategoryBitMask
     enum CollisionBitMask {
         static let projectile: UInt32 = 0
-        static let player: UInt32 = 0
+        static let player: UInt32 = Physics.CategoryBitMask.groundTile
         static let zombie: UInt32 = 0
-        static let groundTile: UInt32 = 0
+        static let groundTile: UInt32 = Physics.CategoryBitMask.player
         static let boundary: UInt32 = 0
     }
 }

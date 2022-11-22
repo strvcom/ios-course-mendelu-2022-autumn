@@ -9,6 +9,9 @@ import SpriteKit
 
 final class Player: SKSpriteNode {
     // MARK: Properties
+    private var velocity: CGFloat {
+        levelScene?.joystick.velocity ?? 0
+    }
     // TODO: Add Properties
 }
 
@@ -51,10 +54,12 @@ extension Player: SceneObject {
 extension Player {
     func attack() {
         // TODO: Implement Player Attack
+        print("TODO: Implement attack")
     }
     
     func jump() {
         // TODO: Implement Player Jump
+        print("TODO: Implement jump")
     }
     
     func hit() {
@@ -65,7 +70,20 @@ extension Player {
 // MARK: Private API
 private extension Player {
     func setupPlayer() {
-        // TODO: Implement setupPlayer
+        zPosition = Layer.player
+        
+        physicsBody = SKPhysicsBody(
+            texture: SKTexture(imageNamed: Assets.Image.playerPhysicsBody),
+            size: CGSize(
+                width: 20,
+                height: 35
+            )
+        )
+        physicsBody?.categoryBitMask = Physics.CategoryBitMask.player
+        physicsBody?.collisionBitMask = Physics.CollisionBitMask.player
+        physicsBody?.contactTestBitMask = Physics.ContactTestBitMask.player
+        physicsBody?.restitution = 0
+        physicsBody?.allowsRotation = false
     }
     
     func setupActions() {
@@ -86,6 +104,12 @@ private extension Player {
     
     func updatePosition() {
         // TODO: Implement updateDirection
+        let moveBy = size.width * 0.2 * velocity
+        
+        position = CGPoint(
+            x: position.x + moveBy,
+            y: position.y
+        )
     }
     
     /// Evaluates, if `hurtbox` hitted something.

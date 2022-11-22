@@ -36,10 +36,52 @@ final class GameViewController: UIViewController {
         startGame()
     }
     
-    // TODO: Implement presses for debug purposes
+    /// React to presses began and passes them to `LevelScene`. We found out, when you
+    /// override methods in `SKNode`, it doesn't always work.
+    override func pressesBegan(
+        _ presses: Set<UIPress>,
+        with event: UIPressesEvent?
+    ) {
+        super.pressesBegan(
+            presses,
+            with: event
+        )
+        
+        guard let scene = skView.scene as? LevelScene else {
+            return
+        }
+        
+        for gameObject in scene.allSceneObjects {
+            gameObject.keyboardUp(presses: presses)
+        }
+    }
+    
+    /// React to presses ended and passes them to `LevelScene`. We found out, when you
+    /// override methods in `SKNode`, it doesn't always work.
+    override func pressesEnded(
+        _ presses: Set<UIPress>,
+        with event: UIPressesEvent?
+    ) {
+        super.pressesEnded(
+            presses,
+            with: event
+        )
+        
+        guard let scene = skView.scene as? LevelScene else {
+            return
+        }
+        
+        for gameObject in scene.allSceneObjects {
+            gameObject.keyboardDown(presses: presses)
+        }
+    }
     
     func startGame() {
-        // TODO: Show Level scene
+        guard let scene = SKScene(fileNamed: Assets.Scenes.level1) else {
+            return
+        }
+        
+        skView.presentScene(scene)
     }
 
     func showLevelFinishedScene(

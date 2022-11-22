@@ -15,19 +15,20 @@ final class LevelScene: SKScene {
     weak var levelSceneDelegate: LevelSceneDelegate?
     
     var allSceneObjects: [SceneObject] {
-        []
+        [
+            cameraObject,
+            level,
+            player,
+            joystick,
+            controlButtons
+        ]
     }
-    // TODO: Add Camera
     
-    // TODO: Add Background
-    
-    // TODO: Add Level
-    
-    // TODO: Add Player
-
-    // TODO: Add Joystick
-    
-    // TODO: Add ControlButtons
+    private(set) var cameraObject: Camera!
+    private(set) var level: Level!
+    private(set) var player: Player!
+    private(set) var joystick: Joystick!
+    private(set) var controlButtons: ControlButtons!
     
     // TODO: Add PlayerLifes
     
@@ -41,21 +42,39 @@ final class LevelScene: SKScene {
     override func willMove(from view: SKView) {
         super.willMove(from: view)
         
-        // TODO: Setup scaling
+        scaleMode = .aspectFill
     }
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         
+        cameraObject = Camera()
+        joystick = Joystick()
+        controlButtons = ControlButtons()
+
+        for child in children {
+            switch child {
+            case let map as SKTileMapNode:
+                level = Level(ground: map)
+            case let player as Player:
+                self.player = player
+            case let child where child.name == ObjectNames.scenery:
+                child.zPosition = Layer.scenery
+            default:
+                break
+            }
+        }
+        
         // MARK: Set physics contact delegate
         
-        // MARK: Initialize Scene objects
+        allSceneObjects.forEach { $0.setup(scene: self) }
     }
     
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
         
         // TODO: Update Scene objects
+        allSceneObjects.forEach { $0.update(currentTime) }
     }
 }
 
