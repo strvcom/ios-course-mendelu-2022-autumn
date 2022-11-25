@@ -12,6 +12,7 @@ enum Example: String, CaseIterable {
     case customScene = "Custom scene"
     case customBezierPath = "Geometry from bezier path"
     case customGeometry = "Custom Geometry"
+    case customGeometryExtended = "Custom geometry - extended"
     case planeDetection = "Plane detection"
     case bodyTracking = "Body tracking"
     case vision = "Vision - hand tracking"
@@ -26,6 +27,8 @@ extension Example {
             return BezierPathGeometryExample()
         case .customGeometry:
             return GeometryExample()
+        case .customGeometryExtended:
+            return CustomGeometryExtendedExample()
         case .planeDetection:
             return PlaneDetectionExample()
         case .bodyTracking:
