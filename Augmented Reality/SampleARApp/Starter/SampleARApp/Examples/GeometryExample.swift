@@ -16,10 +16,6 @@ final class GeometryExample: ARViewController {
 
 private extension GeometryExample {
     func showCustomNode() {
-        // TODO: bigger size?
-//        let width: Float = <#Set node's width#>
-//        let height: Float = <#Set node's height#>
-
         // 1. Define vertices
 
 

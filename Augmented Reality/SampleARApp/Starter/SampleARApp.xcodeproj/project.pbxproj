@@ -13,6 +13,8 @@
 		B5466D1128F5A1350049CF6E /* CoordinatesAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466D1028F5A1350049CF6E /* CoordinatesAdapter.swift */; };
 		B5466D1328F5A1510049CF6E /* CVPixelBuffer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466D1228F5A1510049CF6E /* CVPixelBuffer+Extensions.swift */; };
 		B5466D1528F5A4550049CF6E /* BodyTrackingExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5466D1428F5A4550049CF6E /* BodyTrackingExample.swift */; };
+		B5CDA5272930F49F006C3FCE /* CustomGeometryExtended.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CDA5262930F49F006C3FCE /* CustomGeometryExtended.swift */; };
+		B5CDA5292930F527006C3FCE /* simd_float3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5CDA5282930F527006C3FCE /* simd_float3+Extensions.swift */; };
 		B5DE74B028BE73E500CD3A1E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DE74AF28BE73E500CD3A1E /* AppDelegate.swift */; };
 		B5DE74B228BE73E500CD3A1E /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = B5DE74B128BE73E500CD3A1E /* art.scnassets */; };
 		B5DE74B928BE73E600CD3A1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5DE74B828BE73E600CD3A1E /* Assets.xcassets */; };
@@ -32,6 +34,8 @@
 		B5466D1028F5A1350049CF6E /* CoordinatesAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatesAdapter.swift; sourceTree = "<group>"; };
 		B5466D1228F5A1510049CF6E /* CVPixelBuffer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CVPixelBuffer+Extensions.swift"; sourceTree = "<group>"; };
 		B5466D1428F5A4550049CF6E /* BodyTrackingExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyTrackingExample.swift; sourceTree = "<group>"; };
+		B5CDA5262930F49F006C3FCE /* CustomGeometryExtended.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomGeometryExtended.swift; sourceTree = "<group>"; };
+		B5CDA5282930F527006C3FCE /* simd_float3+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "simd_float3+Extensions.swift"; sourceTree = "<group>"; };
 		B5DE74AC28BE73E500CD3A1E /* SampleARApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleARApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5DE74AF28BE73E500CD3A1E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5DE74B128BE73E500CD3A1E /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -61,8 +65,9 @@
 			children = (
 				B5466D1028F5A1350049CF6E /* CoordinatesAdapter.swift */,
 				B5466D1228F5A1510049CF6E /* CVPixelBuffer+Extensions.swift */,
-				B5012EAB28FE7D4A00F36633 /* simd_float4x4+Extensions.swift */,
 				B5012EAD28FE7D8500F36633 /* SCNGeometrySource+Extensions.swift */,
+				B5CDA5282930F527006C3FCE /* simd_float3+Extensions.swift */,
+				B5012EAB28FE7D4A00F36633 /* simd_float4x4+Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -107,6 +112,7 @@
 				B5DE74D128C893AA00CD3A1E /* VisionHandExample.swift */,
 				B5466D1428F5A4550049CF6E /* BodyTrackingExample.swift */,
 				B5012EA928F9705400F36633 /* CustomSceneExample.swift */,
+				B5CDA5262930F49F006C3FCE /* CustomGeometryExtended.swift */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -182,6 +188,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5CDA5292930F527006C3FCE /* simd_float3+Extensions.swift in Sources */,
 				B5DE74CA28C26D1600CD3A1E /* GeometryExample.swift in Sources */,
 				B5DE74CC28C7677100CD3A1E /* BezierPathGeometryExample.swift in Sources */,
 				B5466D1128F5A1350049CF6E /* CoordinatesAdapter.swift in Sources */,
@@ -189,6 +196,7 @@
 				B5DE74B028BE73E500CD3A1E /* AppDelegate.swift in Sources */,
 				B5DE74C728C269D100CD3A1E /* ExamplesViewController.swift in Sources */,
 				B5466D1328F5A1510049CF6E /* CVPixelBuffer+Extensions.swift in Sources */,
+				B5CDA5272930F49F006C3FCE /* CustomGeometryExtended.swift in Sources */,
 				B5DE74D228C893AA00CD3A1E /* VisionHandExample.swift in Sources */,
 				B5466D1528F5A4550049CF6E /* BodyTrackingExample.swift in Sources */,
 				B5012EAE28FE7D8500F36633 /* SCNGeometrySource+Extensions.swift in Sources */,
