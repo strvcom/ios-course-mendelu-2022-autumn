@@ -38,17 +38,24 @@ class EmojiLoadingScene: SKScene {
         for (index, node) in children.enumerated() {
             node.run(
                 .sequence([
+                    /// Because of this wait actions each node starts animating 0.2 seconds after the previous one.
                     .wait(forDuration: Double(index) * 0.2),
+                    /// The animation is repeating.
                     .repeatForever(
+                        /// Actions in a sequence are executed one after another.
                         .sequence([
+                            /// Actions in a group are executed simultaneously.
                             .group([
+                                /// Rotate the node 360 degrees.
                                 .rotate(byAngle: .pi * 2, duration: 0.6),
+                                /// Scale the node by 50% and then back.
                                 .sequence([
                                     .scale(to: 1.5, duration: 0.3),
                                     .scale(to: 1, duration: 0.3)
                                 ])
                             ]),
-                            .wait(forDuration: 0.5)
+                            /// After the rotation + scale animation is done wait for 0.6 before repeating it, otherwise the animation would look chaotic.
+                            .wait(forDuration: 0.6)
                         ])
                     )
                 ])
