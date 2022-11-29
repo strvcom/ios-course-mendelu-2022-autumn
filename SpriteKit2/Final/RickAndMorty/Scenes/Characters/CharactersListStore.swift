@@ -55,7 +55,7 @@ private extension CharactersListStore {
             let response: PaginatedResponse<Character> = try await apiManager.request(endpoint)
             
             if page == nil {
-                try await Task.sleep(for: .seconds(4))
+                try await Task.sleep(nanoseconds: 4000000000)
             }
             
             currentResponseInfo = response.info
