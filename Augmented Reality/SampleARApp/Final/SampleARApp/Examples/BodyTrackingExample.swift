@@ -30,7 +30,10 @@ extension BodyTrackingExample: ARSessionDelegate {
             guard
                 let headTransform = transformFor(.head),
                 let leftHandTransform = transformFor(.leftHand),
-                let rightHandTransform = transformFor(.rightHand)
+                let rightHandTransform = transformFor(.rightHand),
+                let leftShoulderTransform = transformFor(.leftShoulder),
+                let rightShoulderTransform = transformFor(.rightShoulder),
+                let cameraTransform = session.currentFrame?.camera.transform
             else {
                 continue
             }
@@ -47,12 +50,23 @@ extension BodyTrackingExample: ARSessionDelegate {
                 right: rootPosition + rightHandTransform.translation
             )
 
-            // Check which hand is above head and show a sphere.
-            // Note that the head's position (or its pivot) is not at the top of the head but rather somewhere in the middle.
-            if handsPosition.left.y > headPosition.y {
-                addNodeOrMove(to: handsPosition.left)
-            } else if handsPosition.right.y > headPosition.y {
-                addNodeOrMove(to: handsPosition.right)
+            let cameraDirection = handsPosition.left - cameraTransform.translation
+
+            // Create a vector in the direction going from the shoulder to the left hand.
+            let leftHandVector = handsPosition.left - leftShoulderTransform.translation
+
+            // Create a vector in the direction going from the right hand to the right shoulder.
+            let rightHandVector = rightShoulderTransform.translation - handsPosition.right
+
+            // The cross product point towards us if the hands do not intersect, otherwise the product points away from us.
+            let crossProduct = cross(leftHandVector, rightHandVector)
+
+            let dotProduct = dot(cameraDirection, crossProduct)
+
+            // A positive dot product means that the directions are the same,
+            // meaning that the cross product vector points in the same direction as the camera.
+            if dotProduct > 0 {
+                addNodeOrMove(to: headPosition)
             } else {
                 removeAllNodes()
             }
